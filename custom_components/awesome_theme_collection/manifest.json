@@ -1,0 +1,13 @@
+{
+  "domain": "awesome_theme_collection",
+  "name": "Awesome Theme Collection for Home Assistant",
+  "version": "1.0.0",
+  "documentation": "https://github.com/lSi0270/Awesome-Theme-Collection",
+  "issue_tracker": "https://github.com/lSi0270/Awesome-Theme-Collection/issues",
+  "codeowners": [
+    "@lSi0270"
+  ],
+  "config_flow": true,
+  "integration_type": "service",
+  "iot_class": "local_push"
+}
