@@ -1,0 +1,10 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Awesome Theme Kollection",
+        "description": "Installiert die Awesome Theme Kollektion Dateien und Hintergründe."
+      }
+    }
+  }
+}
