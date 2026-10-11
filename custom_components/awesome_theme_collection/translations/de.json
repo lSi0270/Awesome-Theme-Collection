@@ -2,9 +2,12 @@
   "config": {
     "step": {
       "user": {
-        "title": "Awesome Theme Kollection",
-        "description": "Installiert die Awesome Theme Kollektion Dateien und Hintergründe."
+        "title": "Awesome Theme Collection",
+        "description": "Richte die Awesome Theme Collection ein."
       }
+    },
+    "abort": {
+      "single_instance_allowed": "Awesome Theme Collection ist bereits eingerichtet."
     }
   }
 }
