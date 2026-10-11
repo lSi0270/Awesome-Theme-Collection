@@ -3,7 +3,28 @@
     "step": {
       "user": {
         "title": "Awesome Theme Collection",
-        "description": "Install the Awesome Theme Collection files and wallpapers."
+        "description": "Set up Awesome Theme Collection."
+      }
+    },
+    "abort": {
+      "single_instance_allowed": "Awesome Theme Collection is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manage themes",
+        "description": "Select the themes that should remain installed.",
+        "data": {
+          "flat_leather_shadows": "Awesome Flat Leather Shadows",
+          "flat_leather": "Awesome Flat Leather",
+          "flat_metal_shadows": "Awesome Flat Metal Shadows",
+          "flat_metal": "Awesome Flat Metal",
+          "leather_shadows": "Awesome Leather Shadows",
+          "leather": "Awesome Leather",
+          "metal_shadows": "Awesome Metal Shadows",
+          "metal": "Awesome Metal"
+        }
       }
     }
   }
