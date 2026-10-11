@@ -9,5 +9,13 @@
     "abort": {
       "single_instance_allowed": "Awesome Theme Collection ist bereits eingerichtet."
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Themes verwalten",
+        "description": "Wähle die Themes aus, die installiert bleiben sollen. Änderungen werden nach dem Speichern übernommen."
+      }
+    }
   }
 }
