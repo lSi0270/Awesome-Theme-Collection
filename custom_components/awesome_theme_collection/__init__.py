@@ -35,17 +35,6 @@ WALLPAPERS = {
     "metal_light.jpg",
 }
 
-WALLPAPER_FAMILY = {
-    "flat_leather_shadows": "leather",
-    "flat_leather": "leather",
-    "leather_shadows": "leather",
-    "leather": "leather",
-    "flat_metal_shadows": "metal",
-    "flat_metal": "metal",
-    "metal_shadows": "metal",
-    "metal": "metal",
-}
-
 
 def _file_hash(path: Path) -> str:
     """Calculate the SHA-256 hash of a file."""
@@ -98,7 +87,7 @@ def _load_manifest(path: Path) -> dict[str, Any]:
 
 
 def _save_manifest(path: Path, data: dict[str, Any]) -> None:
-    """Write the manifest atomically."""
+    """Save the manifest atomically."""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary_path = path.with_suffix(".tmp")
@@ -118,7 +107,7 @@ def _validate_sources(
     themes_source: Path,
     wallpaper_source: Path,
 ) -> None:
-    """Validate all required source files before installation."""
+    """Validate all required source files."""
 
     if not themes_source.is_dir():
         raise FileNotFoundError(
@@ -150,7 +139,7 @@ def _sync_file(
     *,
     selected: bool,
 ) -> None:
-    """Install, update or remove a file owned by this integration."""
+    """Install, update or remove a managed file safely."""
 
     filename = source.name
     previous_hash = managed.get(filename)
@@ -207,7 +196,6 @@ def _sync_file(
         return
 
     if target_hash != previous_hash:
-        # A manually modified file is no longer managed.
         managed.pop(filename, None)
         _LOGGER.warning(
             "Datei %s wurde verändert und wird nicht überschrieben.",
@@ -230,7 +218,7 @@ def _sync_assets(
     manifest_path: Path,
     selected_themes: list[str],
 ) -> None:
-    """Synchronize selected themes and their wallpaper families."""
+    """Synchronize selected themes and always keep wallpapers installed."""
 
     _validate_sources(themes_source, wallpaper_source)
 
@@ -253,6 +241,7 @@ def _sync_assets(
     managed_themes = manifest["themes"]
     managed_wallpapers = manifest["wallpapers"]
 
+    # Themes are installed, updated or removed according to selection.
     for key, filename in THEMES.items():
         _sync_file(
             themes_source / filename,
@@ -261,18 +250,14 @@ def _sync_assets(
             selected=key in selected_themes,
         )
 
-    required_families = {
-        WALLPAPER_FAMILY[key] for key in selected_themes
-    }
-
+    # All wallpapers are always selected and are never removed
+    # because a theme is deselected.
     for filename in sorted(WALLPAPERS):
-        family = filename.split("_", maxsplit=1)[0]
-
         _sync_file(
             wallpaper_source / filename,
             wallpaper_target / filename,
             managed_wallpapers,
-            selected=family in required_families,
+            selected=True,
         )
 
     _save_manifest(
@@ -336,8 +321,8 @@ async def async_setup_entry(
         )
     except HomeAssistantError:
         _LOGGER.exception(
-            "Die Theme-Dateien wurden synchronisiert, konnten aber "
-            "nicht neu geladen werden."
+            "Die Dateien wurden synchronisiert, aber die Themes "
+            "konnten nicht neu geladen werden."
         )
 
     _LOGGER.info(
