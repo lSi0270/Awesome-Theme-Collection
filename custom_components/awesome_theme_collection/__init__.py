@@ -60,7 +60,7 @@ def _file_hash(path: Path) -> str:
 
 
 def _load_manifest(path: Path) -> dict[str, Any]:
-    """Load the manifest of managed files."""
+    """Load the manifest of integration-managed files."""
 
     if not path.exists():
         return {"themes": {}, "wallpapers": {}}
@@ -81,27 +81,54 @@ def _load_manifest(path: Path) -> dict[str, Any]:
             "Die Dateiverwaltung hat ein ungültiges Format."
         )
 
+    for section in ("themes", "wallpapers"):
+        for filename, digest in data[section].items():
+            if (
+                not isinstance(filename, str)
+                or Path(filename).name != filename
+                or not isinstance(digest, str)
+                or len(digest) != 64
+                or any(char not in "0123456789abcdef" for char in digest)
+            ):
+                raise ValueError(
+                    "Die Dateiverwaltung enthält ungültige Einträge."
+                )
+
     return data
 
 
 def _save_manifest(path: Path, data: dict[str, Any]) -> None:
-    """Save the managed-file manifest atomically."""
+    """Write the manifest atomically."""
 
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary_path = path.with_suffix(".tmp")
 
-    temporary_path.write_text(
-        json.dumps(data, indent=2, ensure_ascii=False) + "\n",
-        encoding="utf-8",
-    )
-    temporary_path.replace(path)
+    try:
+        temporary_path.write_text(
+            json.dumps(data, indent=2, ensure_ascii=False) + "\n",
+            encoding="utf-8",
+        )
+        temporary_path.replace(path)
+    finally:
+        if temporary_path.exists():
+            temporary_path.unlink()
 
 
 def _validate_sources(
     themes_source: Path,
     wallpaper_source: Path,
 ) -> None:
-    """Validate all required source files."""
+    """Validate all required source files before installation."""
+
+    if not themes_source.is_dir():
+        raise FileNotFoundError(
+            f"Theme-Verzeichnis fehlt: {themes_source}"
+        )
+
+    if not wallpaper_source.is_dir():
+        raise FileNotFoundError(
+            f"Wallpaper-Verzeichnis fehlt: {wallpaper_source}"
+        )
 
     for filename in THEMES.values():
         if not (themes_source / filename).is_file():
@@ -123,7 +150,7 @@ def _sync_file(
     *,
     selected: bool,
 ) -> None:
-    """Install, update or remove a managed file."""
+    """Install, update or remove a file owned by this integration."""
 
     filename = source.name
     previous_hash = managed.get(filename)
@@ -136,17 +163,22 @@ def _sync_file(
             managed.pop(filename, None)
             return
 
-        if target.is_file() and _file_hash(target) == previous_hash:
-            target.unlink()
-            managed.pop(filename, None)
-            _LOGGER.info("Datei entfernt: %s", filename)
-        else:
+        if not target.is_file():
+            raise OSError(
+                f"Installationsziel ist keine reguläre Datei: {target}"
+            )
+
+        if _file_hash(target) != previous_hash:
             managed.pop(filename, None)
             _LOGGER.warning(
                 "Datei %s wurde verändert und bleibt erhalten.",
                 filename,
             )
+            return
 
+        target.unlink()
+        managed.pop(filename, None)
+        _LOGGER.info("Datei entfernt: %s", filename)
         return
 
     source_hash = _file_hash(source)
@@ -154,7 +186,7 @@ def _sync_file(
     if not target.exists():
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(source, target)
-        managed[filename] = source_hash
+        managed[filename] = _file_hash(target)
         _LOGGER.info("Datei installiert: %s", filename)
         return
 
@@ -166,21 +198,19 @@ def _sync_file(
     target_hash = _file_hash(target)
 
     if previous_hash is None:
-        if target_hash == source_hash:
-            managed[filename] = source_hash
-        else:
-            _LOGGER.warning(
-                "Datei %s existiert bereits und wird nicht "
-                "überschrieben, da ihre Herkunft unbekannt ist.",
-                filename,
-            )
+        # Never claim ownership of an existing unmanaged file.
+        _LOGGER.warning(
+            "Datei %s existiert bereits und wird nicht übernommen "
+            "oder überschrieben.",
+            filename,
+        )
         return
 
     if target_hash != previous_hash:
+        # A manually modified file is no longer managed.
         managed.pop(filename, None)
         _LOGGER.warning(
-            "Datei %s wurde manuell verändert und wird nicht "
-            "überschrieben.",
+            "Datei %s wurde verändert und wird nicht überschrieben.",
             filename,
         )
         return
@@ -189,7 +219,7 @@ def _sync_file(
         shutil.copy2(source, target)
         _LOGGER.info("Datei aktualisiert: %s", filename)
 
-    managed[filename] = source_hash
+    managed[filename] = _file_hash(target)
 
 
 def _sync_assets(
@@ -200,9 +230,18 @@ def _sync_assets(
     manifest_path: Path,
     selected_themes: list[str],
 ) -> None:
-    """Synchronize the selected themes and required wallpapers."""
+    """Synchronize selected themes and their wallpaper families."""
 
     _validate_sources(themes_source, wallpaper_source)
+
+    if (
+        not isinstance(selected_themes, list)
+        or any(not isinstance(key, str) for key in selected_themes)
+    ):
+        raise ValueError("Die Theme-Auswahl ist ungültig.")
+
+    if len(selected_themes) != len(set(selected_themes)):
+        raise ValueError("Die Theme-Auswahl enthält Duplikate.")
 
     unknown_themes = set(selected_themes) - set(THEMES)
     if unknown_themes:
@@ -278,13 +317,14 @@ async def async_setup_entry(
             manifest_path,
             selected_themes,
         )
-    except (OSError, ValueError) as err:
+    except (OSError, ValueError, TypeError) as err:
         _LOGGER.exception(
             "Installation der Awesome Theme Collection fehlgeschlagen"
         )
         raise HomeAssistantError(
             "Die Themes konnten nicht vollständig synchronisiert werden. "
-            "Bitte prüfe die Quelldateien und Schreibrechte."
+            "Bitte prüfe die Asset-Dateien, die Dateiverwaltung und "
+            "die Schreibrechte."
         ) from err
 
     try:
@@ -296,8 +336,8 @@ async def async_setup_entry(
         )
     except HomeAssistantError:
         _LOGGER.exception(
-            "Die Dateien wurden synchronisiert, aber die Themes "
-            "konnten nicht neu geladen werden."
+            "Die Theme-Dateien wurden synchronisiert, konnten aber "
+            "nicht neu geladen werden."
         )
 
     _LOGGER.info(
