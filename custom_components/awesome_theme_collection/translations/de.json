@@ -14,7 +14,17 @@
     "step": {
       "init": {
         "title": "Themes verwalten",
-        "description": "Wähle die Themes aus, die installiert bleiben sollen. Änderungen werden nach dem Speichern übernommen."
+        "description": "Wähle die Themes aus, die installiert bleiben sollen.",
+        "data": {
+          "flat_leather_shadows": "Awesome Flat Leather Shadows",
+          "flat_leather": "Awesome Flat Leather",
+          "flat_metal_shadows": "Awesome Flat Metal Shadows",
+          "flat_metal": "Awesome Flat Metal",
+          "leather_shadows": "Awesome Leather Shadows",
+          "leather": "Awesome Leather",
+          "metal_shadows": "Awesome Metal Shadows",
+          "metal": "Awesome Metal"
+        }
       }
     }
   }
