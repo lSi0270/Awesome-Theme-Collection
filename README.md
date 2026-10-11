@@ -99,10 +99,7 @@ Nach HA-Neustart zu "Einstellungen/Geräte & Dienste/UI eXtension for Home Assis
 
 ### 3. Installation der Awesome Theme Kollektion
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=lSi2070&repository=Awesome-Theme-Collection&category=integration)
-
-1. Oder `https://github.com/lSi0270/Awesome-Theme-Collection` in HACS manuell als benutzerdefiniertes Repository (Kategorie *Integration*) hinzufügen, **Awesome Theme Collektion** installieren und Home Assistant neu starten.
-
+1. *`https://github.com/lSi0270/Awesome-Theme-Collection`* in HACS manuell als benutzerdefiniertes Repository (Kategorie **Integration**) hinzufügen, **Awesome Theme Collection** installieren und Home Assistant neu starten.
 2. Zu **Einstellungen/Geräte & Dienste**.
 3. **Integration hinzufügen**.
 4. **Awesome Theme Collection** suchen.

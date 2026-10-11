@@ -99,10 +99,7 @@ Select “Experimental settings” and tick “Always patch ha-card” and “St
 
 ### 3. Installing the Awesome Theme Collection
 
-[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=lSi2070&repository=Awesome-Theme-Collection&category=integration)
-
-1. Or add `https://github.com/lSi0270/Awesome-Theme-Collection` manually in HACS as a custom repository (category *Integration*), install **Awesome Theme Collektion**  and restart Home Assistant.
-
+1. add *`https://github.com/lSi0270/Awesome-Theme-Collection`* manually in HACS as a custom repository (category **Integration**), install **Awesome Theme Collektion**  and restart Home Assistant.
 2. Go to **Settings/Devices & Services**.
 3. **Add integration**.
 4. Search for **Awesome Theme Collection**.
