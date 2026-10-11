@@ -60,7 +60,7 @@ def _file_hash(path: Path) -> str:
 
 
 def _load_manifest(path: Path) -> dict[str, Any]:
-    """Load the manifest of files managed by this integration."""
+    """Load the manifest of managed files."""
 
     if not path.exists():
         return {"themes": {}, "wallpapers": {}}
@@ -101,18 +101,18 @@ def _validate_sources(
     themes_source: Path,
     wallpaper_source: Path,
 ) -> None:
-    """Check all required source files before modifying anything."""
+    """Validate all required source files."""
 
-    for theme_file in THEMES.values():
-        if not (themes_source / theme_file).is_file():
+    for filename in THEMES.values():
+        if not (themes_source / filename).is_file():
             raise FileNotFoundError(
-                f"Theme-Datei fehlt: {theme_file}"
+                f"Theme-Datei fehlt: {filename}"
             )
 
-    for wallpaper_file in WALLPAPERS:
-        if not (wallpaper_source / wallpaper_file).is_file():
+    for filename in WALLPAPERS:
+        if not (wallpaper_source / filename).is_file():
             raise FileNotFoundError(
-                f"Wallpaper-Datei fehlt: {wallpaper_file}"
+                f"Wallpaper-Datei fehlt: {filename}"
             )
 
 
@@ -123,7 +123,7 @@ def _sync_file(
     *,
     selected: bool,
 ) -> None:
-    """Install, update or remove one integration-managed file."""
+    """Install, update or remove a managed file."""
 
     filename = source.name
     previous_hash = managed.get(filename)
@@ -139,12 +139,11 @@ def _sync_file(
         if target.is_file() and _file_hash(target) == previous_hash:
             target.unlink()
             managed.pop(filename, None)
-            _LOGGER.info("Theme-Datei entfernt: %s", filename)
+            _LOGGER.info("Datei entfernt: %s", filename)
         else:
             managed.pop(filename, None)
             _LOGGER.warning(
-                "Datei %s wurde verändert und bleibt beim Entfernen "
-                "erhalten.",
+                "Datei %s wurde verändert und bleibt erhalten.",
                 filename,
             )
 
@@ -161,31 +160,27 @@ def _sync_file(
 
     if not target.is_file():
         raise OSError(
-            f"Das Installationsziel ist keine reguläre Datei: {target}"
+            f"Installationsziel ist keine reguläre Datei: {target}"
         )
 
     target_hash = _file_hash(target)
 
     if previous_hash is None:
         if target_hash == source_hash:
-            # Adopt an existing file only if its contents match exactly.
             managed[filename] = source_hash
-            _LOGGER.debug("Vorhandene Datei übernommen: %s", filename)
         else:
-            # Never overwrite a file whose ownership is unknown.
             _LOGGER.warning(
-                "Datei %s existiert bereits und unterscheidet sich "
-                "von der mitgelieferten Datei. Sie bleibt unverändert.",
+                "Datei %s existiert bereits und wird nicht "
+                "überschrieben, da ihre Herkunft unbekannt ist.",
                 filename,
             )
         return
 
     if target_hash != previous_hash:
-        # The user may have customized the file. Stop managing it.
         managed.pop(filename, None)
         _LOGGER.warning(
-            "Datei %s wurde außerhalb der Integration verändert. "
-            "Sie wird nicht überschrieben.",
+            "Datei %s wurde manuell verändert und wird nicht "
+            "überschrieben.",
             filename,
         )
         return
@@ -205,7 +200,7 @@ def _sync_assets(
     manifest_path: Path,
     selected_themes: list[str],
 ) -> None:
-    """Synchronize selected themes and their required wallpapers."""
+    """Synchronize the selected themes and required wallpapers."""
 
     _validate_sources(themes_source, wallpaper_source)
 
@@ -219,7 +214,6 @@ def _sync_assets(
     managed_themes = manifest["themes"]
     managed_wallpapers = manifest["wallpapers"]
 
-    # First reconcile all themes. Unselected managed files are removed.
     for key, filename in THEMES.items():
         _sync_file(
             themes_source / filename,
@@ -228,17 +222,16 @@ def _sync_assets(
             selected=key in selected_themes,
         )
 
-    # Keep wallpapers for every theme that remains selected.
     required_families = {
         WALLPAPER_FAMILY[key] for key in selected_themes
     }
 
-    for wallpaper in sorted(WALLPAPERS):
-        family = wallpaper.split("_", maxsplit=1)[0]
+    for filename in sorted(WALLPAPERS):
+        family = filename.split("_", maxsplit=1)[0]
 
         _sync_file(
-            wallpaper_source / wallpaper,
-            wallpaper_target / wallpaper,
+            wallpaper_source / filename,
+            wallpaper_target / filename,
             managed_wallpapers,
             selected=family in required_families,
         )
@@ -291,15 +284,28 @@ async def async_setup_entry(
         )
         raise HomeAssistantError(
             "Die Themes konnten nicht vollständig synchronisiert werden. "
-            "Bitte prüfe die Asset-Dateien, die Dateiverwaltung und "
-            "die Schreibrechte der Home-Assistant-Verzeichnisse."
+            "Bitte prüfe die Quelldateien und Schreibrechte."
         ) from err
 
+    try:
+        await hass.services.async_call(
+            "frontend",
+            "reload_themes",
+            {},
+            blocking=True,
+        )
+    except HomeAssistantError:
+        _LOGGER.exception(
+            "Die Dateien wurden synchronisiert, aber die Themes "
+            "konnten nicht neu geladen werden."
+        )
+
     _LOGGER.info(
-        "Awesome Theme Collection eingerichtet: %s von %s Themes ausgewählt",
+        "Awesome Theme Collection eingerichtet: %s von %s Themes.",
         len(selected_themes),
         len(THEMES),
     )
+
     return True
 
 
@@ -308,7 +314,5 @@ async def async_unload_entry(
     entry: ConfigEntry,
 ) -> bool:
     """Unload the integration."""
-
-    return True
 
     return True
