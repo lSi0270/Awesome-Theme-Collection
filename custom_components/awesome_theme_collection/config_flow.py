@@ -12,42 +12,21 @@ from homeassistant.helpers import selector
 from . import DOMAIN
 
 THEMES = {
-    "flat_leather_shadows": {
-        "name": "Awesome Flat Leather Shadows",
-        "filename": "Awesome-Flat-Leather-Shadows-UIX.yaml",
-    },
-    "flat_leather": {
-        "name": "Awesome Flat Leather",
-        "filename": "Awesome-Flat-Leather-UIX.yaml",
-    },
-    "flat_metal_shadows": {
-        "name": "Awesome Flat Metal Shadows",
-        "filename": "Awesome-Flat-Metal-Shadows-UIX.yaml",
-    },
-    "flat_metal": {
-        "name": "Awesome Flat Metal",
-        "filename": "Awesome-Flat-Metal-UIX.yaml",
-    },
-    "leather_shadows": {
-        "name": "Awesome Leather Shadows",
-        "filename": "Awesome-Leather-Shadows-UIX.yaml",
-    },
-    "leather": {
-        "name": "Awesome Leather",
-        "filename": "Awesome-Leather-UIX.yaml",
-    },
-    "metal_shadows": {
-        "name": "Awesome Metal Shadows",
-        "filename": "Awesome-Metal-Shadows-UIX.yaml",
-    },
-    "metal": {
-        "name": "Awesome Metal",
-        "filename": "Awesome-Metal-UIX.yaml",
-    },
+    "flat_leather_shadows": "Awesome Flat Leather Shadows",
+    "flat_leather": "Awesome Flat Leather",
+    "flat_metal_shadows": "Awesome Flat Metal Shadows",
+    "flat_metal": "Awesome Flat Metal",
+    "leather_shadows": "Awesome Leather Shadows",
+    "leather": "Awesome Leather",
+    "metal_shadows": "Awesome Metal Shadows",
+    "metal": "Awesome Metal",
 }
 
 
-class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+class AwesomeThemeConfigFlow(
+    config_entries.ConfigFlow,
+    domain=DOMAIN,
+):
     """Handle the initial setup."""
 
     VERSION = 1
@@ -69,7 +48,9 @@ class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 data={},
             )
 
-        return self.async_show_form(step_id="user")
+        return self.async_show_form(
+            step_id="user",
+        )
 
     @staticmethod
     @callback
@@ -90,13 +71,19 @@ class AwesomeThemeOptionsFlow(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
-        """Show the theme selection."""
+        """Show the individual theme checkboxes."""
 
         if user_input is not None:
+            selected_themes = [
+                key
+                for key in THEMES
+                if user_input.get(key, False)
+            ]
+
             return self.async_create_entry(
                 title="",
                 data={
-                    "themes": user_input["themes"],
+                    "themes": selected_themes,
                 },
             )
 
@@ -105,28 +92,17 @@ class AwesomeThemeOptionsFlow(
             list(THEMES),
         )
 
-        options = [
-            {
-                "label": theme["name"],
-                "value": key,
-            }
-            for key, theme in THEMES.items()
-        ]
+        schema_fields = {}
 
-        schema = vol.Schema(
-            {
-                vol.Required(
-                    "themes",
-                    default=current_themes,
-                ): selector.SelectSelector(
-                    selector.SelectSelectorConfig(
-                        options=options,
-                        multiple=True,
-                        mode=selector.SelectSelectorMode.DROPDOWN,
-                    )
+        for key in THEMES:
+            schema_fields[
+                vol.Optional(
+                    key,
+                    default=key in current_themes,
                 )
-            }
-        )
+            ] = selector.BooleanSelector()
+
+        schema = vol.Schema(schema_fields)
 
         return self.async_show_form(
             step_id="init",
