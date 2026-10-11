@@ -2,7 +2,7 @@
   <b>Deutsch</b> · <a href="https://github.com/lSi0270/Awesome-Theme-Collection/blob/main/README_en.md">English</a>
 </p>
 
-# Awesome Theme Kollektion für Home Assistant
+# Awesome Theme Collection für Home Assistant
 
 Das ist eine Kollektion von UIX-Themes mit passenden Hintergründen für Home Assistant. Die Themes stylen (fast) alle HA-Standard-Karten, Custom-Karten, Bubble-Karten und Mushroom-Karten mit einem einheitlichen Aussehen.
 Zusätzlich werden alle Seiten (Einstellungen, Profile, HACS usw.) und Dialoge, Bubble-Card-Popups mit dem Dashboard-Hintergrund versehen. Die Themes nutzen alle das gleiche Farbschema, unterscheiden sich beim Kartenstyling, mit Schatten oder Ohne, Wahl des Hintergrundes.
