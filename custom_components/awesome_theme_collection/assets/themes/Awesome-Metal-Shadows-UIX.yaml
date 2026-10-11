@@ -1,6 +1,6 @@
-# Erstellt mit HATG v1.3.2b22
-# Theme: Awesome-Metal-Shadows-UIX – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-10-06
+# Erstellt mit HATG v1.3.2
+# Theme: Awesome-Metal-Shadows-UIX (v1.0.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-10-11
 
 Awesome-Metal-Shadows-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
@@ -1703,7 +1703,7 @@ Awesome-Metal-Shadows-UIX:
       bubble-pop-up-border-radius: "18px"
       dialog-box-shadow: "no"
       ha-dialog-scrim-backdrop-filter: "blur(2px)"
-      ha-dialog-surface-background: "rgba(22, 28, 37, 1"
+      ha-dialog-surface-background: "rgba(0, 0, 0, 1)"
       mdc-dialog-scrim-color: "rgba(0, 0, 0, 0.60)"
       bubble-pop-up-main-background-color: "#161C25"
       bubble-backdrop-background-color: "rgba(0, 0, 0, 0.55)"
