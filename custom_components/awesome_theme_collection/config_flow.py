@@ -10,7 +10,7 @@ from . import DOMAIN
 
 
 class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    """Handle a config flow for Awesome Theme Collection."""
+    """Handle the user setup."""
 
     VERSION = 1
 
@@ -19,6 +19,11 @@ class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
         """Handle the user setup."""
+
+        if self._async_current_entries():
+            return self.async_abort(
+                reason="single_instance_allowed"
+            )
 
         if user_input is not None:
             return self.async_create_entry(
