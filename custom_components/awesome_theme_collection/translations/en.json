@@ -9,5 +9,13 @@
     "abort": {
       "single_instance_allowed": "Awesome Theme Collection is already configured."
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Manage themes",
+        "description": "Select the themes that should remain installed. Changes are applied when you save."
+      }
+    }
   }
 }
