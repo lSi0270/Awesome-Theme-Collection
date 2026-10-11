@@ -99,16 +99,16 @@ Nach HA-Neustart zu "Einstellungen/Geräte & Dienste/UI eXtension for Home Assis
 
 ### 3. Installation der Awesome Theme Kollektion
 
-1. **HACS** in Home Assistant öffnen.
-2. Nach **Awesome Theme Collection** suchen.
-3. Integration downloaden und installieren.
-4. Home Assistant neu starten.
-5. Zu **Einstellungen/Geräte & Dienste**.
-6. **Integration hinzufügen**.
-7. **Awesome Theme Collection** suchen.
-8. Integration hinzufügen.
-9. Zu **Einstellungen/Werkzeuge/Aktionen** und "Designs neu laden" auswählen.
-10. Zu **Profil** (Benutzer) und unter "Design" das gewünschte Design auswählen und den gewünschten "Design-Modus" 
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=lSi2070&repository=Awesome-Theme-Collection&category=integration)
+
+1. Oder `https://github.com/lSi0270/Awesome-Theme-Collection` in HACS manuell als benutzerdefiniertes Repository (Kategorie *Integration*) hinzufügen, **Awesome Theme Collektion** installieren und Home Assistant neu starten.
+
+2. Zu **Einstellungen/Geräte & Dienste**.
+3. **Integration hinzufügen**.
+4. **Awesome Theme Collection** suchen.
+5. Integration hinzufügen.
+6. Zu **Einstellungen/Werkzeuge/Aktionen** und "Designs neu laden" auswählen.
+7. Zu **Profil** (Benutzer) und unter "Design" das gewünschte Design auswählen und den gewünschten "Design-Modus" 
 
 Die Integration legt automatisch die erforderlichen Verzeichnisse an für die Themes (/config/themes/) und für die Hintergründe (/config/www/wallpaper/).
 

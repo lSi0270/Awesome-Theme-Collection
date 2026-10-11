@@ -99,16 +99,16 @@ Select “Experimental settings” and tick “Always patch ha-card” and “St
 
 ### 3. Installing the Awesome Theme Collection
 
-1. Open **HACS** in Home Assistant.
-2. Search for **Awesome Theme Collection**.
-3. Download and install the integration.
-4. Restart Home Assistant.
-5. Go to **Settings/Devices & Services**.
-6. **Add integration**.
-7. Search for **Awesome Theme Collection**.
-8. Add the integration.
-9. Go to **Settings/Tools/Actions** and select ‘Reload themes’.
-10. Go to **Profile** (User) and, under “Design”, select the desired theme and the desired “Design Mode”
+[![Open your Home Assistant instance and open a repository inside the Home Assistant Community Store.](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?owner=lSi2070&repository=Awesome-Theme-Collection&category=integration)
+
+1. Or add `https://github.com/lSi0270/Awesome-Theme-Collection` manually in HACS as a custom repository (category *Integration*), install **Awesome Theme Collektion**  and restart Home Assistant.
+
+2. Go to **Settings/Devices & Services**.
+3. **Add integration**.
+4. Search for **Awesome Theme Collection**.
+5. Add the integration.
+6. Go to **Settings/Tools/Actions** and select ‘Reload themes’.
+7. Go to **Profile** (User) and, under “Design”, select the desired theme and the desired “Design Mode”
 
 The integration automatically creates the necessary directories for the themes (/config/themes/) and for the wallpapers (/config/www/wallpaper/).
 
