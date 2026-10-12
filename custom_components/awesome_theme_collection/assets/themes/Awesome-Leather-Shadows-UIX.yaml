@@ -490,7 +490,7 @@ Awesome-Leather-Shadows-UIX:
       state-weather-windy-color: "#34C759"
       state-battery-low-color: "#ff2600"
       state-sensor-battery-high-color: "#34A759"
-      state-sensor-battery-medium-color: "#006ADF"
+      state-sensor-battery-medium-color: "#DFA107"
       state-sensor-battery-low-color: "#DF3B30"
       label-badge-background-color: "#F1F1F1"
       label-badge-text-color: "rgba(23, 23, 23, 0.9)"
