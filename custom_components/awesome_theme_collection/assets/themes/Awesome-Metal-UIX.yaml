@@ -1,5 +1,5 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Metal-UIX (v1.0.2 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Theme: Awesome-Metal-UIX (v1.0.3 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
 # Generiert am 2026-10-12
 
 Awesome-Metal-UIX:
@@ -186,7 +186,9 @@ Awesome-Metal-UIX:
         background-color: transparent !important;
       }
     $: |
+      :host(.type-dialog-lovelace-dashboard-detail),
       :host(.type-hui-dialog-create-card),
+      :host(.type-dialog-edit-badge),
       :host(.type-dialog-edit-card) {
         wa-dialog::part(dialog) {
           background: var(--popup-custom-wallpaper, var(--lovelace-background, none)) !important;
@@ -352,8 +354,8 @@ Awesome-Metal-UIX:
       # HA-Grundgerüst / Hintergründe
       primary-background-color: "#D0D0D0"
       background-color: "#E9E9E9"
-      lovelace-background: "linear-gradient(rgba(224, 224, 224, 0.30), rgba(224, 224, 224, 0.30)), url(\"/local/wallpaper/metal_light.jpg\") center / cover no-repeat"
-      popup-custom-wallpaper: "linear-gradient(rgba(224, 224, 224, 0.30), rgba(224, 224, 224, 0.30)), url(\"/local/wallpaper/metal_light.jpg\")"
+      lovelace-background: "linear-gradient(rgba(224, 224, 224, 0.5), rgba(224, 224, 224, 0.5)), url(\"/local/wallpaper/metal2_light.jpg\") center / cover no-repeat"
+      popup-custom-wallpaper: "linear-gradient(rgba(224, 224, 224, 0.5), rgba(224, 224, 224, 0.5)), url(\"/local/wallpaper/metal2_light.jpg\") center / cover no-repeat"
       secondary-background-color: "#ECECEC"
       glass-effect-style: "off"
       background-style: "bild"
@@ -864,8 +866,8 @@ Awesome-Metal-UIX:
       rgb-state-media_player-color: "186, 75, 0"
 
       # HA-Grundgerüst / Graphen & Energie
-      graph-color-1: "#ff9300"
-      graph-color-2: "#007AFF"
+      graph-color-1: "#0A84FF"
+      graph-color-2: "#64D2FF"
       graph-color-3: "#34C759"
       graph-color-4: "#AF52DE"
       graph-color-5: "#FF3B30"
@@ -1105,8 +1107,8 @@ Awesome-Metal-UIX:
       # HA-Grundgerüst / Hintergründe
       primary-background-color: "#10151C"
       background-color: "#10151C"
-      lovelace-background: "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40)), url(\"/local/wallpaper/metal_dark.jpg\") center / cover no-repeat"
-      popup-custom-wallpaper: "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40)), url(\"/local/wallpaper/metal_dark.jpg\")"
+      lovelace-background: "linear-gradient(rgba(16, 21, 28, 0.4), rgba(16, 21, 28, 0.4)), url(\"/local/wallpaper/metal2_dark.jpg\") center / cover no-repeat"
+      popup-custom-wallpaper: "linear-gradient(rgba(16, 21, 28, 0.4), rgba(16, 21, 28, 0.4)), url(\"/local/wallpaper/metal2_dark.jpg\") center / cover no-repeat"
       secondary-background-color: "#10151C"
       glass-effect-style: "off"
       background-style: "bild"

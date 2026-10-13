@@ -1,5 +1,5 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Flat-Leather-UIX (v1.0.2 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Theme: Awesome-Flat-Leather-UIX (v1.0.3 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
 # Generiert am 2026-10-12
 
 Awesome-Flat-Leather-UIX:
@@ -866,8 +866,8 @@ Awesome-Flat-Leather-UIX:
       rgb-state-media_player-color: "186, 75, 0"
 
       # HA-Grundgerüst / Graphen & Energie
-      graph-color-1: "#ff9300"
-      graph-color-2: "#007AFF"
+      graph-color-1: "#007AFF"
+      graph-color-2: "#64D2FF"
       graph-color-3: "#34C759"
       graph-color-4: "#AF52DE"
       graph-color-5: "#FF3B30"
