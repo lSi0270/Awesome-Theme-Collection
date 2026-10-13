@@ -32,7 +32,9 @@ WALLPAPERS = {
     "leather_dark.jpg",
     "leather_light.jpg",
     "metal_dark.jpg",
+    "metal2_dark.jpg",
     "metal_light.jpg",
+    "metal2_light.jpg",
 }
 
 
