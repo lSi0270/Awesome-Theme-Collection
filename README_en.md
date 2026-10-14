@@ -5,7 +5,7 @@
 # Awesome Theme Collection for Home Assistant
 
 This is a collection of UIX themes with matching backgrounds for Home Assistant. The themes style (almost) all standard HA cards, custom cards, bubble cards and mushroom cards with a consistent look.
-In addition, all pages (Settings, Profiles, HACS, etc.) and dialogues, as well as bubble card pop-ups, feature the dashboard background. The themes all use the same color scheme but differ in terms of card styling – with or without shadows – and choice of background.
+In addition, all pages (Settings, Profiles, HACS, etc.) and dialogues, as well as bubble card pop-ups, feature the dashboard background. The themes all use the same color scheme but differ in terms of card styling – with or without shadows – and the choice of background.
 
 ## Included Themes
 
