@@ -103,9 +103,8 @@ Select “Experimental settings” and tick “Always patch ha-card” and “St
 2. Go to **Settings/Devices & Services**.
 3. **Add integration**.
 4. Search for **Awesome Theme Collection**.
-5. Add the integration.
-6. Go to **Settings/Tools/Actions** and select ‘Reload themes’.
-7. Go to **Profile** (User) and, under “Design”, select the desired theme and the desired “Design Mode”
+5. Install the integration (‘Reload designs’ will run automatically after installation).
+6. Go to **Profile** (User) and, under “Design”, select the desired theme and the desired “Design Mode”
 
 The integration automatically creates the necessary directories for the themes (/config/themes/) and for the wallpapers (/config/www/wallpaper/).
 
