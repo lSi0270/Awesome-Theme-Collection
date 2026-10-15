@@ -77,7 +77,10 @@ def _load_manifest(path: Path) -> dict[str, Any]:
                 or Path(filename).name != filename
                 or not isinstance(digest, str)
                 or len(digest) != 64
-                or any(char not in "0123456789abcdef" for char in digest)
+                or any(
+                    char not in "0123456789abcdef"
+                    for char in digest
+                )
             ):
                 raise ValueError(
                     "Die Dateiverwaltung enthält ungültige Einträge."
@@ -107,7 +110,7 @@ def _validate_sources(
     themes_source: Path,
     wallpaper_source: Path,
 ) -> None:
-    """Validate all required source files."""
+    """Validate all required source files before synchronization."""
 
     if not themes_source.is_dir():
         raise FileNotFoundError(
@@ -138,76 +141,74 @@ def _sync_file(
     managed: dict[str, str],
     *,
     selected: bool,
-) -> None:
-    """Install, update or remove a managed file safely."""
+) -> bool:
+    """Install, update or remove a file managed by this integration.
+
+    Returns True if the target file was installed, updated or removed.
+    """
 
     filename = source.name
-    previous_hash = managed.get(filename)
 
     if not selected:
-        if previous_hash is None:
-            return
-
-        if not target.exists():
-            managed.pop(filename, None)
-            return
-
-        if not target.is_file():
+        # These filenames are explicitly managed by this integration.
+        # Remove deselected themes even if an older installation did
+        # not yet record them in the manifest.
+        if target.is_dir():
             raise OSError(
-                f"Installationsziel ist keine reguläre Datei: {target}"
+                f"Installationsziel ist ein Verzeichnis: {target}"
             )
 
-        if _file_hash(target) != previous_hash:
-            managed.pop(filename, None)
-            _LOGGER.warning(
-                "Datei %s wurde verändert und bleibt erhalten.",
-                filename,
-            )
-            return
+        if target.exists():
+            if not target.is_file():
+                raise OSError(
+                    f"Installationsziel ist keine reguläre Datei: {target}"
+                )
 
-        target.unlink()
+            target.unlink()
+            _LOGGER.info("Datei entfernt: %s", filename)
+            changed = True
+        else:
+            changed = False
+
         managed.pop(filename, None)
-        _LOGGER.info("Datei entfernt: %s", filename)
-        return
+        return changed
+
+    if not source.is_file():
+        raise FileNotFoundError(
+            f"Quelldatei fehlt: {source}"
+        )
 
     source_hash = _file_hash(source)
 
-    if not target.exists():
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
-        managed[filename] = _file_hash(target)
-        _LOGGER.info("Datei installiert: %s", filename)
-        return
-
-    if not target.is_file():
+    if target.exists() and not target.is_file():
         raise OSError(
             f"Installationsziel ist keine reguläre Datei: {target}"
         )
 
-    target_hash = _file_hash(target)
+    target.parent.mkdir(parents=True, exist_ok=True)
 
-    if previous_hash is None:
-        # Never claim ownership of an existing unmanaged file.
-        _LOGGER.warning(
-            "Datei %s existiert bereits und wird nicht übernommen "
-            "oder überschrieben.",
-            filename,
-        )
-        return
+    if target.is_file():
+        target_hash = _file_hash(target)
 
-    if target_hash != previous_hash:
-        managed.pop(filename, None)
-        _LOGGER.warning(
-            "Datei %s wurde verändert und wird nicht überschrieben.",
-            filename,
-        )
-        return
+        if target_hash == source_hash:
+            # The file is already current. Record it as managed so
+            # that subsequent updates and deselection work correctly.
+            managed[filename] = source_hash
+            return False
 
-    if target_hash != source_hash:
+        # The source repository is authoritative for these filenames.
+        # This also repairs files left behind by older versions.
         shutil.copy2(source, target)
-        _LOGGER.info("Datei aktualisiert: %s", filename)
+        managed[filename] = source_hash
 
-    managed[filename] = _file_hash(target)
+        _LOGGER.info("Datei aktualisiert: %s", filename)
+        return True
+
+    shutil.copy2(source, target)
+    managed[filename] = source_hash
+
+    _LOGGER.info("Datei installiert: %s", filename)
+    return True
 
 
 def _sync_assets(
@@ -217,8 +218,12 @@ def _sync_assets(
     wallpaper_target: Path,
     manifest_path: Path,
     selected_themes: list[str],
-) -> None:
-    """Synchronize selected themes and always keep wallpapers installed."""
+) -> bool:
+    """Synchronize selected themes and all wallpapers.
+
+    Wallpapers remain installed regardless of the selected themes.
+    Returns True if any theme or wallpaper changed.
+    """
 
     _validate_sources(themes_source, wallpaper_source)
 
@@ -229,9 +234,12 @@ def _sync_assets(
         raise ValueError("Die Theme-Auswahl ist ungültig.")
 
     if len(selected_themes) != len(set(selected_themes)):
-        raise ValueError("Die Theme-Auswahl enthält Duplikate.")
+        raise ValueError(
+            "Die Theme-Auswahl enthält Duplikate."
+        )
 
     unknown_themes = set(selected_themes) - set(THEMES)
+
     if unknown_themes:
         raise ValueError(
             f"Unbekannte Theme-Auswahl: {sorted(unknown_themes)}"
@@ -241,25 +249,28 @@ def _sync_assets(
     managed_themes = manifest["themes"]
     managed_wallpapers = manifest["wallpapers"]
 
-    # Themes are installed, updated or removed according to selection.
+    changed = False
+
+    # Install, update or remove every known theme according to
+    # the current selection.
     for key, filename in THEMES.items():
-        _sync_file(
+        changed |= _sync_file(
             themes_source / filename,
             themes_target / filename,
             managed_themes,
             selected=key in selected_themes,
         )
 
-    # All wallpapers are always selected and are never removed
-    # because a theme is deselected.
+    # Keep all wallpapers installed and update them when necessary.
     for filename in sorted(WALLPAPERS):
-        _sync_file(
+        changed |= _sync_file(
             wallpaper_source / filename,
             wallpaper_target / filename,
             managed_wallpapers,
             selected=True,
         )
 
+    # Persist the manifest only after the file synchronization succeeds.
     _save_manifest(
         manifest_path,
         {
@@ -267,6 +278,8 @@ def _sync_assets(
             "wallpapers": managed_wallpapers,
         },
     )
+
+    return changed
 
 
 async def async_setup_entry(
@@ -282,7 +295,10 @@ async def async_setup_entry(
     wallpaper_source = assets_dir / "wallpaper"
 
     themes_target = Path(hass.config.path("themes"))
-    wallpaper_target = Path(hass.config.path("www", "wallpaper"))
+    wallpaper_target = Path(
+        hass.config.path("www", "wallpaper")
+    )
+
     manifest_path = Path(
         hass.config.path(
             ".storage",
@@ -290,10 +306,13 @@ async def async_setup_entry(
         )
     )
 
-    selected_themes = entry.options.get("themes", list(THEMES))
+    selected_themes = entry.options.get(
+        "themes",
+        list(THEMES),
+    )
 
     try:
-        await hass.async_add_executor_job(
+        changed = await hass.async_add_executor_job(
             _sync_assets,
             themes_source,
             wallpaper_source,
@@ -312,6 +331,8 @@ async def async_setup_entry(
             "die Schreibrechte."
         ) from err
 
+    # Reload the frontend themes after every successful synchronization,
+    # including a synchronization where all files were already current.
     try:
         await hass.services.async_call(
             "frontend",
@@ -326,9 +347,11 @@ async def async_setup_entry(
         )
 
     _LOGGER.info(
-        "Awesome Theme Collection eingerichtet: %s von %s Themes.",
+        "Awesome Theme Collection eingerichtet: %s von %s Themes. "
+        "Dateien geändert: %s",
         len(selected_themes),
         len(THEMES),
+        changed,
     )
 
     return True
