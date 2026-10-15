@@ -104,7 +104,8 @@ Nach HA-Neustart zu "Einstellungen/Geräte & Dienste/UI eXtension for Home Assis
 3. **Integration hinzufügen**.
 4. **Awesome Theme Collection** suchen.
 5. Integration installieren ("Designs neu laden" wird nach der Installation automatisch ausgeführt).
-6. Zu **Profil** (Benutzer) und unter "Design" das gewünschte Design auswählen und den gewünschten "Design-Modus" 
+6. In den Integrations-Einstellungen können gewünschte und nicht gewünschte Themes an- oder abgewählt werden.
+7. Zu **Profil** (Benutzer) und unter "Design" das gewünschte Design auswählen und den gewünschten "Design-Modus" 
 
 Die Integration legt automatisch die erforderlichen Verzeichnisse an für die Themes (/config/themes/) und für die Hintergründe (/config/www/wallpaper/).
 
