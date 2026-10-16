@@ -7,7 +7,7 @@
   "config_flow": true,
   "documentation": "https://github.com/lSi0270/Awesome-Theme-Collection",
   "integration_type": "service",
-  "issue_tracker": "https://github.com/lSi0270/Awesome-Theme-Collection/issues",
   "iot_class": "local_push",
+  "issue_tracker": "https://github.com/lSi0270/Awesome-Theme-Collection/issues",
   "version": "1.0.4"
 }
