@@ -1,13 +1,13 @@
 {
   "domain": "awesome_theme_collection",
   "name": "Awesome Theme Collection",
-  "version": "1.0.4",
-  "documentation": "https://github.com/lSi0270/Awesome-Theme-Collection",
-  "issue_tracker": "https://github.com/lSi0270/Awesome-Theme-Collection/issues",
   "codeowners": [
     "@lSi0270"
   ],
   "config_flow": true,
+  "documentation": "https://github.com/lSi0270/Awesome-Theme-Collection",
   "integration_type": "service",
-  "iot_class": "local_push"
+  "issue_tracker": "https://github.com/lSi0270/Awesome-Theme-Collection/issues",
+  "iot_class": "local_push",
+  "version": "1.0.4"
 }
