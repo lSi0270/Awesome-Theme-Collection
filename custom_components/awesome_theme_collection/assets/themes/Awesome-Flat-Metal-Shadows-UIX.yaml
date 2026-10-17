@@ -1,6 +1,6 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Flat-Metal-Shadows-UIX (v1.0.3 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-10-14
+# Theme: Awesome-Flat-Metal-Shadows-UIX (v1.0.5 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-10-17
 
 Awesome-Flat-Metal-Shadows-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
@@ -140,6 +140,13 @@ Awesome-Flat-Metal-Shadows-UIX:
       will-change: transform;
     }
     /* HATG:UIX:eigene-dashboard-hintergrund-fuer-alle-seiten:END */
+  uix-view-yaml: |
+    # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:START
+    "hui-sections-view $": |
+      div.wrapper div.container ha-sortable div.content div.section:has([style*="background"]) {
+        border: 1px solid rgba(130, 130, 130, 0.2);
+      }
+    # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:END
   uix-more-info-yaml: |
     # HATG:UIX:eigene-popup-hintergrund-fuer-more-info:START
     "$ ha-dialog $": |
@@ -394,7 +401,7 @@ Awesome-Flat-Metal-Shadows-UIX:
       state-icon-color: "#007AFF"
       state-icon-active-color: "#E78800"
       state-icon-unavailable-color: "#E7ECF3"
-      state-active-color: "##E78800"
+      state-active-color: "#E78800"
       state-inactive-color: "#626262"
       state-unavailable-color: "#6F6F6F"
       state-on-color: "#E78800"
