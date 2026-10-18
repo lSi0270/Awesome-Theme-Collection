@@ -1,18 +1,4 @@
 <p align="center">
-  <a href="https://github.com/lSi0270/Awesome-Theme-Collection/releases/">
-    <img src="https://img.shields.io/github/downloads/lSi0270/Awesome-Theme-Collection/total?style=for-the-badge" alt="GitHub Downloads">
-  </a>
-  <a href="https://github.com/lSi0270/Awesome-Theme-Collection/releases/">
-    <img src="https://img.shields.io/github/release/lSi0270/Awesome-Theme-Collection?style=for-the-badge" alt="GitHub release">
-  </a>
-  <a href="https://github.com/lSi0270/Awesome-Theme-Collection/releases/">
-    <img src="https://img.shields.io/github/stars/lSi0270/Awesome-Theme-Collection?style=for-the-badge" alt="Stars">
-  </a>
-  <a href="https://github.com/lSi0270/Awesome-Theme-Collection/issues/">
-    <img src="https://img.shields.io/github/issues/lSi0270/Awesome-Theme-Collection?style=for-the-badge" alt="Issues">
-  </a>
-</p>
-<p align="center">
   <b>Deutsch</b> · <a href="https://github.com/lSi0270/Awesome-Theme-Collection/blob/main/README_en.md">English</a>
 </p>
 
