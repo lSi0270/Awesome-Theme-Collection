@@ -132,8 +132,8 @@ Installationroutine angepasst (Installation routine updated):
 - "Designs neu laden" wird jetzt automatisch ausgeführt nach Installation/Deinstallation
 
 v1.0.3
-- Neuer Metallhintergrund (New Metal Background)
-- Screenshots aktualisiert (Screenshots updated)
+- Neuer Metallhintergrund
+- Screenshots aktualisiert
 
 v1.0.2
 - mehr Farben korrigiert, Transparenzwerte teilweise angepasst, mehr Dialoge mit Dashboard-Hintergrund
