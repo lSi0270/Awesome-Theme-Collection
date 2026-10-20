@@ -70,7 +70,7 @@ Ohne UIX funktioniert es auch, aber sieht dann nur nach einem Standard-HA-Theme 
 Besonderer Dank geht an Piranha1605 für seinen HATG (https://github.com/Piranha1605/ha-theme-generator) und Lint-Free-Technology für die UIX-Erweiterung (https://github.com/Lint-Free-Technology/uix).
 Ohne die Beiden wäre die Themes-Kollektion nicht enstanden.
 
-[Anfang](#awesome-theme-kollektion)
+[🏠 Anfang](#awesome-theme-kollektion)
 
 ## Installationsanweisungen
 
@@ -113,7 +113,7 @@ Die Integration legt automatisch die erforderlichen Verzeichnisse an für die Th
 
 Ich hoffe es zumindest, das es dem Einen oder Anderen auch so gut gefällt wie mir selbst.
 
-[Anfang](#awesome-theme-kollektion)
+[🏠 Anfang](#awesome-theme-kollektion)
 
 ## Support
 
@@ -144,7 +144,7 @@ v1.0.1
 v1.0.0
 - Erstes Release (8 UIX-Themes mit Light & Dark Sektion)
 
-[Anfang](#awesome-theme-kollektion)
+[🏠 Anfang](#awesome-theme-kollektion)
 
 
 # Awesome Theme Collection
@@ -219,7 +219,7 @@ It will work without UIX, but will then simply look like a standard HA theme wit
 Special thanks go to Piranha1605 for his HATG (https://github.com/Piranha1605/ha-theme-generator) and Lint-Free-Technology for the UIX extension (https://github.com/Lint-Free-Technology/uix).
 Without them, this collection of themes would never become reality.
 
-[Begin](#awesome-theme-collection)
+[🏠 Home](#awesome-theme-collection)
 
 ## Installation instructions
 
@@ -261,7 +261,7 @@ The integration automatically creates the necessary directories for the themes (
 
 I certainly hope that some of you will enjoy it as much as I do.
 
-[Begin](#awesome-theme-collection)
+[🏠 Home](#awesome-theme-collection)
 
 ## Support
 
@@ -291,4 +291,4 @@ v1.0.1
 v1.0.0
 - first release (8 UIX-Themes with Light & Dark Section)
 
-[Begin](#awesome-theme-collection)
+[🏠 Home](#awesome-theme-collection)
