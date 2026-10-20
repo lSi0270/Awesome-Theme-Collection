@@ -1,11 +1,11 @@
-[Deutsch](#awesome-theme-kollektion) · [English](#awesome-theme-collection)
+[English](#awesome-theme-collection)
 
 # Awesome Theme Kollektion
 
 Das ist eine Kollektion von UIX-Themes mit passenden Hintergründen für Home Assistant. Die Themes stylen (fast) alle HA-Standard-Karten, Custom-Karten, Bubble-Karten und Mushroom-Karten mit einem einheitlichen Aussehen.
 Zusätzlich werden alle Seiten (Einstellungen, Profile, HACS usw.) und Dialoge, Bubble-Card-Popups mit dem Dashboard-Hintergrund versehen. Die Themes nutzen alle das gleiche Farbschema, unterscheiden sich beim Kartenstyling, mit Schatten oder Ohne und der Wahl des Hintergrundes.
 
-[Themes](#enthaltene-themes) · [Installation](#installationsanweisungen) · [Versionen](#versionen)
+[Installation](#installationsanweisungen) · [Support](#support) · [Versionen](#versionen) · [English](#awesome-theme-collection)
 
 ## Enthaltene Themes
 
@@ -117,10 +117,6 @@ Ich hoffe es zumindest, das es dem Einen oder Anderen auch so gut gefällt wie m
 
 Wenn du ein Problem findest oder einen Verbesserungsvorschlag hast, öffne eine issue im Github Repository.
 
-<p align="center">
-  <b>[Deutsch](#awesome_theme_kollektion)</b> · <b>[English](#awesome_theme_collection)</b>
-</p>
-
 ## Versionen
 
 v1.0.5
@@ -147,18 +143,12 @@ v1.0.0
 - Erstes Release (8 UIX-Themes mit Light & Dark Sektion)
 
 
-<p align="center">
-  <b>[Deutsch](#awesome-theme-kollektion)</b> · <b>[English](#awesome-theme-collection)</b>
-</p>
-
 # Awesome Theme Collection
 
 This is a collection of UIX themes with matching backgrounds for Home Assistant. The themes style (almost) all standard HA cards, custom cards, bubble cards and mushroom cards with a consistent look.
 In addition, all pages (Settings, Profiles, HACS, etc.) and dialogues, as well as bubble card pop-ups, feature the dashboard background. The themes all use the same color scheme but differ in terms of card styling – with or without shadows – and the choice of background.
 
-<p align="center">
-  <b>[Themes](#included-themes)</b> · <b>[Installation](#installation-instructions)</b> · <b>[Versions](#versions)</b>
-</p>
+[Installation](#installation-instructions) · [Support](#support-1) · [Versions](#versions) · [Deutsch](#awesome-theme-kollektion)
 
 ## Included Themes
 
