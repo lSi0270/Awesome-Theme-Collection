@@ -148,7 +148,7 @@ v1.0.0
 
 
 <p align="center">
-  <b>[Deutsch](#awesome_theme_kollektion)</b> · <b>[English](#awesome_theme_collection)</b>
+  <b>[Deutsch](#awesome-theme-kollektion)</b> · <b>[English](#awesome-theme-collection)</b>
 </p>
 
 # Awesome Theme Collection
@@ -157,7 +157,7 @@ This is a collection of UIX themes with matching backgrounds for Home Assistant.
 In addition, all pages (Settings, Profiles, HACS, etc.) and dialogues, as well as bubble card pop-ups, feature the dashboard background. The themes all use the same color scheme but differ in terms of card styling – with or without shadows – and the choice of background.
 
 <p align="center">
-  <b>[Themes](#included_themes)</b> · <b>[Installation](#installation_instructions)</b> · <b>[Versions](#versions)</b>
+  <b>[Themes](#included-themes)</b> · <b>[Installation](#installation-instructions)</b> · <b>[Versions](#versions)</b>
 </p>
 
 ## Included Themes
