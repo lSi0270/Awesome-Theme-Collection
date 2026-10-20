@@ -1,5 +1,5 @@
 <p align="center">
-  <b>[Deutsch](#awesome_theme_kollektion)</b> · <b>[English](#awesome_theme_collection)</b>
+  [Deutsch](#awesome_theme_kollektion) · [English](#awesome_theme_collection)
 </p>
 
 # Awesome Theme Kollektion
@@ -8,7 +8,7 @@ Das ist eine Kollektion von UIX-Themes mit passenden Hintergründen für Home As
 Zusätzlich werden alle Seiten (Einstellungen, Profile, HACS usw.) und Dialoge, Bubble-Card-Popups mit dem Dashboard-Hintergrund versehen. Die Themes nutzen alle das gleiche Farbschema, unterscheiden sich beim Kartenstyling, mit Schatten oder Ohne und der Wahl des Hintergrundes.
 
 <p align="center">
-  <b>[Themes](#enthaltene_themes)</b> · <b>[Installation](#installationsanweisungen)</b> · <b>[Versionen](#versionen)</b>
+  [Themes](#enthaltene_themes) · [Installation](#installationsanweisungen) · [Versionen](#versionen)
 </p>
 
 ## Enthaltene Themes
