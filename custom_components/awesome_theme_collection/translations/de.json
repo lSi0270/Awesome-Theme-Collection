@@ -1,31 +1,128 @@
+
 {
   "config": {
     "step": {
       "user": {
         "title": "Awesome Theme Collection",
-        "description": "Richte die Awesome Theme Collection ein."
+        "description": "Installiert und verwaltet die Awesome-Themes für Home Assistant."
       }
     },
     "abort": {
-      "single_instance_allowed": "Awesome Theme Collection ist bereits eingerichtet."
+      "single_instance_allowed": "Die Integration ist bereits eingerichtet."
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "Themes verwalten",
-        "description": "Wähle die Themes aus, die installiert bleiben sollen.",
+        "title": "Awesome Theme Collection",
+        "description": "Wähle den Konfigurationsbereich.",
+        "menu_options": {
+          "areas": "Bereiche aktivieren/deaktivieren",
+          "metal": "Awesome-Metall-Themes",
+          "leather": "Awesome-Leder-Themes"
+        }
+      },
+      "areas": {
+        "title": "Awesome Theme Collection",
+        "description": "Aktiviere oder deaktiviere die gewünschten Theme-Bereiche. Beim Deaktivieren werden die zugehörigen, von der Integration verwalteten Themes und Hintergründe entfernt.",
         "data": {
-          "flat_leather_shadows": "Awesome Flat Leather Shadows",
-          "flat_leather": "Awesome Flat Leather",
-          "flat_metal_shadows": "Awesome Flat Metal Shadows",
-          "flat_metal": "Awesome Flat Metal",
-          "leather_shadows": "Awesome Leather Shadows",
-          "leather": "Awesome Leather",
-          "metal_shadows": "Awesome Metal Shadows",
-          "metal": "Awesome Metal"
+          "metal_enabled": "Awesome-Metall-Themes",
+          "leather_enabled": "Awesome-Leder-Themes"
+        }
+      },
+      "metal": {
+        "title": "Awesome-Metall-Themes",
+        "description": "Konfiguriere die Metall-Themes, Hintergrundbilder, Hintergrundfarben und Abschnittsdarstellung.",
+        "data": {},
+        "sections": {
+          "themes": {
+            "name": "Auswahl",
+            "description": "Wähle die Metall-Themes aus, die installiert werden sollen.",
+            "data": {
+              "flat_metal_shadows": "Awesome Flat Metal Shadows",
+              "flat_metal": "Awesome Flat Metal",
+              "metal_shadows": "Awesome Metal Shadows",
+              "metal": "Awesome Metal"
+            }
+          },
+          "backgrounds": {
+            "name": "Hintergründe",
+            "description": "Wähle die Dashboard- und Popup-Hintergrundbilder sowie die dazugehörigen Farben für die Metall-Themes aus. Als Farbe ist ein linear-gradient erlaubt.",
+            "data": {
+              "background_metal_dark": "Dashboard - Bild - Dunkel",
+              "dashboard_color_metal_dark": "Dashboard - Farbe - Dunkel",
+              "background_metal_light": "Dashboard - Bild - Hell",
+              "dashboard_color_metal_light": "Dashboard - Farbe - Hell",
+              "background_popup_metal_dark": "Popup - Bild - Dunkel",
+              "popup_color_metal_dark": "Popup - Farbe - Dunkel",
+              "background_popup_metal_light": "Popup - Bild - Hell",
+              "popup_color_metal_light": "Popup - Farbe - Hell",
+              "reset_backgrounds": "Auf Standard-Hintergründe zurücksetzen",
+              "reset_colors": "Auf Standard-Farben zurücksetzen"
+            }
+          },
+          "sections": {
+            "name": "Abschnittsabstände und Rahmenfarbe",
+            "description": "Diese Werte gelten ausschließlich für die Metall-Themes.",
+            "data": {
+              "section_column_gap_metal": "Horizontaler Abstand (Standard: 32px)",
+              "section_row_gap_metal": "Vertikaler Abstand (Standard: 24px)",
+              "section_border_color_metal": "Rahmenfarbe (wenn ein Abschnitt-Hintergrund aktiv)",
+              "reset_sections": "Auf Standard zurücksetzen"
+            }
+          }
+        }
+      },
+      "leather": {
+        "title": "Awesome-Leder-Themes",
+        "description": "Konfiguriere die Leder-Themes, Hintergrundbilder, Hintergrundfarben und Abschnittsdarstellung.",
+        "data": {},
+        "sections": {
+          "themes": {
+            "name": "Auswahl",
+            "description": "Wähle die Leder-Themes aus, die installiert werden sollen.",
+            "data": {
+              "flat_leather_shadows": "Awesome Flat Leather Shadows",
+              "flat_leather": "Awesome Flat Leather",
+              "leather_shadows": "Awesome Leather Shadows",
+              "leather": "Awesome Leather"
+            }
+          },
+          "backgrounds": {
+            "name": "Hintergründe",
+            "description": "Wähle die Dashboard- und Popup-Hintergrundbilder sowie die dazugehörigen Farben für die Leder-Themes aus. Als Farbe ist ein linear-gradient erlaubt.",
+            "data": {
+              "background_leather_dark": "Dashboard - Bild - Dunkel",
+              "dashboard_color_leather_dark": "Dashboard - Farbe - Dunkel",
+              "background_leather_light": "Dashboard - Bild - Hell",
+              "dashboard_color_leather_light": "Dashboard - Farbe - Hell",
+              "background_popup_leather_dark": "Popup - Bild - Dunkel",
+              "popup_color_leather_dark": "Popup - Farbe - Dunkel",
+              "background_popup_leather_light": "Popup - Bild - Hell",
+              "popup_color_leather_light": "Popup - Farbe - Hell",
+              "reset_backgrounds": "Auf Standard-Hintergründe zurücksetzen",
+              "reset_colors": "Auf Standard-Farben zurücksetzen"
+            }
+          },
+          "sections": {
+            "name": "Abschnittsabstände und Rahmenfarbe",
+            "description": "Diese Werte gelten ausschließlich für Leder-Themes.",
+            "data": {
+              "section_column_gap_leather": "Horizontaler Abstand (Standard: 32px)",
+              "section_row_gap_leather": "Vertikaler Abstand (Standard: 24px)",
+              "section_border_color_leather": "Rahmenfarbe (wenn ein Abschnitt-Hintergrund aktiv)",
+              "reset_sections": "Auf Standard zurücksetzen"
+            }
+          }
         }
       }
+    },
+    "error": {
+      "base": "Die Theme-Einstellungen sind ungültig.",
+      "invalid_rgba": "Bitte gib eine gültige RGBA-Farbe ein, z. B. rgba(130, 130, 130, 0.2).",
+      "invalid_background": "Bitte wähle einen gültigen lokalen Hintergrundpfad aus.",
+      "invalid_theme_color": "Bitte gib einen gültigen linear-gradient ein.",
+      "invalid_spacing": "Die Abstände müssen zwischen 0 und 50 Pixel liegen."
     }
   }
 }

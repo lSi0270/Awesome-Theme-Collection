@@ -1,31 +1,128 @@
+
 {
   "config": {
     "step": {
       "user": {
         "title": "Awesome Theme Collection",
-        "description": "Set up Awesome Theme Collection."
+        "description": "Installs and manages the Awesome themes for Home Assistant."
       }
     },
     "abort": {
-      "single_instance_allowed": "Awesome Theme Collection is already configured."
+      "single_instance_allowed": "The integration is already configured."
     }
   },
   "options": {
     "step": {
       "init": {
-        "title": "Manage themes",
-        "description": "Select the themes that should remain installed.",
+        "title": "Awesome Theme Collection",
+        "description": "Choose a configuration area.",
+        "menu_options": {
+          "areas": "Enable/disable areas",
+          "metal": "Awesome-Metal-Themes",
+          "leather": "Awesome-Leather-Themes"
+        }
+      },
+      "areas": {
+        "title": "Awesome Theme Collection",
+        "description": "Enable or disable the desired theme areas. Disabling an area removes its associated themes and wallpapers managed by this integration.",
         "data": {
-          "flat_leather_shadows": "Awesome Flat Leather Shadows",
-          "flat_leather": "Awesome Flat Leather",
-          "flat_metal_shadows": "Awesome Flat Metal Shadows",
-          "flat_metal": "Awesome Flat Metal",
-          "leather_shadows": "Awesome Leather Shadows",
-          "leather": "Awesome Leather",
-          "metal_shadows": "Awesome Metal Shadows",
-          "metal": "Awesome Metal"
+          "metal_enabled": "Awesome-Metal-Themes",
+          "leather_enabled": "Awesome-Leather-Themes"
+        }
+      },
+      "metal": {
+        "title": "Awesome-Metal-Themes",
+        "description": "Configure Metal themes, background images, background colors and section styling.",
+        "data": {},
+        "sections": {
+          "themes": {
+            "name": "Select",
+            "description": "Select the Metal themes to install.",
+            "data": {
+              "flat_metal_shadows": "Awesome Flat Metal Shadows",
+              "flat_metal": "Awesome Flat Metal",
+              "metal_shadows": "Awesome Metal Shadows",
+              "metal": "Awesome Metal"
+            }
+          },
+          "backgrounds": {
+            "name": "Backgrounds",
+            "description": "Select dashboard and popup background images and their colors for the Metal themes. Colors can be specified as a linear-gradient.",
+            "data": {
+              "background_metal_dark": "Dashboard - Image - Dark",
+              "dashboard_color_metal_dark": "Dashboard - Color - Dark",
+              "background_metal_light": "Dashboard - Image - Light",
+              "dashboard_color_metal_light": "Dashboard - Color - Light",
+              "background_popup_metal_dark": "Popup - Image - Dark",
+              "popup_color_metal_dark": "Popup - Color - Dark",
+              "background_popup_metal_light": "Popup - Image - Light",
+              "popup_color_metal_light": "Popup - Color - Light",
+              "reset_backgrounds": "Reset to default backgrounds",
+              "reset_colors": "Reset to default colors"
+            }
+          },
+          "sections": {
+            "name": "Section spacing and border color",
+            "description": "These settings apply exclusively to Metal themes.",
+            "data": {
+              "section_column_gap_metal": "Horizontal spacing (default: 32px)",
+              "section_row_gap_metal": "Vertical spacing (default: 24px)",
+              "section_border_color_metal": "Border color (when a section background is active)",
+              "reset_sections": "Reset to default"
+            }
+          }
+        }
+      },
+      "leather": {
+        "title": "Awesome-Leather-Themes",
+        "description": "Configure Leather themes, background images, background colors and section styling.",
+        "data": {},
+        "sections": {
+          "themes": {
+            "name": "Select",
+            "description": "Select the Leather themes to install.",
+            "data": {
+              "flat_leather_shadows": "Awesome Flat Leather Shadows",
+              "flat_leather": "Awesome Flat Leather",
+              "leather_shadows": "Awesome Leather Shadows",
+              "leather": "Awesome Leather"
+            }
+          },
+          "backgrounds": {
+            "name": "Backgrounds",
+            "description": "Select dashboard and popup background images and their colors for the Leather themes. Colors can be specified as a linear-gradient.",
+            "data": {
+              "background_leather_dark": "Dashboard - Image - Dark",
+              "dashboard_color_leather_dark": "Dashboard - Color - Dark",
+              "background_leather_light": "Dashboard - Image - Light",
+              "dashboard_color_leather_light": "Dashboard - Color - Light",
+              "background_popup_leather_dark": "Popup - Image - Dark",
+              "popup_color_leather_dark": "Popup - Color - Dark",
+              "background_popup_leather_light": "Popup - Image - Light",
+              "popup_color_leather_light": "Popup - Color - Light",
+              "reset_backgrounds": "Reset to default backgrounds",
+              "reset_colors": "Reset to default colors"
+            }
+          },
+          "sections": {
+            "name": "Section spacing and border color",
+            "description": "These settings apply exclusively to Leather themes.",
+            "data": {
+              "section_column_gap_leather": "Horizontal spacing (default: 32px)",
+              "section_row_gap_leather": "Vertical spacing (default: 24px)",
+              "section_border_color_leather": "Border color (when a section background is active)",
+              "reset_sections": "Reset section settings to default"
+            }
+          }
         }
       }
+    },
+    "error": {
+      "base": "The theme settings are invalid.",
+      "invalid_rgba": "Please enter a valid RGBA color, e.g. rgba(130, 130, 130, 0.2).",
+      "invalid_background": "Please select a valid local background path.",
+      "invalid_theme_color": "Please enter a valid linear-gradient.",
+      "invalid_spacing": "Spacing values must be between 0 and 50 pixels."
     }
   }
 }
