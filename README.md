@@ -144,15 +144,15 @@ Hier kann ein ganzer Themen-Bereich aktiviert/deaktiviert werden. Das heisst wen
 
 Die Themes und Hintergründe werden nach Aktivierung wieder freigegeben, das heisst Sie werden bei Deaktivierung nicht komplett gelöscht und sind in den Integration-Einstellungen jederzeit wieder verfügbar (solange die Integration nicht deinstalliert wird).
 
-### Awesome-Metall-Themes
+## Awesome-Metall-Themes
 
 Hier werden alle Einstellungen die die Metall-Themes betreffen gemacht und sind unabhängig von den anderen Bereichen.
 
-#### Auswahl
+### Auswahl
 
 Hier können einzelne **Themes aus diesem Bereich aktiviert/deaktiviert werden.** Dabei werden nur die Themes aus dem öffentlichen Bereich entfernt. Die passenden Hintergründe bleiben für die anderen Themes verfügbar.
 
-#### Hintergründe
+### Hintergründe
 
 Hier können die **Bild- und Farb-Hintergründe für Dashboard- und Popup-Hintergrund (Dialoge, Bubble-Card Popups)** eingestellt werden (oder auch eine Kombination von Beiden).
 
@@ -183,7 +183,7 @@ Wenn **"Auf Standard-Farben zurücksetzen"** aktiviert ist werden mit **"OK" die
 
 *Alle Einstellungen gelten hier nur für alle Hintergründe und Farben der Metall-Themes.*
 
-#### Abschnittsabstände und Rahmenfarbe
+### Abschnittsabstände und Rahmenfarbe
 
 Hier können die Abschnittsabstände (Sections) für **horizontale und vertikale Abstände der Abschnitte (Sections)** eingestellt werden (um weniger Platz zu verschwenden). Es sind Werte zwischen **0-50px möglich**. Ich würde aber nicht empfehlen die Werte auf 0 zu setzen, da dann die Abschnitte direkt aneinander liegen.
 
@@ -404,15 +404,15 @@ Here, an entire theme section can be enabled or disabled. This means that if **�
 
 The themes and backgrounds are made available again once enabled; this means they are not completely deleted when disabled and remain available at any time in the integration settings (provided the integration is not uninstalled).
 
-### Awesome Metal Themes
+## Awesome Metal Themes
 
 All settings relating to the metal themes are configured here and are independent of the other sections.
 
-#### Selection
+### Selection
 
 Here, individual **themes from this section can be enabled or disabled.** Only the themes are removed from the public area. The corresponding background images remain available for the other themes.
 
-#### Backgrounds
+### Backgrounds
 
 Here you can set the **image and color backgrounds for the dashboard and pop-up backgrounds (dialogs, bubble card pop-ups)** (or a combination of both).
 
@@ -443,7 +443,7 @@ If **"Reset to default colors"** is enabled, **clicking "OK" will restore the de
 
 *All settings here apply only to the backgrounds and colors of the metal themes.*
 
-#### Section spacing and border color
+### Section spacing and border color
 
 Here you can set the section spacing for **horizontal and vertical spacing between sections** (to minimise wasted space). Values between **0–50px** are possible. However, I would not recommend setting the values to 0, as the sections will then be right up against one another.
 
