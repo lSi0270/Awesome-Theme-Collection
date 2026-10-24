@@ -223,6 +223,8 @@ v1.1.0
 
 - zusätzlich kann jeweils ein ganzer Bereich an Themes deaktiviert werden (Metall- und Leder-Themes), die aber nur aus dem öffentlichen Bereich entfernt werden und jederzeit wieder reaktiviert werden können
 
+- neu ist auch ein zusätzlicher Bereich in dem die Abschnittsabstände und Rahmenfarbe für Abschnitte (Sections) in beiden Theme-Bereichen getrennt einstellbar ist
+
 - es sind noch mehr System-Dialoge mit dem Theme-Styling versehen
 
 
@@ -480,6 +482,8 @@ v1.1.0
   The image background can also be retained if an alpha value of less than 1 is set in the color gradient or if an optional transparent background has been selected.
 
 - In addition, an entire set of themes can be deactivated (Metal and Leather themes); however, these are only removed from the public area and can be reactivated at any time
+
+- Another new feature is an additional section where the spacing between sections and the border colour for sections can be set separately in both theme areas
 
 - Even more system dialog boxes now feature theme styling
 
