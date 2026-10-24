@@ -138,7 +138,7 @@ In den Integration-Einstellungen könne diverse Modifikationen vorgenommen werde
 
 Eine Auswähl öffnet das passende Dialogfenster.
 
-### Bereiche aktivieren/deaktivieren
+## Bereiche aktivieren/deaktivieren
 
 Hier kann ein ganzer Themen-Bereich aktiviert/deaktiviert werden. Das heisst wenn **"Awesome-Metall-Themes" oder "Awesome-Leder-Themes"** deaktiviert wird, werden alle passenden Themes und Hintergrundbilder dazu deaktiviert (aus öffentlichen Bereich entfernt).
 
@@ -398,7 +398,7 @@ Various changes can be made in the integration settings. There are 3 sub-menus.
 
 Selecting an option opens the corresponding dialog box.
 
-### Enable/disable sections
+## Enable/disable sections
 
 Here, an entire theme section can be enabled or disabled. This means that if **‘Awesome Metal Themes’ or ‘Awesome Leather Themes’** is disabled, all corresponding themes and background images will be disabled (removed from the public area).
 
