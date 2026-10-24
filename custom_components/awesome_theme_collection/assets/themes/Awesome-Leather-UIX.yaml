@@ -1,6 +1,6 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Leather-UIX (v1.0.5 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-10-17
+# Theme: Awesome-Leather-UIX (v1.1.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-10-22
 
 Awesome-Leather-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
@@ -144,7 +144,7 @@ Awesome-Leather-UIX:
     # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:START
     "hui-sections-view $": |
       div.wrapper div.container ha-sortable div.content div.section:has([style*="background"]) {
-        border: 1px solid rgba(130, 130, 130, 0.2);
+        border: 1px solid rgba(130, 130, 130, 0.2) /* ATC_SECTION_BORDER_COLOR_LEATHER */;
       }
     # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:END
   uix-more-info-yaml: |
@@ -193,10 +193,7 @@ Awesome-Leather-UIX:
         background-color: transparent !important;
       }
     $: |
-      :host(.type-dialog-lovelace-dashboard-detail),
-      :host(.type-hui-dialog-create-card),
-      :host(.type-dialog-edit-badge),
-      :host(.type-dialog-edit-card) {
+      :host {
         wa-dialog::part(dialog) {
           background: var(--popup-custom-wallpaper, var(--lovelace-background, none)) !important;
           background-attachment: scroll !important;
@@ -361,8 +358,8 @@ Awesome-Leather-UIX:
       # HA-Grundgerüst / Hintergründe
       primary-background-color: "#D0D0D0"
       background-color: "#E9E9E9"
-      lovelace-background: "linear-gradient(rgba(224, 224, 224, 0.80), rgba(224, 224, 224, 0.80)), url(\"/local/wallpaper/leather_light.jpg\") center / cover no-repeat"
-      popup-custom-wallpaper: "linear-gradient(rgba(224, 224, 224, 0.80), rgba(224, 224, 224, 0.80)), url(\"/local/wallpaper/leather_light.jpg\") center / cover no-repeat"
+      lovelace-background: "linear-gradient(rgba(224, 224, 224, 0.80), rgba(224, 224, 224, 0.80))/* ATC_DASHBOARD_COLOR_LEATHER_LIGHT */, url('/local/wallpaper/leather_light.jpg') /* ATC_BACKGROUND_LEATHER_LIGHT */ center / cover no-repeat"
+      popup-custom-wallpaper: "linear-gradient(rgba(224, 224, 224, 0.80), rgba(224, 224, 224, 0.80))/* ATC_POPUP_COLOR_LEATHER_LIGHT */, url('/local/wallpaper/leather_light.jpg') /* ATC_BACKGROUND_POPUP_LEATHER_LIGHT */ center / cover no-repeat"
       secondary-background-color: "#ECECEC"
       glass-effect-style: "off"
       background-style: "bild"
@@ -512,36 +509,6 @@ Awesome-Leather-UIX:
       ha-badge-font-size: "var(--ha-font-size-s)"
       ha-badge-icon-size: "18px"
       ha-badge-size: "36px"
-
-      # HA-Grundgerüst / Dialoge & Bottom-Sheet
-      dialog-backdrop-filter: "none"
-      dialog-content-padding: "var(--ha-space-6)"
-      dialog-content-position: "relative"
-      dialog-surface-margin-top: "auto"
-      ha-bottom-sheet-border-radius: "var(--ha-dialog-border-radius, var(--ha-border-radius-2xl))"
-      ha-bottom-sheet-content-padding: "0"
-      ha-bottom-sheet-handle-color: "var(--divider-color)"
-      ha-bottom-sheet-height: "auto"
-      ha-bottom-sheet-max-height: "90vh"
-      ha-bottom-sheet-padding: "0 var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left)"
-      ha-bottom-sheet-scrim-backdrop-filter: "var( --ha-dialog-scrim-backdrop-filter, var(--dialog-backdrop-filter, none) )"
-      ha-bottom-sheet-scrim-color: "var(--mdc-dialog-scrim-color, none)"
-      ha-bottom-sheet-surface-backdrop-filter: "var(--ha-dialog-surface-backdrop-filter, none)"
-      ha-bottom-sheet-surface-background: "var( --ha-dialog-surface-background, var(--card-background-color, var(--ha-color-surface-default)) )"
-      ha-dialog-border-radius: "var(--ha-border-radius-3xl)"
-      ha-dialog-header-title-color: "var(--primary-text-color)"
-      ha-dialog-header-title-font-size: "var(--ha-font-size-2xl)"
-      ha-dialog-header-title-font-weight: "var(--ha-font-weight-normal)"
-      ha-dialog-header-title-line-height: "var(--ha-line-height-condensed)"
-      ha-dialog-hide-duration: "200ms"
-      ha-dialog-max-height: "calc(var(--safe-height) - var(--ha-space-20))"
-      ha-dialog-max-width: "var(--safe-width)"
-      ha-dialog-min-height: "0"
-      ha-dialog-show-duration: "200ms"
-      ha-dialog-width-full: "min(95vw, var(--safe-width))"
-      ha-dialog-width-lg: "1024px"
-      ha-dialog-width-md: "580px"
-      ha-dialog-width-sm: "320px"
 
       # HA-Grundgerüst / Kacheln (Tile)
       ha-tile-icon-border-radius: "var(--ha-border-radius-pill)"
@@ -840,8 +807,8 @@ Awesome-Leather-UIX:
       ha-font-family-code: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       mdc-typography-font-family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       ha-font-size-scale: "1"
-      ha-font-size-2xs: "8px"
-      ha-font-size-xs: "8px"
+      ha-font-size-2xs: "9px"
+      ha-font-size-xs: "11px"
       ha-font-size-s: "12px"
       ha-font-size-m: "14px"
       ha-font-size-l: "16px"
@@ -1051,6 +1018,8 @@ Awesome-Leather-UIX:
       custom-card-border: "1px solid #8a8a8a"
       custom-glow-border: "2px solid #00828f"
       heading-text-color: "#221100"
+      ha-view-sections-row-gap: 24px # ATC_SECTION_ROW_GAP_LEATHER
+      ha-view-sections-column-gap: 32px # ATC_SECTION_COLUMN_GAP_LEATHER
 
     dark:
       # Grundfarben & Text / Grundfarben
@@ -1114,8 +1083,8 @@ Awesome-Leather-UIX:
       # HA-Grundgerüst / Hintergründe
       primary-background-color: "#10151C"
       background-color: "#10151C"
-      lovelace-background: "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40)), url(\"/local/wallpaper/leather_dark.jpg\") center / cover no-repeat"
-      popup-custom-wallpaper: "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40)), url(\"/local/wallpaper/leather_dark.jpg\") center / cover no-repeat"
+      lovelace-background: "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40))/* ATC_DASHBOARD_COLOR_LEATHER_DARK */, url('/local/wallpaper/leather_dark.jpg') /* ATC_BACKGROUND_LEATHER_DARK */ center / cover no-repeat"
+      popup-custom-wallpaper: "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40))/* ATC_POPUP_COLOR_LEATHER_DARK */, url('/local/wallpaper/leather_dark.jpg') /* ATC_BACKGROUND_POPUP_LEATHER_DARK */ center / cover no-repeat"
       secondary-background-color: "#10151C"
       glass-effect-style: "off"
       background-style: "bild"
@@ -1265,36 +1234,6 @@ Awesome-Leather-UIX:
       ha-badge-font-size: "var(--ha-font-size-s)"
       ha-badge-icon-size: "18px"
       ha-badge-size: "36px"
-
-      # HA-Grundgerüst / Dialoge & Bottom-Sheet
-      dialog-backdrop-filter: "none"
-      dialog-content-padding: "var(--ha-space-6)"
-      dialog-content-position: "relative"
-      dialog-surface-margin-top: "auto"
-      ha-bottom-sheet-border-radius: "var(--ha-dialog-border-radius, var(--ha-border-radius-2xl))"
-      ha-bottom-sheet-content-padding: "0"
-      ha-bottom-sheet-handle-color: "var(--divider-color)"
-      ha-bottom-sheet-height: "auto"
-      ha-bottom-sheet-max-height: "90vh"
-      ha-bottom-sheet-padding: "0 var(--safe-area-inset-right) var(--safe-area-inset-bottom) var(--safe-area-inset-left)"
-      ha-bottom-sheet-scrim-backdrop-filter: "var( --ha-dialog-scrim-backdrop-filter, var(--dialog-backdrop-filter, none) )"
-      ha-bottom-sheet-scrim-color: "var(--mdc-dialog-scrim-color, none)"
-      ha-bottom-sheet-surface-backdrop-filter: "var(--ha-dialog-surface-backdrop-filter, none)"
-      ha-bottom-sheet-surface-background: "var( --ha-dialog-surface-background, var(--card-background-color, var(--ha-color-surface-default)) )"
-      ha-dialog-border-radius: "var(--ha-border-radius-3xl)"
-      ha-dialog-header-title-color: "var(--primary-text-color)"
-      ha-dialog-header-title-font-size: "var(--ha-font-size-2xl)"
-      ha-dialog-header-title-font-weight: "var(--ha-font-weight-normal)"
-      ha-dialog-header-title-line-height: "var(--ha-line-height-condensed)"
-      ha-dialog-hide-duration: "200ms"
-      ha-dialog-max-height: "calc(var(--safe-height) - var(--ha-space-20))"
-      ha-dialog-max-width: "var(--safe-width)"
-      ha-dialog-min-height: "0"
-      ha-dialog-show-duration: "200ms"
-      ha-dialog-width-full: "min(95vw, var(--safe-width))"
-      ha-dialog-width-lg: "1024px"
-      ha-dialog-width-md: "580px"
-      ha-dialog-width-sm: "320px"
 
       # HA-Grundgerüst / Kacheln (Tile)
       ha-tile-icon-border-radius: "var(--ha-border-radius-pill)"
@@ -1593,8 +1532,8 @@ Awesome-Leather-UIX:
       ha-font-family-code: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       mdc-typography-font-family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       ha-font-size-scale: "1"
-      ha-font-size-2xs: "8px"
-      ha-font-size-xs: "8px"
+      ha-font-size-2xs: "9px"
+      ha-font-size-xs: "11px"
       ha-font-size-s: "12px"
       ha-font-size-m: "14px"
       ha-font-size-l: "16px"
@@ -1804,3 +1743,5 @@ Awesome-Leather-UIX:
       custom-card-border: "1px solid #2b303d"
       custom-glow-border: "2px solid #00828f"
       heading-text-color: "#ffbb88"
+      ha-view-sections-row-gap: 24px # ATC_SECTION_ROW_GAP_LEATHER
+      ha-view-sections-column-gap: 32px # ATC_SECTION_COLUMN_GAP_LEATHER
