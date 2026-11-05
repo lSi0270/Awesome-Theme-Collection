@@ -1,3 +1,7 @@
+<p align="center">
+  <b>Deutsch</b> · <a href="https://github.com/lSi0270/Awesome-Theme-Collection/blob/main/README_en.md"><b>English</b></a>
+</p>
+
 # Awesome Theme Kollektion
 
 Das ist eine Kollektion von UIX-Themes mit passenden Hintergründen für Home Assistant. Die Themes stylen (fast) alle HA-Standard-Karten, Custom-Karten, Bubble-Karten und Mushroom-Karten mit einem einheitlichen Aussehen.
@@ -5,6 +9,8 @@ Das ist eine Kollektion von UIX-Themes mit passenden Hintergründen für Home As
 Zusätzlich werden alle Seiten (Einstellungen, Profile, HACS usw.) und Dialoge, Bubble-Card-Popups mit einem Bild-Hintergrund versehen. 
 
 Die Themes nutzen alle das gleiche Farbschema, unterscheiden sich beim Kartenstyling, mit Schatten oder Ohne und der Wahl des Hintergrundes.
+
+Zusätzlich können in den Integrations-Einstellungen noch nachträgliche Anpassungen vorgenommen werden um die Themes noch weiter an den persönlichen Geschmack anzupassen.
 
 [Installation](#installationsanweisungen) · [Einstellungen](#einstellungen) · [Änderungen](#änderungen) · [English](#awesome-theme-collection)
 
@@ -110,7 +116,7 @@ Nach HA-Neustart zu "Einstellungen/Geräte & Dienste/UI eXtension for Home Assis
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=lSi0270&amp;repository=awesome-theme-collection&amp;category=integration"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Repository in Home Assistant öffnen" height="32"></a>
 </p>
 
-1. `https://github.com/lSi0270/Awesome-Theme-Collection` in HACS manuell als benutzerdefiniertes Repository (Kategorie **Integration**) hinzufügen, **Awesome Theme Collection** herunterladen und Home Assistant neu starten.
+1. `https://github.com/lSi0270/Awesome-Theme-Collection` in HACS/Marketplace manuell als benutzerdefiniertes Repository (Kategorie **Integration**) hinzufügen, **Awesome Theme Collection** herunterladen und Home Assistant neu starten (entfällt ab HA 2026.11.0 und geht mit 6. weiter).
 2. **Einstellungen/Geräte & Dienste**.
 3. **Integration hinzufügen**.
 4. **Awesome Theme Collection** suchen.
@@ -164,7 +170,7 @@ Unterteilt ist der Bereich in **"Dashboard" und "Popups"** mit je einer Bild- un
 z.B. "Dashboard-Bild-Dunkel" und "Dashboard-Farbe-Dunkel" stellt den Dashboard-Bild-Hintergrund und Dashboard-Farb-Hintergrund für den "Dunkel"-Design-Modus zusammen. Die beiden Werte werden dabei immer kombiniert.
 Das Gleiche gilt auch für die anderen Felder im gleichen Maße.
 
-Es kann unter der Bildauswahl auch "Transparent - kein Hintergrundbild" ausgewählt werden (wenn kein Bildhintergrund gewünscht). Alternativ kann in den rgba-Werten der Alpha auf 1 gesetzt werden (Farbe dann 100% deckend).
+Es kann unter der Bildauswahl auch "Transparent" ausgewählt werden (wenn kein Bildhintergrund gewünscht). Alternativ kann in den rgba-Werten der Alpha auf 1 gesetzt werden (Farbe dann 100% deckend).
 
 **Farbwert und Linear-Grandient nur verändern wenn man weiss was man tut, da ich nicht garantieren kann ob wirklich alle Falscheingaben abgefangen werden.**
 
@@ -183,9 +189,9 @@ Wenn **"Auf Standard-Farben zurücksetzen"** aktiviert ist werden mit **"OK" die
 
 *Alle Einstellungen gelten hier nur für alle Hintergründe und Farben der Metall-Themes.*
 
-### Abschnittsabstände und Rahmenfarbe
+### Abschnitte
 
-Hier können die Abschnittsabstände (Sections) für **horizontale und vertikale Abstände der Abschnitte (Sections)** eingestellt werden (um weniger Platz zu verschwenden). Es sind Werte zwischen **0-50px möglich**. Ich würde aber nicht empfehlen die Werte auf 0 zu setzen, da dann die Abschnitte direkt aneinander liegen.
+Hier können die Abschnittsabstände für **horizontale und vertikale Abstände der Abschnitte** eingestellt werden (um weniger Platz zu verschwenden). Es sind Werte zwischen **0-50px möglich**. Ich würde aber nicht empfehlen die Werte auf 0 zu setzen, da dann die Abschnitte direkt aneinander liegen.
 
 Außerdem kann eine Rahmenfarbe festgelegt werden.
 **Die Rahmenfarbe ist aber nur aktiv wenn für den jeweiligen Abschnitt ein Hintergrund festgelegt ist.**
@@ -193,6 +199,46 @@ Außerdem kann eine Rahmenfarbe festgelegt werden.
 Übernommen werden die Änderungen mit **"OK"**. Wenn etwas Falsches eingegeben wurde kommt eine "rote Fehlermeldung" im Dialog und der Wert wird wieder auf den Standard-Wert gesetzt.
 
 Wenn **"Auf Standard zurücksetzen"** aktiviert ist werden **mit "OK" die Voreinstellungen wieder hergestellt in diesem Bereich.**
+
+### Schrift - Größen
+
+Hier können die global geltenden Schriftgrößen eingestellt werden. Überall wo diese Standard-Schriftgrößen verwendet werden, wird die eingestellte Schriftgröße übernommen.
+Zulässig sind Werten zwischen 8 - 46px (**bei zu groß gewählten Größen kann es zu Darstellungsproblemen kommen**)
+
+Die Standards und Verwendungszweck sind: 
+- font-size-xs (Kleine Statusanzeigen, kurze Hinweise, kompakte Labels), font-size-s (Sekundärtexte, Untertitel, Zeitstempel, kleine Beschriftungen),
+- font-size-m (Normaler Text, Standardbeschriftungen, Entitätsnamen), font-size-l (Hervorgehobener Text, wichtige Statusinformationen, Kartenüberschriften)
+- font-size-xl (Größere Überschriften, Abschnittstitel), font-size-2xl (Hauptüberschriften, prominente Werte)
+- font-size-3xl (Große Überschriften, wichtige Messwerte), font-size-4xl (Sehr große Kennzahlen, Temperatur oder Energieverbrauch)
+- font-size-5xl (Besonders prominente Zahlen, z. B. auf einem Wandtablet)
+
+Wenn **"Auf Standard zurücksetzen"** aktiviert ist werden **mit "OK" die Voreinstellungen wieder hergestellt in diesem Bereich.**
+
+### Schrift - Farben
+
+Hier können die global geltenden Schriftfarben eingestellt werden. Überall wo diese Standard-Farben genutzt werden, wird die eingestellte Farbe übernommen.
+Der Bereich ist in die Farben für den Dunkel-Modus und den Hell-Modus unterteilt. **Ändere die Farben nur so dass sie noch lesbar bleiben.**
+
+Einstellbar ist die Primär-Text-Farbe (z.B. Bezeichnungen), Sekundär-Text-Farbe (z.B. Statusmeldungen), Deaktiviert-Text-Farbe, Überschriften-Text-Farbe (z.B. Überschriften von Abschnitten)
+Der Bereich ist in 2 Gruppen unterteilt. Einmal die 4 einstellbaren Farben für den Dunkel-Modus und dann die 4 einstellbaren Farben für den Hell-Modus.
+
+Wenn **"Auf Standard zurücksetzen"** aktiviert ist werden **mit "OK" die Voreinstellungen wieder hergestellt in diesem Bereich.**
+
+### Icons
+
+Hier kann die Icon-Größe und die Icon-Farbe (wenn aus/deaktiviert) eingestellt werden. Das gilt z.B. für die Entitäten-Icons, Seitenleiste-Icons, Kopfleiste-Icons, Formular-Icons.
+
+Die Größe kann zwischen 16 - 36px (Standard: 24px) gewählt werden. Bei Knopf-Karten wird nur die Minimal-Größe auf die eingestellte Icon-Größe verändert, da Knopf-Karten die Icon-Größe abhängig von der Größe der Karte dynamisch anpassen.
+
+Die Icon-Farbe gilt nur im aus-/deaktiertem Zustand und kann für den Dunkel- und Hell-Modus getrennt eingestellt werden.
+
+Wenn **"Auf Standard zurücksetzen"** aktiviert ist werden **mit "OK" die Voreinstellungen wieder hergestellt in diesem Bereich.**
+
+### Primär-Farben und Karten-Radius
+
+Hier können die Primär- und Aktenzfarbe angepasst werden (für Dunkel- und Hell-Modus). Die Primärfarbe wird z.B. für Rahmen und Hintergründe bestimmter Bedienelemente verwendet. Die Aktenzfarbe wird z.B. für Bestimmte Schalter oder aktive Elemente. verwendet.
+
+Der Karten-Radius gilt für alle HA-Karten, Bubble-Karten, Mushroom-Karten und alle Custom-Karten die sich im Design anpassen lassen. Gleichzeitig werden auch die Bedienelemente (Sub-Buttons) an den gewählten Radius angepasst. Er kann zwischen 0 - 28px (Standard: 10px) eingestellt werden.
 
 *Alle Einstellungen gelten hier nur für alle  Abschnitte der Metall-Themes.*
 
@@ -208,10 +254,38 @@ Alle Einstellungen sind die Gleichen wie im Awesome-Metall-Themes Bereich. Siehe
 
 ## Support
 
-Wenn du ein Problem findest oder einen Verbesserungsvorschlag hast, öffne eine issue im Github Repository.
+Wenn dir meine Arbeit gefällt, hinterlasse einen ⭐ auf Github in meinem Repository.
+Wenn du ein Problem findest oder einen Verbesserungsvorschlag hast, öffne eine Issue im Github Repository.
 
 
 ## Änderungen
+
+v1.2.0
+
+Die persönlichen Einstellmöglichkeiten wurden nochmal deutlich erweitert:
+
+- es können die Standard-Schriftgrößen verändert werden (font-size-xs, font-size-s, font-size-m, font-size-l, font-size-xl, font-size-2xl, font-size-3xl, font-size-4xl, font-size-5xl),
+  überall wo diese Standards verwendet werden wird die Schriftgröße angepasst. Wenn die Schriftgröße zu groß gewählt wurde für den Verwendungszweck kann es zu Darstellungsproblemen kommen.
+
+- es können die Standard-Schriftfarben verändert werden (Primär-Text-Farbe, Sekundär-Text-Farbe, Deaktiviert-Text-Farbe, Überschriften-Text-Farbe)
+   diese Standard-Farben werden z.B. bei Bezeichnungen (Primär-Text-Farbe) oder für Statusmeldungen (Sekundär-Text-Farbe) verwendet. Die Überschriftenfarbe z.B. für Abschnittsüberschriften.
+   
+- es kann die Icon-Größe und die Icon-Farbe (wenn aus/deaktiviert) für Dunkel- und Hell-Modus angepasst werden.
+  Die Icon-Größe wird überall genutzt wo der Standard-Icon (ha-icon) genutzt wird z.B. bei Kachel-Karten, Seitenleiste, Kopfleiste, Formulare. Der einstellbare Bereich liegt zwischen 16 - 36px (Standard: 24px).
+  
+- die Mushroom-Karten und Bubble-Karten übernehmen jetzt auch die Schriftgrößen und Schriftart des Standards für die HA-Karten.
+
+- für die Seitenleiste wurde die Schriftgröße für die Bezeichnungen jetzt von font-size-m auf font-size-l geändert (besser lesbar), auch die Schriftgröße für die Meldungsanzahl (Badge) wurde vergrößert
+
+- es können die Primär- und Akzentfarbe angepasst werden (jeweils für Dunkel- und Hell-Modus)
+
+- es kann der Karten-Radius zwischen 0 - 28px (Standard: 10px) eingestellt werden. Das betrifft alle HA-Karten, Bubble-Karten, Mushroom-Karten und sonstige Custom-Karten die sich im Design anpassen lassen.
+  Gleichzeitig passen sich auch die Bedienelemente (Sub-Buttons usw.) an den gewählten Radius automatisch an.
+
+- bei der Deinstallation der Integration werden jetzt alle Dateien tatsächlich entfernt
+
+- Die Awesome-Theme-Collection ist jetzt auch im HACS-/Marketplace-Katalog zu finden
+ 
 
 v1.1.0
 - es sind jetzt andere (auch eigene) Bildhintergründe möglich (einstellbar über die Integrations-Einstellungen) getrennt für die Metall- und Leder-Themes,
@@ -223,13 +297,13 @@ v1.1.0
 
 - zusätzlich kann jeweils ein ganzer Bereich an Themes deaktiviert werden (Metall- und Leder-Themes), die aber nur aus dem öffentlichen Bereich entfernt werden und jederzeit wieder reaktiviert werden können
 
-- neu ist auch ein zusätzlicher Bereich in dem die Abschnittsabstände und Rahmenfarbe für Abschnitte (Sections) in beiden Theme-Bereichen getrennt einstellbar ist
+- neu ist auch ein zusätzlicher Bereich in dem die Abschnittsabstände und Rahmenfarbe für Abschnitte in beiden Theme-Bereichen getrennt einstellbar ist
 
 - es sind noch mehr System-Dialoge mit dem Theme-Styling versehen
 
 
 v1.0.5
-- setzt einen dezenten Rand für Abschnitte (Sections) wenn Hintergrund gesetzt
+- setzt einen dezenten Rand für Abschnitte wenn Hintergrund gesetzt
 
 - state-active-color (light) korrigiert
 
@@ -266,9 +340,11 @@ v1.0.0
 
 This is a collection of UIX themes with matching backgrounds for Home Assistant. The themes style (almost) all standard HA cards, custom cards, bubble cards and mushroom cards with a consistent look.
 
-In addition, all pages (Settings, Profiles, HACS, etc.) and dialogues, as well as bubble card pop-ups, feature a picture background.
+In addition, all pages (Settings, Profiles, HACS, etc.) and dialogs, as well as bubble card pop-ups, feature a picture background.
 
 The themes all use the same color scheme but differ in terms of card styling – with or without shadows – and the choice of background.
+
+In addition, further adjustments can be made in the integration settings to tailor the themes even more closely to your personal taste.
 
 [Installation](#installation-instructions) · [Settings](#settings) · [Changes](#changes) · [Deutsch](#awesome-theme-kollektion)
 
@@ -371,7 +447,7 @@ Select `Experimental settings` and tick `Always patch ha-card` and `Style frame 
   <a href="https://my.home-assistant.io/redirect/hacs_repository/?owner=lSi0270&amp;repository=awesome-theme-collection&amp;category=integration"><img src="https://my.home-assistant.io/badges/hacs_repository.svg" alt="Repository in Home Assistant öffnen" height="32"></a>
 </p>
 
-1. add *`https://github.com/lSi0270/Awesome-Theme-Collection`* manually in HACS as a custom repository (category **Integration**), load **Awesome Theme Collection**  and restart Home Assistant.
+1. add *`https://github.com/lSi0270/Awesome-Theme-Collection`* manually in HACS/Marketplace as a custom repository (category **Integration**), load **Awesome Theme Collection**  and restart Home Assistant (Omitted from HA 2026.11.0 onwards; continues with 6.).
 2. **Settings/Devices & Services**.
 3. **Add integration**.
 4. Search for **Awesome Theme Collection**.
@@ -424,7 +500,7 @@ The section is divided into **“Dashboard” and “Pop-ups”**, each with an 
 For example, “Dashboard Image – Dark” and “Dashboard Color – Dark” combine the dashboard image background and dashboard color background for the “Dark” design mode. These two settings are always combined.
 The same applies to the other fields in exactly the same way.
 
-Under ‘Image selection’, you can also choose ‘Transparent – no background image’ (if you do not want a background image). Alternatively, you can set the alpha value to 1 in the rgba values (the color will then be 100% opaque).
+Under ‘Image selection’, you can also choose ‘Transparent’ (if you do not want a background image). Alternatively, you can set the alpha value to 1 in the rgba values (the color will then be 100% opaque).
 
 **Only change the color value and linear gradient if you know what you’re doing, as I cannot guarantee that all incorrect entries will be caught.**
 
@@ -443,7 +519,7 @@ If **"Reset to default colors"** is enabled, **clicking "OK" will restore the de
 
 *All settings here apply only to the backgrounds and colors of the metal themes.*
 
-### Section spacing and border color
+### Sections
 
 Here you can set the section spacing for **horizontal and vertical spacing between sections** (to minimise wasted space). Values between **0–50px** are possible. However, I would not recommend setting the values to 0, as the sections will then be right up against one another.
 
@@ -453,6 +529,46 @@ You can also specify a border color.
 Changes are applied by clicking **“OK”**. If an incorrect value is entered, a "red error message" appears in the dialog box and the value is reset to its default value.
 
 If **“Reset to default”** is enabled, **clicking “OK” will restore the default settings in this section.**
+
+### Font sizes
+
+You can set the global font sizes here. Wherever these standard font sizes are used, the font size you have set will be applied.
+Values between 8 and 46px are permitted (**selecting sizes that are too large may cause display issues**)
+
+The standards and their intended uses are:
+- font-size-xs (small status indicators, brief notes, compact labels), font-size-s (secondary text, subtitles, timestamps, small captions),
+- font-size-m (normal text, standard labels, entity names), font-size-l (emphasised text, important status information, map headings)
+- font-size-xl (larger headings, section titles), font-size-2xl (main headings, prominent values)
+- font-size-3xl (large headings, important measured values), font-size-4xl (very large key figures, temperature or energy consumption)
+- font-size-5xl (particularly prominent numbers, e.g. on a wall-mounted display)
+
+If **"Reset to default"** is enabled, **clicking "OK" will restore the default settings in this section.**
+
+### Font colors
+
+Here you can set the global font colors. Wherever these default colors are used, the color you have set will be applied.
+This section is divided into colors for dark mode and light mode. **Only change the colors so that they remain legible.**
+
+You can set the primary-text-color (e.g. labels), secondary-text-color (e.g. status messages), disabled-text-color and heading-text-color (e.g. section headings)
+This section is divided into two groups: the four customisable colors for dark mode and the four customisable colors for light mode.
+
+If **‘Reset to default’** is enabled, **clicking ‘OK’ will restore the default settings in this section.**
+
+### Icons
+
+Here you can set the icon size and icon color (if disabled). This applies, for example, to entity icons, sidebar icons, header bar icons and form icons.
+
+The size can be selected between 16 and 36px (default: 24px). For button cards, only the minimum size is adjusted to the set icon size, as button cards dynamically adjust the icon size depending on the card’s size.
+
+The icon color only applies when the feature is disabled and can be set separately for dark and light modes.
+
+If **"Reset to default"** is enabled, **clicking "OK" will restore the default settings in this section.**
+
+### Primary colors and card radius
+
+Here, you can adjust the primary and accent colors (for dark and light modes). The primary color is used, for example, for the borders and backgrounds of certain control elements. The accent color is used, for example, for certain buttons or active elements.
+
+The card radius applies to all HA cards, bubble cards, mushroom cards and all custom cards that can be customised in the design. At the same time, the control elements (sub-buttons) are also adjusted to the selected radius. It can be set between 0 and 28px (default: 10px).
 
 *All settings here apply only to all sections of the Metal themes.*
 
@@ -468,10 +584,36 @@ All settings are the same as in the Awesome Metal Themes section. See [**Awesome
 
 ## Support
 
-If you encounter a problem or have a suggestion for improvement, please open an issue in the GitHub repository.
-
+If you like my work, please give my repository a ⭐ on GitHub.
+If you find a problem or have a suggestion for improvement, please open an issue in the GitHub repository.
 
 ## Changes
+
+v1.2.0
+
+The range of personalisation options has been significantly expanded once again:
+
+- the default font sizes can be changed (font-size-xs, font-size-s, font-size-m, font-size-l, font-size-xl, font-size-2xl, font-size-3xl, font-size-4xl, font-size-5xl),
+  and the font size will be adjusted wherever these defaults are used. If the font size selected is too large for the intended purpose, this may lead to display issues.
+
+- The standard font colors can be changed (primary-text-color, secondary-text-color, disabled-text-color, heading-text-color)
+  These default colors are used, for example, for labels (primary text color) or status messages (secondary text color). The heading color is used, for example, for section headings.
+
+- The icon size and icon color (if disabled) can be adjusted for dark and light modes.
+  The icon size is used wherever the standard icon (ha-icon) is displayed, e.g. on tile cards, in the sidebar, header bar and forms. The adjustable range is between 16 and 36px (default: 24px).
+
+- Mushroom cards and bubble cards now also adopt the font sizes and font style of the standard HA cards.
+
+- For the sidebar, the font size for the labels has now been changed from `font-size-m` to `font-size-l` (for better readability), and the font size for the message count (badge) has also been increased.
+
+- The primary and accent colors can be customised (for dark and light mode respectively)
+
+- The card radius can be set between 0 and 28px (default: 10px). This applies to all ha cards, bubble cards, mushroom cards and other custom cards whose design can be customised.
+  At the same time, the controls (sub-buttons, etc.) automatically adjust to the selected radius.
+
+- When the integration is uninstalled, all files are now actually removed
+
+- The Awesome Theme Collection can now also be found in the HACS-/Marketplace catalogue
 
 v1.1.0
 - Different image backgrounds (including your own) are now available (configurable via the integration settings), separately for the metal and leather themes,
@@ -483,7 +625,7 @@ v1.1.0
 
 - In addition, an entire set of themes can be deactivated (Metal and Leather themes); however, these are only removed from the public area and can be reactivated at any time
 
-- Another new feature is an additional section where the spacing between sections and the border colour for sections can be set separately in both theme areas
+- Another new feature is an additional section where the spacing between sections and the border color for sections can be set separately in both theme areas
 
 - Even more system dialog boxes now feature theme styling
 
