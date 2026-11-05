@@ -1,6 +1,6 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Leather-Shadows-UIX (v1.1.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-10-22
+# Theme: Awesome-Leather-Shadows-UIX (v1.2.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-11-04
 
 Awesome-Leather-Shadows-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
@@ -26,6 +26,7 @@ Awesome-Leather-Shadows-UIX:
       background: var(--custom-card-gradient) !important;
       box-shadow: var(--custom-card-shadows) !important;
       border: var(--custom-card-border) !important;
+      border-radius: var(--default-card-border-radius) !important;
     }
     :host([class*="bubble-"]):has(.bubble-separator) ha-card,
     :host([class*="bubble-"]):has(.bubble-empty-column) ha-card,
@@ -38,17 +39,38 @@ Awesome-Leather-Shadows-UIX:
       border: none !important;
       box-shadow: none !important;
     }
-    :host(.type-heading),
-    :host([data-type="heading"]),
-    ha-card.type-heading {
-      --heading-card-title-color: var(--heading-text-color) !important;
-      --heading-card-subtitle-color: var(--heading-text-color) !important;
-      --primary-text-color: var(--heading-text-color) !important;
-      color: var(--heading-text-color) !important;
+    ha-card .bubble-name {
+      font-size: var(--ha-font-size-m) !important;
+      font-weight: normal !important;
     }
-    ha-card.type-heading .title,
-    ha-card.type-heading .subtitle {
-    color: var(--heading-text-color) !important;
+    .is-off .bubble-main-icon {
+      opacity: 1 !important;
+    }
+    ha-card .bubble-main-icon-container {
+      --mdc-icon-size: var(--default-icon-size) !important;
+      color:  var(--default-icon-off-color) !important;
+    }
+    ha-card ha-tile-container ha-tile-icon {
+      --mdc-icon-size: var(--default-icon-size) !important;
+      --tile-icon-opacity: var(--default-icon-opacity) !important;
+      border-radius: var(--default-icon-border-radius) !important;
+    }
+    ha-card ha-state-icon {
+      min-width: var(--default-icon-size) !important;
+      margin-left: calc((width - var(--default-icon-size)) / 2);
+    }
+    ha-card div.container div.row div.content ha-tile-icon {
+      --mdc-icon-size: var(--default-icon-size) !important;
+    }
+    ha-card mushroom-card mushroom-state-item mushroom-shape-icon ha-state-icon {
+      --mdc-icon-size: var(--default-icon-size) !important;
+      background-color: rgba(0, 0, 0, 0) !important;
+    }
+    ha-card mushroom-shape-icon {
+      --shape-color: rgba(0, 0, 0, 0) !important;
+      --shape-color-disabled: rgba(0, 0, 0, 0) !important;
+      --icon-color-disabled: var(--default-icon-off-color) !important;
+      background-color: rgba(0, 0, 0, 0) !important;
     }
     /* HATG:UIX:eigene-3d-hintergrund-mit-abgesetzten-rand:END */
     /* HATG:UIX:eigene-popup-hintergrund-fuer-bubble-card-popups:START */
@@ -67,13 +89,23 @@ Awesome-Leather-Shadows-UIX:
       .bubble-name {
         font-size: var(--ha-font-size-xl) !important;
         line-height: 22px !important;
-        color: var(--heading-text-color) !important;
+        color: var(--ha-heading-card-title-color) !important;
       }
       .bubble-main-icon {
-        color: var(--heading-text-color) !important;
+        color: var(--ha-heading-card-title-color) !important;
       }
     }
     /* HATG:UIX:eigene-popup-hintergrund-fuer-bubble-card-popups:END */
+    /* HATG:UIX:eigene-calendar-card:START */
+    div.calendar-container div.calendar-item div.calendar-content {
+      div.event-title {
+        font-size: var(--ha-font-size-m) !important;
+      }
+      div.event-time {
+        font-size: var(--ha-font-size-s) !important;
+      }
+    }
+    /* HATG:UIX:eigene-calendar-card:END */
   uix-root: |
     /* HATG:UIX:eigene-toolbar-mit-schatten:START */
     div div.header slot div.toolbar {
@@ -96,7 +128,7 @@ Awesome-Leather-Shadows-UIX:
         inset 3px 3px 7px color-mix(in srgb, var(--accent-color, var(--primary-color)), #000000), inset -2px -2px 6px color-mix(in srgb, var(--accent-color, var(--primary-color)) 74%, #ffffff) !important;
       }
     ha-list-item-button.selected::before {
-      border-radius: var(--ha-card-border-radius, 14px) !important;
+      border-radius: var(--default-card-border-radius, 14px) !important;
       opacity: 1 !important;
       background-color: var(--accent-color, var(--primary-color)) !important;
       background-image: none !important;
@@ -109,6 +141,20 @@ Awesome-Leather-Shadows-UIX:
     ha-list-item-button::before {
       transition: opacity 160ms ease, box-shadow 160ms ease;
     }
+    ha-list-item-button .item-text {
+      font-size: var(--ha-font-size-l) !important;
+      margin-left: calc((var(--mdc-icon-size) - 24px) / 2);
+    }
+    ha-list-item-button ha-icon {
+      margin-left: calc((24px - var(--mdc-icon-size)) / 2);
+    }
+    div.panels-list ha-list-nav slot ha-list-item-button .item-text {
+      margin-left: calc((var(--mdc-icon-size) - 24px) / 2);
+    }
+    div.panels-list ha-list-nav slot ha-list-item-button ha-svg-icon {
+      width: var(--mdc-icon-size);
+      margin-left: calc((24px - var(--mdc-icon-size)) / 2);
+    }
     :host {
       box-shadow:
         var(--custom-sidebar-shadow, no) !important;
@@ -118,6 +164,7 @@ Awesome-Leather-Shadows-UIX:
     .badge {
       background-color: var(--accent-color) !important;
       color: var(--disabled-color) !important;
+      font-size: var(--ha-font-size-m) !important;
       font-weight: bold !important;
       border: 1px solid black !important;
     }
@@ -143,8 +190,9 @@ Awesome-Leather-Shadows-UIX:
   uix-view-yaml: |
     # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:START
     "hui-sections-view $": |
-      div.wrapper div.container ha-sortable div.content div.section:has([style*="background"]) {
-        border: 1px solid rgba(130, 130, 130, 0.2) /* ATC_SECTION_BORDER_COLOR_LEATHER */;
+      div.section-container:has([style*="background"]) {
+        border-radius: var(--default-card-border-radius) !important;
+        border: 1px solid rgba(130, 130, 130, 0.2) /* ATC_SECTION_BORDER_COLOR_METAL */;
       }
     # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:END
   uix-more-info-yaml: |
@@ -207,6 +255,14 @@ Awesome-Leather-Shadows-UIX:
         box-shadow: var(--custom-card-shadows) !important;
         border: var(--custom-card-border) !important;
       }
+      div.dialog-content div.calendar-item div.calendar-content div.event-entry {
+        div.event-title {
+          font-size: var(--ha-font-size-m) !important;
+        }
+        div.event-time {
+          font-size: var(--ha-font-size-s) !important;
+        }
+      }
     # HATG:UIX:eigene-popup-hintergrund-fuer-alle-dialoge:END
   uix-config-yaml: |
     # HATG:UIX:eigene-karten-auf-einstellungsseiten-mit-fuellung:START
@@ -254,18 +310,18 @@ Awesome-Leather-Shadows-UIX:
         box-shadow: var(--custom-card-shadows) !important;
         border: var(--custom-card-border) !important;
       }
-        "ha-profile-section-security $ ha-refresh-tokens-card $": |
-          ha-card {
-            background: var(--custom-card-gradient) !important;
-            box-shadow: var(--custom-card-shadows) !important;
-            border: var(--custom-card-border) !important;
-          }
-        "ha-profile-section-security $ ha-long-lived-access-tokens-card $": |
-          ha-card {
-            background: var(--custom-card-gradient) !important;
-            box-shadow: var(--custom-card-shadows) !important;
-            border: var(--custom-card-border) !important;
-          }
+    "ha-profile-section-security $ ha-refresh-tokens-card $": |
+      ha-card {
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--custom-card-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+    "ha-profile-section-security $ ha-long-lived-access-tokens-card $": |
+      ha-card {
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--custom-card-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
     # HATG:UIX:eigene-karten-der-profileseiten-mit-fuellung:END
   uix-theme: "Awesome-Leather-Shadows-UIX"
   uix-hacs-frontend-yaml: |
@@ -298,8 +354,8 @@ Awesome-Leather-Shadows-UIX:
   modes:
     light:
       # Grundfarben & Text / Grundfarben
-      accent-color: "#BA4B00"
-      primary-color: "#0A5CFF"
+      accent-color: "var(--default-accent-color)"
+      primary-color: "var(--default-primary-color)"
       dark-primary-color: "#073FAD"
       light-primary-color: "#BAD1FF"
       disabled-color: "#262626"
@@ -335,10 +391,10 @@ Awesome-Leather-Shadows-UIX:
       printer-yellow-color: "#FDF60A"
 
       # Grundfarben & Text / Text
-      primary-text-color: "#202020"
-      secondary-text-color: "#474747"
-      text-primary-color: "#202020"
-      disabled-text-color: "#8E8E8E"
+      primary-text-color: "#101010" # ATC_PRIMARY_TEXT_COLOR_LIGHT_LEATHER
+      secondary-text-color: "#272727" # ATC_SECONDARY_TEXT_COLOR_LIGHT_LEATHER
+      text-primary-color: "#101010" # ATC_PRIMARY_TEXT_COLOR_LIGHT_LEATHER
+      disabled-text-color: "#8E8E8E" # ATC_DISABLED_TEXT_COLOR_LIGHT_LEATHER
 
       # HA-Grundgerüst / Card
       card-background-color: "#D0D0D0"
@@ -346,7 +402,7 @@ Awesome-Leather-Shadows-UIX:
       ha-card-background-color: "#E3E3E3"
       wa-color-surface-raised: "#E0E0E0"
       ha-card-border-color: "rgba(0, 0, 0, 0.2)"
-      ha-card-border-radius: "10px"
+      ha-card-border-radius: "var(--default-card-border-radius)"
       ha-card-border-width: "1px"
       ha-card-box-shadow: "no"
       table-row-background-color: "#E0E0E0"
@@ -397,12 +453,12 @@ Awesome-Leather-Shadows-UIX:
       # HA-Grundgerüst / Status, Icons & Entitäten
       state-icon-color: "#007AFF"
       state-icon-active-color: "#E78800"
-      state-icon-unavailable-color: "#E7ECF3"
+      state-icon-unavailable-color: "var(--default-icon-off-color)"
       state-active-color: "#E78800"
-      state-inactive-color: "#626262"
-      state-unavailable-color: "#6F6F6F"
+      state-inactive-color: "var(--default-icon-off-color)"
+      state-unavailable-color: "var(--default-icon-off-color)"
       state-on-color: "#E78800"
-      state-off-color: "#626262"
+      state-off-color: "var(--default-icon-off-color)"
       state-light-color: "#E78800"
       state-light-active-color: "#E78800"
       state-light-on-color: "#E78800"
@@ -415,8 +471,8 @@ Awesome-Leather-Shadows-UIX:
       state-climate-dry-color: "#007AFF"
       state-climate-fan_only-color: "#5AC8FA"
       state-climate-heat_cool-color: "#FFC107"
-      state-cover-color: "#BA4B00"
-      state-cover-active-color: "#BA4B00"
+      state-cover-color: "var(--default-accent-color)"
+      state-cover-active-color: "var(--default-accent-color)"
       state-cover-open-color: "#929000"
       state-cover-closed-color: "#Bf2600"
       state-fan-color: "#E78800"
@@ -460,7 +516,7 @@ Awesome-Leather-Shadows-UIX:
       state-binary_sensor-smoke-on-color: "#FF3B30"
       state-binary_sensor-sound-on-color: "#FF3B30"
       state-binary_sensor-tamper-on-color: "#FF3B30"
-      state-device_tracker-active-color: "#BA4B00"
+      state-device_tracker-active-color: "var(--default-accent-color)"
       state-device_tracker-home-color: "#34C759"
       state-humidifier-on-color: "#E78800"
       state-lawn_mower-active-color: "#E78800"
@@ -511,7 +567,6 @@ Awesome-Leather-Shadows-UIX:
       ha-badge-size: "36px"
 
       # HA-Grundgerüst / Kacheln (Tile)
-      ha-tile-icon-border-radius: "var(--ha-border-radius-pill)"
       ha-tile-info-gap: "var(--_tile-info-fixed-gap, 0)"
       ha-tile-info-min-height: "var(--_tile-info-fixed-min-height, auto)"
       ha-tile-info-primary-color: "var(--primary-text-color)"
@@ -520,7 +575,7 @@ Awesome-Leather-Shadows-UIX:
       ha-tile-info-primary-letter-spacing: "0.1px"
       ha-tile-info-primary-line-height: "var( --_tile-info-fixed-primary-line-height, var(--ha-line-height-normal) )"
       ha-tile-info-primary-min-height: "var(--_tile-info-fixed-primary-min-height, auto)"
-      ha-tile-info-secondary-color: "var(--primary-text-color)"
+      ha-tile-info-secondary-color: "var(--secondary-text-color)"
       ha-tile-info-secondary-font-size: "var(--ha-font-size-s)"
       ha-tile-info-secondary-font-weight: "var(--ha-font-weight-normal)"
       ha-tile-info-secondary-letter-spacing: "0.4px"
@@ -594,7 +649,7 @@ Awesome-Leather-Shadows-UIX:
       # HA-Grundgerüst / Buttons & Chips
       control-button-background-color: "#ECECEC"
       control-button-icon-color: "#2F6FE0"
-      control-button-border-radius: "10px"
+      control-button-border-radius: "var(--default-card-border-radius)"
       button-height: "40px"
       ha-assist-chip-active-container-opacity: "1"
       ha-assist-chip-container-color: "transparent"
@@ -651,9 +706,9 @@ Awesome-Leather-Shadows-UIX:
       ha-color-fill-primary-quiet-resting: "rgba(125, 125, 125, 0.45)"
       ha-color-fill-primary-quiet-hover: "rgba(125, 125, 125, 0.15)"
       ha-color-on-primary-loud: "#FFFFFF"
-      ha-color-on-primary-normal: "#BA4B00"
-      ha-color-on-primary-quiet: "#BA4B00"
-      ha-color-text-link: "#BA4B00"
+      ha-color-on-primary-normal: "var(--default-accent-color)"
+      ha-color-on-primary-quiet: "var(--default-accent-color)"
+      ha-color-text-link: "var(--default-accent-color)"
       ha-color-black: "#000"
       ha-color-green-05: "#031608"
       ha-color-green-10: "#052310"
@@ -736,7 +791,7 @@ Awesome-Leather-Shadows-UIX:
 
       # HA-Grundgerüst / Abstände, Rundungen, Schatten & Rahmen
       border-color: "rgba(0, 0, 0, 0.2)"
-      border-radius: "10px"
+      border-radius: "var(--default-card-border-radius)"
       box-shadow: "no"
       divider-color: "rgba(0, 0, 0, 0.12)"
       outline-color: "rgba(0, 0, 0, 0.12)"
@@ -777,15 +832,15 @@ Awesome-Leather-Shadows-UIX:
       ha-space-18: "72px"
       ha-space-19: "76px"
       ha-space-20: "80px"
-      ha-border-radius-sm: "4px"
-      ha-border-radius-md: "8px"
-      ha-border-radius-lg: "12px"
-      ha-border-radius-xl: "16px"
-      ha-border-radius-2xl: "20px"
-      ha-border-radius-3xl: "24px"
-      ha-border-radius-4xl: "28px"
-      ha-border-radius-5xl: "32px"
-      ha-border-radius-6xl: "36px"
+      ha-border-radius-sm: "calc(var(--default-card-border-radius) - 12px)" # "4px"
+      ha-border-radius-md: "calc(var(--default-card-border-radius) - 8px)" # "8px"
+      ha-border-radius-lg: "calc(var(--default-card-border-radius) - 4px)" # "12px"
+      ha-border-radius-xl: "var(--default-card-border-radius)" # "16px"
+      ha-border-radius-2xl: "calc(var(--default-card-border-radius) + 4px)" # "20px"
+      ha-border-radius-3xl: "calc(var(--default-card-border-radius) + 8px)" # "24px"
+      ha-border-radius-4xl: "calc(var(--default-card-border-radius) + 12px)" # "28px"
+      ha-border-radius-5xl: "calc(var(--default-card-border-radius) + 16px)" # "32px"
+      ha-border-radius-6xl: "calc(var(--default-card-border-radius) + 20px)" # "36px"
       ha-border-radius-pill: "9999px"
       ha-border-radius-square: "0"
       ha-border-width-sm: "1px"
@@ -796,8 +851,8 @@ Awesome-Leather-Shadows-UIX:
       ha-box-shadow-l: "0 6px 12px -3px rgba(0, 0, 0, 0.12), 0 16px 32px -6px rgba(0, 0, 0, 0.2)"
       ha-animation-duration-none: "1ms"
       ha-animation-duration-instant: "75ms"
-      ha-animation-duration-normal: "250ms"
-      ha-animation-duration-slow: "350ms"
+      ha-animation-duration-normal: "150ms"
+      ha-animation-duration-slow: "250ms"
 
       # HA-Grundgerüst / Schrift & Typografie
       primary-font-family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
@@ -806,16 +861,17 @@ Awesome-Leather-Shadows-UIX:
       ha-font-family-longform: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       ha-font-family-code: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       mdc-typography-font-family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
+      mdc-typography-subtitle1-font-size: "var(--ha-font-size-m)"
       ha-font-size-scale: "1"
-      ha-font-size-2xs: "9px"
-      ha-font-size-xs: "11px"
-      ha-font-size-s: "12px"
-      ha-font-size-m: "14px"
-      ha-font-size-l: "16px"
-      ha-font-size-xl: "18px"
-      ha-font-size-2xl: "20px"
-      ha-font-size-3xl: "22px"
-      ha-font-size-4xl: "24px"
+      ha-font-size-xs: "11px" # ATC_FONT_SIZE_XS
+      ha-font-size-s: "12px" # ATC_FONT_SIZE_S
+      ha-font-size-m: "14px" # ATC_FONT_SIZE_M
+      ha-font-size-l: "16px" # ATC_FONT_SIZE_L
+      ha-font-size-xl: "18px" # ATC_FONT_SIZE_XL
+      ha-font-size-2xl: "20px" # ATC_FONT_SIZE_2XL
+      ha-font-size-3xl: "24px" # ATC_FONT_SIZE_3XL
+      ha-font-size-4xl: "28px" # ATC_FONT_SIZE_4XL
+      ha-font-size-5xl: "36px" # ATC_FONT_SIZE_5XL
       ha-font-weight-light: "300"
       ha-font-weight-normal: "400"
       ha-font-weight-body: "400"
@@ -881,37 +937,37 @@ Awesome-Leather-Shadows-UIX:
       bubble-main-buttons-background-color: "#D0D0D0"
       bubble-secondary-background-color: "#ECECEC"
       bubble-icon-background-color: "rgba(193, 193, 193, 0)"
-      bubble-icon-color: "#BA4B00"
-      bubble-accent-color: "#BA4B00"
+      bubble-icon-color: "var(--default-accent-color)"
+      bubble-accent-color: "var(--default-accent-color)"
       bubble-line-background-color: "rgba(0, 0, 0, 0.12)"
       bubble-border: "1px solid rgba(0, 0, 0, 0.2)"
-      bubble-border-radius: "10px"
+      bubble-border-radius: "var(--default-card-border-radius)"
       bubble-box-shadow: "0 10px 30px rgba(0,0,0,.50)"
-      bubble-icon-border-radius: "10px"
+      bubble-icon-border-radius: "var(--default-card-sub-border-radius)"
 
       # Bubble Card / Select (Auswahlkarte)
       bubble-select-main-background-color: "#D0D0D0"
       bubble-select-list-background-color: "#D0D0D0"
-      bubble-select-list-border-radius: "10px"
+      bubble-select-list-border-radius: "var(--default-card-border-radius)"
       bubble-select-list-width: "220px"
-      bubble-select-list-item-accent-color: "#BA4B00"
+      bubble-select-list-item-accent-color: "var(--default-accent-color)"
       bubble-select-arrow-background-color: "#D0D0D0"
-      bubble-select-button-border-radius: "10px"
+      bubble-select-button-border-radius: "var(--default-card-border-radius)"
 
       # Bubble Card / Buttons
       bubble-button-background-color: "#D0D0D0"
-      bubble-button-active-icon-color: "#BA4B00"
-      bubble-button-border-radius: "10px"
+      bubble-button-active-icon-color: "var(--default-accent-color)"
+      bubble-button-border-radius: "var(--default-card-border-radius)"
       bubble-button-main-background-color: "#D0D0D0"
-      bubble-button-icon-border-radius: "10px"
+      bubble-button-icon-border-radius: "var(--default-card-sub-border-radius)"
       bubble-button-icon-background-color: "rgba(193, 193, 193, 0)"
       bubble-light-white-color: "#FFFFFF"
       bubble-light-color: "#FFC107"
 
       # Bubble Card / Sub-Buttons
       bubble-sub-button-background-color: "#D0D0D0"
-      bubble-sub-button-border-radius: "10px"
-      bubble-sub-slider-border-radius: "10px"
+      bubble-sub-button-border-radius: "var(--default-card-sub-border-radius)"
+      bubble-sub-slider-border-radius: "var(--default-card-sub-border-radius)"
       bubble-sub-slider-background-color: "#D0D0D0"
       bubble-sub-slider-height: "48px"
       bubble-sub-button-dark-text-color: "#1C1C1E"
@@ -921,7 +977,7 @@ Awesome-Leather-Shadows-UIX:
 
       # Bubble Card / Popup & Dialog
       bubble-pop-up-background-color: "#D0D0D0"
-      bubble-pop-up-border-radius: "18px"
+      bubble-pop-up-border-radius: "var(--default-card-border-radius)"
       dialog-box-shadow: "0 10px 30px rgba(0,0,0,.50)"
       ha-dialog-scrim-backdrop-filter: "blur(2px)"
       ha-dialog-surface-background: "rgba(224, 224, 224, 1)"
@@ -931,7 +987,7 @@ Awesome-Leather-Shadows-UIX:
 
       # Bubble Card / Horizontal Buttons Stack
       bubble-horizontal-buttons-stack-background-color: "#D0D0D0"
-      bubble-horizontal-buttons-stack-border-radius: "10px"
+      bubble-horizontal-buttons-stack-border-radius: "var(--default-card-border-radius)"
 
       # Bubble Card / Climate
       bubble-climate-background-color: "#D0D0D0"
@@ -942,43 +998,43 @@ Awesome-Leather-Shadows-UIX:
       bubble-state-climate-heat-color: "#FF3B30"
       bubble-state-climate-auto-color: "#34C759"
       bubble-state-climate-heat-cool-color: "#AF52DE"
-      bubble-climate-accent-color: "#BA4B00"
+      bubble-climate-accent-color: "var(--default-accent-color)"
 
       # Bubble Card / Cover
       bubble-cover-button-background-color: "#D0D0D0"
 
       # Bubble Card / Media Player
       bubble-media-player-button-background-color: "#D0D0D0"
-      bubble-media-player-border-radius: "10px"
-      bubble-media-player-buttons-border-radius: "10px"
+      bubble-media-player-border-radius: "var(--default-card-border-radius)"
+      bubble-media-player-buttons-border-radius: "var(--default-card-sub-border-radius)"
       bubble-media-player-slider-background-color: "#D0D0D0"
 
       # Bubble Card / Calendar
       bubble-calendar-height: "56px"
       bubble-calendar-mask-size: "16px"
-      bubble-calendar-border-radius: "10px"
+      bubble-calendar-border-radius: "var(--default-card-border-radius)"
       bubble-event-background-color: "#D0D0D0"
       bubble-event-background-image: "none"
 
       # Mushroom / Karten & Hintergründe
       mush-card-background: "#D0D0D0"
       mush-control-background-color: "#ECECEC"
-      mush-card-primary-color: "#202020"
-      mush-card-secondary-color: "#43474A"
-      mush-title-color: "#202020"
-      mush-subtitle-color: "#43474A"
+      mush-card-primary-color: "#101010" # ATC_PRIMARY_TEXT_COLOR_LIGHT_LEATHER
+      mush-card-secondary-color: "#272727" # ATC_SECONDARY_TEXT_COLOR_LIGHT_LEATHER
+      mush-title-color: "#101010" # ATC_PRIMARY_TEXT_COLOR_LIGHT_LEATHER
+      mush-subtitle-color: "#272727" # ATC_SECONDARY_TEXT_COLOR_LIGHT_LEATHER
 
       # Mushroom / Icons
       mush-icon-background-color: "rgba(193, 193, 193, 0)"
-      mush-icon-color: "#626262"
-      mush-icon-active-color: "#BA4B00"
+      mush-icon-color: "var(--default-icon-off-color)"
+      mush-icon-active-color: "var(--default-accent-color)"
 
       # Mushroom / Toggle
-      mush-toggle-color: "#BA4B00"
+      mush-toggle-color: "var(--default-accent-color)"
       mush-toggle-background-color: "#D1D1D1"
 
       # Mushroom / Slider
-      mush-slider-color: "#BA4B00"
+      mush-slider-color: "var(--default-accent-color)"
       mush-slider-track-color: "#D1D1D1"
       mush-slider-background-color: "#F9F9F9"
 
@@ -986,9 +1042,9 @@ Awesome-Leather-Shadows-UIX:
       mush-chip-background: "#E0E0E0"
       mush-chip-active-background: "#F9F9F9"
       mush-chip-color: "#1C1C1C"
-      mush-chip-icon-color: "#BA4B00"
-      mush-chip-active-color: "#BA4B00"
-      mush-chip-active-icon-color: "#BA4B00"
+      mush-chip-icon-color: "var(--default-accent-color)"
+      mush-chip-active-color: "var(--default-accent-color)"
+      mush-chip-active-icon-color: "var(--default-accent-color)"
       mush-chip-border-color: "rgba(0, 0, 0, 0.2)"
       mush-chip-border-radius: "10px"
       mush-chip-font-size: "12px"
@@ -1017,16 +1073,29 @@ Awesome-Leather-Shadows-UIX:
       custom-card-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.3), inset 2px 2px 0px rgba(255, 255, 255, 0.4), inset -1px -1px 0px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.10)"
       custom-card-border: "1px solid #8a8a8a"
       custom-glow-border: "2px solid #00828f"
-      heading-text-color: "#221100"
       custom-sidebar-shadow: "8px 0 16px -7px rgba(0, 0, 0, 0.20), 3px 0 10px -4px rgba(0, 0, 0, 0.10)"
       custom-toolbar-shadow: "0 8px 16px -6px rgba(0, 0, 0, 0.20), 0 4px 9px -3px rgba(0, 0, 0, 0.10)"
       ha-view-sections-row-gap: 24px # ATC_SECTION_ROW_GAP_LEATHER
       ha-view-sections-column-gap: 32px # ATC_SECTION_COLUMN_GAP_LEATHER
+      ha-heading-card-title-color: "#221100" # ATC_HEADING_TITLE_COLOR_LIGHT_LEATHER
+      ha-heading-card-subtitle-color: "#221100" # ATC_HEADING_TITLE_COLOR_LIGHT_LEATHER
+      mdc-icon-size: "24px" # ATC_ICON_SIZE_LEATHER
+      default-icon-size: "24px" # ATC_ICON_SIZE_LEATHER
+      default-icon-off-color: "#626262" #ATC_ICON_OFF_COLOR_LIGHT_LEATHER
+      default-icon-opacity: "0.0"
+      default-icon-border-radius: "6px"
+      ha-tile-icon-border-radius: "6px"
+      tile-icon-opacity: "0.0"
+      ha-transition-property: "transform, opacity"
+      default-card-border-radius: "10px" # ATC_CARD_BORDER_RADIUS_LEATHER
+      default-card-sub-border-radius: "calc(var(--default-card-border-radius) - 4px)"
+      default-primary-color: "#0A5CFF" # ATC_PRIMARY_COLOR_LIGHT_LEATHER
+      default-accent-color: "#BA4B00" # ATC_ACCENT_COLOR_LIGHT_LEATHER
 
     dark:
       # Grundfarben & Text / Grundfarben
-      accent-color: "#FFB200"
-      primary-color: "#0A5CFF"
+      accent-color: "var(--default-accent-color)"
+      primary-color: "var(--default-primary-color)"
       dark-primary-color: "#073FAD"
       light-primary-color: "#BAD1FF"
       disabled-color: "#363636"
@@ -1062,10 +1131,10 @@ Awesome-Leather-Shadows-UIX:
       printer-yellow-color: "#FFE14D"
 
       # Grundfarben & Text / Text
-      primary-text-color: "#E7EDF5"
-      secondary-text-color: "#9DA9B7"
-      text-primary-color: "#000000"
-      disabled-text-color: "#636366"
+      primary-text-color: "#E7EDF5" # ATC_PRIMARY_TEXT_COLOR_DARK_LEATHER
+      secondary-text-color: "#ADB9C7" # ATC_SECONDARY_TEXT_COLOR_DARK_LEATHER
+      text-primary-color: "#E7EDF5" # ATC_PRIMARY_TEXT_COLOR_DARK_LEATHER
+      disabled-text-color: "#636366" # ATC_DISABLED_TEXT_COLOR_DARK_LEATHER
 
       # HA-Grundgerüst / Card
       card-background-color: "#212730"
@@ -1073,7 +1142,7 @@ Awesome-Leather-Shadows-UIX:
       ha-card-background-color: "#161C25"
       wa-color-surface-raised: "#10151C"
       ha-card-border-color: "rgba(225, 225, 225, 0.15)"
-      ha-card-border-radius: "10px"
+      ha-card-border-radius: "var(--default-card-border-radius)"
       ha-card-border-width: "1px"
       ha-card-box-shadow: "no"
       table-row-background-color: "#161C25"
@@ -1119,17 +1188,17 @@ Awesome-Leather-Shadows-UIX:
       sidebar-text-color: "#E7EDF5"
       sidebar-icon-color: "rgba(231, 237, 245, 0.6)"
       sidebar-selected-text-color: "#d5d5d5"
-      sidebar-selected-icon-color: "#FFB200"
+      sidebar-selected-icon-color: "var(--default-accent-color)"
 
       # HA-Grundgerüst / Status, Icons & Entitäten
       state-icon-color: "#0A68FF"
       state-icon-active-color: "#FF9300"
-      state-icon-unavailable-color: "#929292"
+      state-icon-unavailable-color: "var(--default-icon-off-color)"
       state-active-color: "#FF9300"
-      state-inactive-color: "#929292"
-      state-unavailable-color: "#929292"
+      state-inactive-color: "var(--default-icon-off-color)"
+      state-unavailable-color: "var(--default-icon-off-color)"
       state-on-color: "#30D158"
-      state-off-color: "#636366"
+      state-off-color: "var(--default-icon-off-color)"
       state-light-color: "#FF9300"
       state-light-active-color: "#FF9300"
       state-light-on-color: "#FF9300"
@@ -1238,7 +1307,6 @@ Awesome-Leather-Shadows-UIX:
       ha-badge-size: "36px"
 
       # HA-Grundgerüst / Kacheln (Tile)
-      ha-tile-icon-border-radius: "var(--ha-border-radius-pill)"
       ha-tile-info-gap: "var(--_tile-info-fixed-gap, 0)"
       ha-tile-info-min-height: "var(--_tile-info-fixed-min-height, auto)"
       ha-tile-info-primary-color: "var(--primary-text-color)"
@@ -1247,7 +1315,7 @@ Awesome-Leather-Shadows-UIX:
       ha-tile-info-primary-letter-spacing: "0.1px"
       ha-tile-info-primary-line-height: "var( --_tile-info-fixed-primary-line-height, var(--ha-line-height-normal) )"
       ha-tile-info-primary-min-height: "var(--_tile-info-fixed-primary-min-height, auto)"
-      ha-tile-info-secondary-color: "var(--primary-text-color)"
+      ha-tile-info-secondary-color: "var(--secondary-text-color)"
       ha-tile-info-secondary-font-size: "var(--ha-font-size-s)"
       ha-tile-info-secondary-font-weight: "var(--ha-font-weight-normal)"
       ha-tile-info-secondary-letter-spacing: "0.4px"
@@ -1270,7 +1338,7 @@ Awesome-Leather-Shadows-UIX:
 
       # HA-Grundgerüst / Schalter, Toggle & Slider
       ha-control-switch-color: "#FF9300"
-      ha-control-switch-checked-color: "#0A5CFF"
+      ha-control-switch-checked-color: "var(--default-primary-color)"
       ha-control-switch-unchecked-color: "#3A3A3C"
       ha-switch-background-color: "#2B2F3A"
       ha-switch-background-color-hover: "#3B3F4A"
@@ -1282,12 +1350,12 @@ Awesome-Leather-Shadows-UIX:
       ha-switch-checked-background-color: "#2B2F3A"
       ha-switch-checked-background-color-hover: "#3B3F4A"
       ha-switch-checked-border-color: "rgba(85, 85, 85, 1)"
-      ha-switch-checked-thumb-background-color: "#0A5CFF"
-      ha-switch-checked-thumb-background-color-hover: "#0A5CFF"
+      ha-switch-checked-thumb-background-color: "var(--default-primary-color)"
+      ha-switch-checked-thumb-background-color-hover: "var(--default-primary-color)"
       ha-switch-checked-thumb-border-color: "rgba(85, 85, 85, 1)"
       ha-switch-checked-thumb-border-color-hover: "rgba(119, 119, 119, 1)"
-      control-slider-color: "#0A5CFF"
-      slider-color: "#0A5CFF"
+      control-slider-color: "var(--default-primary-color)"
+      slider-color: "var(--default-primary-color)"
       slider-secondary-color: "#1F3A5F"
       slider-track-color: "#48484A"
       ha-checkbox-background-color: "var(--wa-form-control-background-color)"
@@ -1320,8 +1388,8 @@ Awesome-Leather-Shadows-UIX:
 
       # HA-Grundgerüst / Buttons & Chips
       control-button-background-color: "rgba(22, 28, 37, 0.68)"
-      control-button-icon-color: "#FFB200"
-      control-button-border-radius: "10px"
+      control-button-icon-color: "var(--default-accent-color)"
+      control-button-border-radius: "var(--default-card-border-radius)"
       button-height: "40px"
       ha-assist-chip-active-container-opacity: "1"
       ha-assist-chip-container-color: "transparent"
@@ -1360,10 +1428,10 @@ Awesome-Leather-Shadows-UIX:
       mdc-text-field-hover-line-color: "#38383A"
 
       # HA-Grundgerüst / Material, Paper & MDC
-      mdc-theme-primary: "#0A5CFF"
+      mdc-theme-primary: "var(--default-primary-color)"
       mdc-theme-secondary: "#FFA200"
       mdc-theme-on-primary: "#000000"
-      md-sys-color-primary: "#0A5CFF"
+      md-sys-color-primary: "var(--default-primary-color)"
       md-sys-color-on-primary: "#0A84FF"
       md-sys-color-primary-container: "#1F3A5F"
       md-sys-color-on-primary-container: "#000000"
@@ -1463,7 +1531,7 @@ Awesome-Leather-Shadows-UIX:
 
       # HA-Grundgerüst / Abstände, Rundungen, Schatten & Rahmen
       border-color: "rgba(225, 225, 225, 0.15)"
-      border-radius: "10px"
+      border-radius: "var(--default-card-border-radius)"
       box-shadow: "no"
       divider-color: "rgba(225, 225, 225, 0.12)"
       outline-color: "rgba(225, 225, 225, 0.12)"
@@ -1504,15 +1572,15 @@ Awesome-Leather-Shadows-UIX:
       ha-space-18: "72px"
       ha-space-19: "76px"
       ha-space-20: "80px"
-      ha-border-radius-sm: "4px"
-      ha-border-radius-md: "8px"
-      ha-border-radius-lg: "12px"
-      ha-border-radius-xl: "16px"
-      ha-border-radius-2xl: "20px"
-      ha-border-radius-3xl: "24px"
-      ha-border-radius-4xl: "28px"
-      ha-border-radius-5xl: "32px"
-      ha-border-radius-6xl: "36px"
+      ha-border-radius-sm: "calc(var(--default-card-border-radius) - 12px)" # "4px"
+      ha-border-radius-md: "calc(var(--default-card-border-radius) - 8px)" # "8px"
+      ha-border-radius-lg: "calc(var(--default-card-border-radius) - 4px)" # "12px"
+      ha-border-radius-xl: "var(--default-card-border-radius)" # "16px"
+      ha-border-radius-2xl: "calc(var(--default-card-border-radius) + 4px)" # "20px"
+      ha-border-radius-3xl: "calc(var(--default-card-border-radius) + 8px)" # "24px"
+      ha-border-radius-4xl: "calc(var(--default-card-border-radius) + 12px)" # "28px"
+      ha-border-radius-5xl: "calc(var(--default-card-border-radius) + 16px)" # "32px"
+      ha-border-radius-6xl: "calc(var(--default-card-border-radius) + 20px)" # "36px"
       ha-border-radius-pill: "9999px"
       ha-border-radius-square: "0"
       ha-border-width-sm: "1px"
@@ -1523,8 +1591,8 @@ Awesome-Leather-Shadows-UIX:
       ha-box-shadow-l: "0 6px 12px -3px rgba(0, 0, 0, 0.4), 0 16px 32px -6px rgba(0, 0, 0, 0.55)"
       ha-animation-duration-none: "1ms"
       ha-animation-duration-instant: "75ms"
-      ha-animation-duration-normal: "250ms"
-      ha-animation-duration-slow: "350ms"
+      ha-animation-duration-normal: "150ms"
+      ha-animation-duration-slow: "250ms"
 
       # HA-Grundgerüst / Schrift & Typografie
       primary-font-family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
@@ -1533,16 +1601,17 @@ Awesome-Leather-Shadows-UIX:
       ha-font-family-longform: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       ha-font-family-code: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
       mdc-typography-font-family: "-apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', sans-serif"
+      mdc-typography-subtitle1-font-size: "var(--ha-font-size-m)"
       ha-font-size-scale: "1"
-      ha-font-size-2xs: "9px"
-      ha-font-size-xs: "11px"
-      ha-font-size-s: "12px"
-      ha-font-size-m: "14px"
-      ha-font-size-l: "16px"
-      ha-font-size-xl: "18px"
-      ha-font-size-2xl: "20px"
-      ha-font-size-3xl: "22px"
-      ha-font-size-4xl: "24px"
+      ha-font-size-xs: "11px" # ATC_FONT_SIZE_XS
+      ha-font-size-s: "12px" # ATC_FONT_SIZE_S
+      ha-font-size-m: "14px" # ATC_FONT_SIZE_M
+      ha-font-size-l: "16px" # ATC_FONT_SIZE_L
+      ha-font-size-xl: "18px" # ATC_FONT_SIZE_XL
+      ha-font-size-2xl: "20px" # ATC_FONT_SIZE_2XL
+      ha-font-size-3xl: "24px" # ATC_FONT_SIZE_3XL
+      ha-font-size-4xl: "28px" # ATC_FONT_SIZE_4XL
+      ha-font-size-5xl: "36px" # ATC_FONT_SIZE_5XL
       ha-font-weight-light: "300"
       ha-font-weight-normal: "400"
       ha-font-weight-body: "400"
@@ -1608,37 +1677,37 @@ Awesome-Leather-Shadows-UIX:
       bubble-main-buttons-background-color: "#212730"
       bubble-secondary-background-color: "#10151C"
       bubble-icon-background-color: "rgba(44, 44, 46, 0)"
-      bubble-icon-color: "#FFB200"
-      bubble-accent-color: "#FFB200"
+      bubble-icon-color: "var(--default-accent-color)"
+      bubble-accent-color: "var(--default-accent-color)"
       bubble-line-background-color: "rgba(225, 225, 225, 0.12)"
       bubble-border: "1px solid rgba(225, 225, 225, 0.15)"
-      bubble-border-radius: "10px"
+      bubble-border-radius: "var(--default-card-border-radius)"
       bubble-box-shadow: "no"
-      bubble-icon-border-radius: "10px"
+      bubble-icon-border-radius: "var(--default-card-sub-border-radius)"
 
       # Bubble Card / Select (Auswahlkarte)
       bubble-select-main-background-color: "#212730"
       bubble-select-list-background-color: "#212730"
-      bubble-select-list-border-radius: "10px"
+      bubble-select-list-border-radius: "var(--default-card-border-radius)"
       bubble-select-list-width: "220px"
-      bubble-select-list-item-accent-color: "#FFB200"
+      bubble-select-list-item-accent-color: "var(--default-accent-color)"
       bubble-select-arrow-background-color: "#212730"
-      bubble-select-button-border-radius: "10px"
+      bubble-select-button-border-radius: "var(--default-card-border-radius)"
 
       # Bubble Card / Buttons
       bubble-button-background-color: "#212730"
-      bubble-button-active-icon-color: "#FFB200"
-      bubble-button-border-radius: "10px"
+      bubble-button-active-icon-color: "var(--default-accent-color)"
+      bubble-button-border-radius: "var(--default-card-border-radius)"
       bubble-button-main-background-color: "#212730"
-      bubble-button-icon-border-radius: "10px"
+      bubble-button-icon-border-radius: "var(--default-card-sub-border-radius)"
       bubble-button-icon-background-color: "rgba(44, 44, 46, 0)"
       bubble-light-white-color: "#FFFFFF"
       bubble-light-color: "#FFC107"
 
       # Bubble Card / Sub-Buttons
       bubble-sub-button-background-color: "#212730"
-      bubble-sub-button-border-radius: "10px"
-      bubble-sub-slider-border-radius: "10px"
+      bubble-sub-button-border-radius: "var(--default-card-sub-border-radius)"
+      bubble-sub-slider-border-radius: "var(--default-card-sub-border-radius)"
       bubble-sub-slider-background-color: "#212730"
       bubble-sub-slider-height: "48px"
       bubble-sub-button-dark-text-color: "#1C1C1E"
@@ -1648,7 +1717,7 @@ Awesome-Leather-Shadows-UIX:
 
       # Bubble Card / Popup & Dialog
       bubble-pop-up-background-color: "#212730"
-      bubble-pop-up-border-radius: "18px"
+      bubble-pop-up-border-radius: "var(--default-card-border-radius)"
       dialog-box-shadow: "no"
       ha-dialog-scrim-backdrop-filter: "blur(2px)"
       ha-dialog-surface-background: "rgba(22, 28, 37, 1)"
@@ -1658,7 +1727,7 @@ Awesome-Leather-Shadows-UIX:
 
       # Bubble Card / Horizontal Buttons Stack
       bubble-horizontal-buttons-stack-background-color: "#212730"
-      bubble-horizontal-buttons-stack-border-radius: "10px"
+      bubble-horizontal-buttons-stack-border-radius: "var(--default-card-border-radius)"
 
       # Bubble Card / Climate
       bubble-climate-background-color: "#212730"
@@ -1669,43 +1738,45 @@ Awesome-Leather-Shadows-UIX:
       bubble-state-climate-heat-color: "#FF453A"
       bubble-state-climate-auto-color: "#30D158"
       bubble-state-climate-heat-cool-color: "#BF5AF2"
-      bubble-climate-accent-color: "#FFB200"
+      bubble-climate-accent-color: "var(--default-accent-color)"
 
       # Bubble Card / Cover
       bubble-cover-button-background-color: "#212730"
 
       # Bubble Card / Media Player
       bubble-media-player-button-background-color: "#212730"
-      bubble-media-player-border-radius: "10px"
-      bubble-media-player-buttons-border-radius: "10px"
+      bubble-media-player-border-radius: "var(--default-card-border-radius)"
+      bubble-media-player-buttons-border-radius: "var(--default-card-sub-border-radius)"
       bubble-media-player-slider-background-color: "#212730"
 
       # Bubble Card / Calendar
       bubble-calendar-height: "56px"
       bubble-calendar-mask-size: "16px"
-      bubble-calendar-border-radius: "10px"
+      bubble-calendar-border-radius: "var(--default-card-border-radius)"
       bubble-event-background-color: "#212730"
       bubble-event-background-image: "none"
 
       # Mushroom / Karten & Hintergründe
       mush-card-background: "#212730"
       mush-control-background-color: "#1B222C"
-      mush-card-primary-color: "#E7EDF5"
-      mush-card-secondary-color: "#9DA9B7"
-      mush-title-color: "#E7EDF5"
-      mush-subtitle-color: "#9DA9B7"
+      mush-card-primary-color: "#E7EDF5" # ATC_PRIMARY_TEXT_COLOR_DARK_LEATHER
+      mush-card-secondary-color: "#ADB9C7" # ATC_SECONDARY_TEXT_COLOR_DARK_LEATHER
+      mush-card-primary-font-size: "var(--ha-font-size-m)"
+      mush-card-secondary-font-size: "var(--ha-font-size-s)"
+      mush-title-color: "#E7EDF5" # ATC_PRIMARY_TEXT_COLOR_DARK_LEATHER
+      mush-subtitle-color: "#ADB9C7" # ATC_SECONDARY_TEXT_COLOR_DARK_LEATHER
 
       # Mushroom / Icons
       mush-icon-background-color: "rgba(44, 44, 46, 0)"
-      mush-icon-color: "#929292"
-      mush-icon-active-color: "#FFB200"
+      mush-icon-color: "var(--default-icon-off-color)"
+      mush-icon-active-color: "var(--default-accent-color)"
 
       # Mushroom / Toggle
-      mush-toggle-color: "#FFB200"
+      mush-toggle-color: "var(--default-accent-color)"
       mush-toggle-background-color: "#48484A"
 
       # Mushroom / Slider
-      mush-slider-color: "#FFB200"
+      mush-slider-color: "var(--default-accent-color)"
       mush-slider-track-color: "#48484A"
       mush-slider-background-color: "#2C2C2E"
 
@@ -1713,9 +1784,9 @@ Awesome-Leather-Shadows-UIX:
       mush-chip-background: "#161C25"
       mush-chip-active-background: "#1F3A5F"
       mush-chip-color: "#F2F2F7"
-      mush-chip-icon-color: "#FFB200"
-      mush-chip-active-color: "#FFB200"
-      mush-chip-active-icon-color: "#FFB200"
+      mush-chip-icon-color: "var(--default-accent-color)"
+      mush-chip-active-color: "var(--default-accent-color)"
+      mush-chip-active-icon-color: "var(--default-accent-color)"
       mush-chip-border-color: "rgba(225, 225, 225, 0.15)"
       mush-chip-border-radius: "10px"
       mush-chip-font-size: "12px"
@@ -1744,8 +1815,21 @@ Awesome-Leather-Shadows-UIX:
       custom-card-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.6), inset 2px 2px 0px rgba(255, 255, 255, 0.10), inset -1px -1px 0px rgba(0, 0, 0, 0.7), 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3)"
       custom-card-border: "1px solid #2b303d"
       custom-glow-border: "2px solid #00828f"
-      heading-text-color: "#ffbb88"
       custom-sidebar-shadow: "8px 0 16px -7px rgba(0, 0, 0, 0.30), 3px 0 10px -4px rgba(0, 0, 0, 0.14)"
       custom-toolbar-shadow: "0 8px 16px -6px rgba(0, 0, 0, 0.30), 0 4px 9px -3px rgba(0, 0, 0, 0.14)"
       ha-view-sections-row-gap: 24px # ATC_SECTION_ROW_GAP_LEATHER
       ha-view-sections-column-gap: 32px # ATC_SECTION_COLUMN_GAP_LEATHER
+      ha-heading-card-title-color: "#ffbb88" # ATC_HEADING_TITLE_COLOR_DARK_LEATHER
+      ha-heading-card-subtitle-color: "#ffbb88" # ATC_HEADING_TITLE_COLOR_DARK_LEATHER
+      mdc-icon-size: "24px" # ATC_ICON_SIZE_LEATHER
+      default-icon-size: "24px" # ATC_ICON_SIZE_LEATHER
+      default-icon-off-color: "#929292" #ATC_ICON_OFF_COLOR_DARK_LEATHER
+      default-icon-opacity: "0.0"
+      default-icon-border-radius: "6px"
+      ha-tile-icon-border-radius: "6px"
+      tile-icon-opacity: "0.0"
+      ha-transition-property: "transform, opacity"
+      default-card-border-radius: "10px" # ATC_CARD_BORDER_RADIUS_LEATHER
+      default-card-sub-border-radius: "calc(var(--default-card-border-radius) - 4px)"
+      default-primary-color: "#0A5CFF" # ATC_PRIMARY_COLOR_DARK_LEATHER
+      default-accent-color: "#FFB200" # ATC_ACCENT_COLOR_DARK_LEATHER
