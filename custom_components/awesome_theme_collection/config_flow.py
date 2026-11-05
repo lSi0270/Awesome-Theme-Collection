@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import logging
+import math
 import re
 from pathlib import Path
 from typing import Any
@@ -20,11 +22,150 @@ from . import (
     TRANSPARENT_WALLPAPER,
 )
 
+_LOGGER = logging.getLogger(__name__)
+
+
+FONT_SIZES: dict[str, int] = {
+    "xs": 11,
+    "s": 12,
+    "m": 14,
+    "l": 16,
+    "xl": 18,
+    "2xl": 20,
+    "3xl": 24,
+    "4xl": 28,
+    "5xl": 36,
+}
+
+FONT_DESCRIPTIONS: dict[str, str] = {
+    "xs": "Kleine Statusanzeigen, kurze Hinweise, kompakte Labels",
+    "s": "Sekundärtexte, Untertitel, Zeitstempel, kleine Beschriftungen",
+    "m": "Normaler Text, Standardbeschriftungen, Entitätsnamen",
+    "l": "Hervorgehobener Text, wichtige Statusinformationen, Kartenüberschriften",
+    "xl": "Größere Überschriften, Abschnittstitel",
+    "2xl": "Hauptüberschriften, prominente Werte",
+    "3xl": "Große Überschriften, wichtige Messwerte",
+    "4xl": "Sehr große Kennzahlen, Temperatur oder Energieverbrauch",
+    "5xl": "Besonders prominente Zahlen, z. B. auf einem Wandtablet",
+}
+
+
+def _font_key(size: str, group: str) -> str:
+    """Return a group-specific font option key."""
+    return f"font_size_{size}_{group}"
+
+
+TEXT_COLOR_DEFAULTS: dict[str, dict[str, str]] = {
+    "metal": {
+        "primary_text_color_dark": "#E7EDF5",
+        "secondary_text_color_dark": "#ADB9C7",
+        "disabled_text_color_dark": "#636366",
+        "heading_title_color_dark": "#FFBB88",
+        "primary_text_color_light": "#202020",
+        "secondary_text_color_light": "#373737",
+        "disabled_text_color_light": "#8E8E8E",
+        "heading_title_color_light": "#221100",
+    },
+    "leather": {
+        "primary_text_color_dark": "#E7EDF5",
+        "secondary_text_color_dark": "#ADB9C7",
+        "disabled_text_color_dark": "#636366",
+        "heading_title_color_dark": "#FFBB88",
+        "primary_text_color_light": "#202020",
+        "secondary_text_color_light": "#373737",
+        "disabled_text_color_light": "#8E8E8E",
+        "heading_title_color_light": "#221100",
+    },
+}
+
+
+ICON_DEFAULTS: dict[str, int] = {"icon_size": 24}
+ICON_OFF_COLOR_DEFAULTS: dict[str, str] = {
+    "icon_off_color_dark": "#929292",
+    "icon_off_color_light": "#626262",
+}
+
+PRIMARY_COLOR_DEFAULTS: dict[str, str] = {
+    "primary_color_dark": "#0A5CFF",
+    "accent_color_dark": "#FFB200",
+    "primary_color_light": "#0A5CFF",
+    "accent_color_light": "#BA4B00",
+}
+CARD_BORDER_RADIUS_DEFAULT = 10
+
+def _text_color_key(name: str, group: str) -> str:
+    """Return a group-specific text color option key."""
+    return f"{name}_{group}"
+
+
+def _icon_key(name: str, group: str) -> str:
+    """Return a group-specific icon option key."""
+    return f"{name}_{group}"
+
+
+class _RangeNumberSelector(selector.NumberSelector):
+    """Keep native bounded sliders but defer range checks to the options flow.
+
+    Home Assistant's NumberSelector validates min/max before the options-flow
+    handler runs. Deferring that check lets the integration handle invalid
+    values and show its translated error messages. The selector configuration
+    still contains min/max, so the frontend keeps the bounded slider UI.
+    """
+
+    def __call__(self, data: Any) -> float:
+        """Convert the submitted value without enforcing the selector range."""
+        if isinstance(data, bool):
+            raise vol.Invalid("Expected a number")
+        try:
+            return float(data)
+        except (TypeError, ValueError) as err:
+            raise vol.Invalid("Expected a number") from err
+
+
+def _section_key(base: str, group: str) -> str:
+    """Return a group-specific section option key."""
+    return f"{base}_{group}"
+
+
+def _valid_hex_color(value: Any) -> bool:
+    """Validate a six-digit HEX color."""
+    return (
+        isinstance(value, str)
+        and bool(HEX_COLOR_PATTERN.fullmatch(value.strip()))
+    )
+
+
+def _rgb_to_hex(value: Any) -> str | None:
+    """Convert an RGB color list to a six-digit HEX color string."""
+    if (
+        not isinstance(value, (list, tuple))
+        or len(value) != 3
+        or any(
+            isinstance(channel, bool)
+            or not isinstance(channel, int)
+            or not 0 <= channel <= 255
+            for channel in value
+        )
+    ):
+        return None
+
+    return "#{:02X}{:02X}{:02X}".format(*value)
+
+
+def _hex_to_rgb(value: str) -> list[int]:
+    """Convert a six-digit HEX color string to an RGB list."""
+    value = value.strip().lstrip("#")
+
+    return [
+        int(value[index:index + 2], 16)
+        for index in (0, 2, 4)
+    ]
+
 
 THEME_GROUPS: dict[str, dict[str, Any]] = {
     "metal": {
         "enabled_key": "metal_enabled",
-        "themes_key": "themes_metal",
+        "options_key": "themes_metal",
         "themes": (
             "flat_metal_shadows",
             "flat_metal",
@@ -66,7 +207,7 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
     },
     "leather": {
         "enabled_key": "leather_enabled",
-        "themes_key": "themes_leather",
+        "options_key": "themes_leather",
         "themes": (
             "flat_leather_shadows",
             "flat_leather",
@@ -108,6 +249,7 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
     },
 }
 
+
 THEMES = {
     "flat_leather_shadows": "Awesome Flat Leather Shadows",
     "flat_leather": "Awesome Flat Leather",
@@ -125,6 +267,7 @@ if set(THEMES) != set(INSTALL_THEMES):
         "__init__.py überein."
     )
 
+
 DEFAULT_SECTION_COLUMN_GAP = 32
 DEFAULT_SECTION_ROW_GAP = 24
 DEFAULT_SECTION_BORDER_COLOR = "rgba(130, 130, 130, 0.2)"
@@ -141,10 +284,7 @@ RGBA_PATTERN = re.compile(
     re.IGNORECASE,
 )
 
-HEX_COLOR_PATTERN = re.compile(
-    r"#(?:[0-9a-fA-F]{3}|[0-9a-fA-F]{4}|"
-    r"[0-9a-fA-F]{6}|[0-9a-fA-F]{8})"
-)
+HEX_COLOR_PATTERN = re.compile(r"#[0-9a-fA-F]{6}")
 
 LINEAR_GRADIENT_PATTERN = re.compile(
     r"^linear-gradient\((.*)\)$",
@@ -152,15 +292,8 @@ LINEAR_GRADIENT_PATTERN = re.compile(
 )
 
 
-def _section_key(base: str, group: str) -> str:
-    """Return a group-specific section option key."""
-
-    return f"{base}_{group}"
-
-
 def _valid_background_path(value: Any) -> bool:
     """Validate a local wallpaper URL."""
-
     if (
         not isinstance(value, str)
         or not value.startswith("/local/wallpaper/")
@@ -172,7 +305,6 @@ def _valid_background_path(value: Any) -> bool:
         return False
 
     path = Path(value)
-
     return (
         ".." not in path.parts
         and path.name not in {"", ".", ".."}
@@ -181,7 +313,6 @@ def _valid_background_path(value: Any) -> bool:
 
 def _split_css_arguments(value: str) -> list[str] | None:
     """Split CSS arguments at top-level commas only."""
-
     arguments: list[str] = []
     depth = 0
     start = 0
@@ -204,17 +335,16 @@ def _split_css_arguments(value: str) -> list[str] | None:
         return None
 
     final_argument = value[start:].strip()
-
     if not final_argument:
         return None
 
     arguments.append(final_argument)
+
     return arguments
 
 
 def _valid_gradient_stop(value: str) -> bool:
     """Validate a HEX or RGBA gradient stop with optional percentage."""
-
     value = value.strip()
     percentage_pattern = r"(?:\s+(\d+(?:\.\d+)?%))?"
 
@@ -225,7 +355,7 @@ def _valid_gradient_stop(value: str) -> bool:
         value,
     )
 
-    if hex_match and HEX_COLOR_PATTERN.fullmatch(hex_match.group(1)):
+    if hex_match:
         return True
 
     rgba_match = re.fullmatch(
@@ -242,7 +372,6 @@ def _valid_gradient_stop(value: str) -> bool:
 
 def _valid_theme_color(value: Any) -> bool:
     """Validate a linear gradient with optional direction and positions."""
-
     if not isinstance(value, str):
         return False
 
@@ -257,7 +386,6 @@ def _valid_theme_color(value: Any) -> bool:
     ):
         return False
 
-    # A plain HEX/RGBA color is intentionally not accepted.
     match = LINEAR_GRADIENT_PATTERN.fullmatch(value)
 
     if not match:
@@ -283,10 +411,9 @@ def _valid_theme_color(value: Any) -> bool:
     else:
         stops = arguments
 
-    if len(stops) < 2:
-        return False
-
-    return all(_valid_gradient_stop(stop) for stop in stops)
+    return len(stops) >= 2 and all(
+        _valid_gradient_stop(stop) for stop in stops
+    )
 
 
 def _get_wallpaper_options(
@@ -294,17 +421,14 @@ def _get_wallpaper_options(
     current_options: dict[str, Any],
 ) -> list[dict[str, str]]:
     """Find wallpapers and always offer the transparent system asset."""
-
     wallpapers: dict[str, str] = {}
 
     for config in THEME_GROUPS.values():
         for url in config["backgrounds"].values():
             wallpapers[url] = f"{Path(url).name} (Standard)"
 
-    # Always offer a transparent background, even if the file is
-    # temporarily missing from the target directory.
     transparent_url = f"/local/wallpaper/{TRANSPARENT_WALLPAPER}"
-    wallpapers[transparent_url] = "Transparent (kein Hintergrundbild)"
+    wallpapers[transparent_url] = "Transparent"
 
     try:
         if wallpaper_dir.is_dir():
@@ -315,16 +439,15 @@ def _get_wallpaper_options(
                         and path.suffix.lower() in WALLPAPER_EXTENSIONS
                     ):
                         url = "/local/wallpaper/" + quote(
-                            path.name,
-                            safe="",
+                            path.name, safe=""
                         )
 
-                        if url == transparent_url:
-                            continue
+                        if url != transparent_url:
+                            wallpapers[url] = path.name
 
-                        wallpapers[url] = path.name
                 except OSError:
                     continue
+
     except OSError:
         pass
 
@@ -352,7 +475,6 @@ async def get_wallpaper_options(
     current_options: dict[str, Any],
 ) -> list[dict[str, str]]:
     """Find wallpapers without blocking the event loop."""
-
     wallpaper_dir = Path(hass.config.path("www", "wallpaper"))
 
     return await hass.async_add_executor_job(
@@ -360,7 +482,6 @@ async def get_wallpaper_options(
         wallpaper_dir,
         current_options,
     )
-
 
 class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Handle the initial setup."""
@@ -372,7 +493,6 @@ class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
         """Set up the integration."""
-
         if self._async_current_entries():
             return self.async_abort(reason="single_instance_allowed")
 
@@ -390,7 +510,6 @@ class AwesomeThemeConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         config_entry: config_entries.ConfigEntry,
     ) -> AwesomeThemeOptionsFlow:
         """Create the options flow."""
-
         return AwesomeThemeOptionsFlow()
 
 
@@ -402,7 +521,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
         """Show enabled areas and the available configuration steps."""
-
         options = self.config_entry.options
         menu_options = ["areas"]
 
@@ -422,16 +540,11 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
         """Enable or disable the theme areas."""
-
         options = dict(self.config_entry.options)
 
         if user_input is not None:
             options.update(user_input)
-
-            return self.async_create_entry(
-                title="",
-                data=options,
-            )
+            return self.async_create_entry(title="", data=options)
 
         return self.async_show_form(
             step_id="areas",
@@ -452,7 +565,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
         """Configure the Metal theme area."""
-
         return await self._async_step_group("metal", user_input)
 
     async def async_step_leather(
@@ -460,7 +572,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
         """Configure the Leather theme area."""
-
         return await self._async_step_group("leather", user_input)
 
     async def _async_step_group(
@@ -469,7 +580,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         user_input: dict[str, Any] | None,
     ) -> config_entries.ConfigFlowResult:
         """Configure one theme group independently."""
-
         if group not in THEME_GROUPS:
             raise ValueError(f"Unbekannter Theme-Bereich: {group}")
 
@@ -481,19 +591,30 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                 theme_data = user_input["themes"]
                 background_data = user_input["backgrounds"]
                 section_data = user_input["sections"]
+                font_data = user_input["fonts"]
+                text_color_data = user_input["text_colors"]
+                icon_data = user_input["icons"]
+                primary_color_data = user_input["primary_colors"]
+
             except (KeyError, TypeError) as err:
+                _LOGGER.exception(
+                    "ATC: Ungültige Gruppeneinstellungen für %s",
+                    group,
+                )
                 raise ValueError(
                     "Die übermittelten Gruppeneinstellungen sind ungültig."
                 ) from err
 
             new_options = dict(options)
 
-            new_options[config["themes_key"]] = [
+            # Theme-Auswahl
+            new_options[config["options_key"]] = [
                 key
                 for key in config["themes"]
                 if theme_data.get(key, False)
             ]
 
+            # Hintergrundbilder
             for key in config["backgrounds"]:
                 value = background_data.get(key)
 
@@ -501,7 +622,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     return self.async_show_form(
                         step_id=group,
                         data_schema=await self._group_schema(group),
-                        errors={"base": "invalid_background"},
+                        errors={"backgrounds": "invalid_background"},
                     )
 
                 new_options[key] = value
@@ -509,6 +630,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             if background_data.get("reset_backgrounds", False):
                 new_options.update(config["backgrounds"])
 
+            # Dashboard- und Popup-Farben
             for key, default_value in config["colors"].items():
                 value = background_data.get(key, default_value)
 
@@ -516,7 +638,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     return self.async_show_form(
                         step_id=group,
                         data_schema=await self._group_schema(group),
-                        errors={"base": "invalid_theme_color"},
+                        errors={"backgrounds": "invalid_theme_color"},
                     )
 
                 new_options[key] = value.strip()
@@ -524,6 +646,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             if background_data.get("reset_colors", False):
                 new_options.update(config["colors"])
 
+            # Abschnittsabstände und Rahmenfarbe
             section_keys = {
                 "section_column_gap": _section_key(
                     "section_column_gap", group
@@ -545,6 +668,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     section_keys["section_border_color"]:
                         DEFAULT_SECTION_BORDER_COLOR,
                 })
+
             else:
                 column_gap = section_data.get(
                     section_keys["section_column_gap"]
@@ -559,15 +683,17 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                 if (
                     isinstance(column_gap, bool)
                     or not isinstance(column_gap, (int, float))
+                    or not math.isfinite(column_gap)
                     or not 0 <= column_gap <= 50
                     or isinstance(row_gap, bool)
                     or not isinstance(row_gap, (int, float))
+                    or not math.isfinite(row_gap)
                     or not 0 <= row_gap <= 50
                 ):
                     return self.async_show_form(
                         step_id=group,
                         data_schema=await self._group_schema(group),
-                        errors={"base": "invalid_spacing"},
+                        errors={"sections": "invalid_spacing"},
                     )
 
                 if (
@@ -577,7 +703,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     return self.async_show_form(
                         step_id=group,
                         data_schema=await self._group_schema(group),
-                        errors={"base": "invalid_rgba"},
+                        errors={"sections": "invalid_rgba"},
                     )
 
                 new_options.update({
@@ -586,19 +712,145 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     section_keys["section_border_color"]: color,
                 })
 
-            return self.async_create_entry(
-                title="",
-                data=new_options,
+            # Schriftgrößen
+            if font_data.get("reset_fonts", False):
+                for size, default_value in FONT_SIZES.items():
+                    new_options[_font_key(size, group)] = default_value
+
+            else:
+                for size, default_value in FONT_SIZES.items():
+                    key = _font_key(size, group)
+                    value = font_data.get(key, default_value)
+
+                    if (
+                        isinstance(value, bool)
+                        or not isinstance(value, (int, float))
+                        or not math.isfinite(value)
+                        or int(value) != value
+                        or not 8 <= value <= 46
+                    ):
+                        return self.async_show_form(
+                            step_id=group,
+                            data_schema=await self._group_schema(group),
+                            errors={"fonts": "invalid_font_size"},
+                        )
+
+                    new_options[key] = int(value)
+
+            # Schriftfarben: HEX-Werte direkt übernehmen und normalisieren
+            color_defaults = TEXT_COLOR_DEFAULTS[group]
+
+            if text_color_data.get("reset_text_colors", False):
+                for name, default_value in color_defaults.items():
+                    new_options[_text_color_key(name, group)] = default_value
+
+            else:
+                for name, default_value in color_defaults.items():
+                    key = _text_color_key(name, group)
+                    value = text_color_data.get(key, default_value)
+
+                    if not _valid_hex_color(value):
+                        return self.async_show_form(
+                            step_id=group,
+                            data_schema=await self._group_schema(group),
+                            errors={"text_colors": "invalid_hex_color"},
+                        )
+
+                    new_options[key] = value.strip().upper()
+
+            # Icon-Einstellungen
+            if icon_data.get("reset_icons", False):
+                for name, default_value in ICON_DEFAULTS.items():
+                    new_options[_icon_key(name, group)] = default_value
+                for name, default_value in ICON_OFF_COLOR_DEFAULTS.items():
+                    new_options[_icon_key(name, group)] = default_value
+            else:
+                for name, default_value in ICON_DEFAULTS.items():
+                    key = _icon_key(name, group)
+                    value = icon_data.get(key, default_value)
+                    if (isinstance(value, bool) or not isinstance(value, (int, float))
+                            or not math.isfinite(value)):
+                        return self.async_show_form(
+                            step_id=group, data_schema=await self._group_schema(group),
+                            errors={"icons": "invalid_icon_size"})
+                    if name == "icon_size" and (not 16 <= value <= 36 or int(value) != value):
+                        return self.async_show_form(step_id=group, data_schema=await self._group_schema(group), errors={"icons": "invalid_icon_size"})
+                    new_options[key] = int(value)
+
+                for name, default_value in ICON_OFF_COLOR_DEFAULTS.items():
+                    key = _icon_key(name, group)
+                    value = icon_data.get(key, default_value)
+                    if not _valid_hex_color(value):
+                        return self.async_show_form(step_id=group, data_schema=await self._group_schema(group), errors={"icons": "invalid_hex_color"})
+                    new_options[key] = value.strip().upper()
+
+            # Primär-Farben und Karten-Radius
+            primary_color_keys = {
+                name: f"{name}_{group}"
+                for name in PRIMARY_COLOR_DEFAULTS
+            }
+
+            if primary_color_data.get("reset_primary_colors", False):
+                for name, default_value in PRIMARY_COLOR_DEFAULTS.items():
+                    new_options[primary_color_keys[name]] = default_value
+                new_options[f"card_border_radius_{group}"] = (
+                    CARD_BORDER_RADIUS_DEFAULT
+                )
+            else:
+                for name, default_value in PRIMARY_COLOR_DEFAULTS.items():
+                    key = primary_color_keys[name]
+                    value = primary_color_data.get(key, default_value)
+                    if not _valid_hex_color(value):
+                        return self.async_show_form(
+                            step_id=group,
+                            data_schema=await self._group_schema(group),
+                            errors={"primary_colors": "invalid_hex_color"},
+                        )
+                    new_options[key] = value.strip().upper()
+
+                radius_key = f"card_border_radius_{group}"
+                radius = primary_color_data.get(
+                    radius_key, CARD_BORDER_RADIUS_DEFAULT
+                )
+                if (
+                    isinstance(radius, bool)
+                    or not isinstance(radius, (int, float))
+                    or not math.isfinite(radius)
+                    or int(radius) != radius
+                    or not 0 <= radius <= 28
+                ):
+                    return self.async_show_form(
+                        step_id=group,
+                        data_schema=await self._group_schema(group),
+                        errors={"primary_colors": "invalid_card_radius"},
+                    )
+                new_options[radius_key] = int(radius)
+
+            return self.async_create_entry(title="", data=new_options)
+
+        # Schema mit Diagnoseprotokollierung erstellen
+        try:
+            schema = await self._group_schema(group)
+
+            _LOGGER.debug(
+                "ATC DEBUG: Schema für %s erfolgreich erstellt",
+                group,
             )
 
-        return self.async_show_form(
-            step_id=group,
-            data_schema=await self._group_schema(group),
-        )
+            return self.async_show_form(
+                step_id=group,
+                data_schema=schema,
+            )
+
+        except Exception:
+            _LOGGER.exception(
+                "ATC DEBUG: Fehler beim Erstellen des Schemas für %s",
+                group,
+            )
+            raise
 
     async def _group_schema(self, group: str) -> vol.Schema:
         """Build the settings form for one theme group."""
-
         options = self.config_entry.options
         config = THEME_GROUPS[group]
 
@@ -608,6 +860,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         )
 
         legacy_themes = options.get("themes", list(THEMES))
+
         if (
             not isinstance(legacy_themes, list)
             or any(not isinstance(key, str) for key in legacy_themes)
@@ -615,7 +868,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             legacy_themes = list(THEMES)
 
         selected_themes = options.get(
-            config["themes_key"],
+            config["options_key"],
             [
                 key for key in config["themes"]
                 if key in legacy_themes
@@ -636,44 +889,56 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             ]
 
         theme_fields = {
-            vol.Optional(
-                key,
-                default=key in selected_themes,
-            ): selector.BooleanSelector()
+            vol.Optional(key, default=key in selected_themes):
+                selector.BooleanSelector()
             for key in config["themes"]
         }
 
+        suffix = group
+
+        dashboard_keys = (
+            f"background_{suffix}_dark",
+            f"dashboard_color_{suffix}_dark",
+            f"background_{suffix}_light",
+            f"dashboard_color_{suffix}_light",
+        )
+
+        popup_keys = (
+            f"background_popup_{suffix}_dark",
+            f"popup_color_{suffix}_dark",
+            f"background_popup_{suffix}_light",
+            f"popup_color_{suffix}_light",
+        )
+
+        # Hintergrundbilder und Farben
         background_fields: dict[Any, Any] = {}
 
-        for key, default_path in config["backgrounds"].items():
-            saved_path = options.get(key, default_path)
+        for key in (*dashboard_keys, *popup_keys):
+            if key in config["backgrounds"]:
+                default_path = config["backgrounds"][key]
+                saved_path = options.get(key, default_path)
 
-            if not _valid_background_path(saved_path):
-                saved_path = default_path
+                if not _valid_background_path(saved_path):
+                    saved_path = default_path
 
-            background_fields[
-                vol.Required(key, default=saved_path)
-            ] = selector.SelectSelector(
-                selector.SelectSelectorConfig(
-                    options=wallpaper_options,
-                    mode=selector.SelectSelectorMode.DROPDOWN,
+                background_fields[
+                    vol.Required(key, default=saved_path)
+                ] = selector.SelectSelector(
+                    selector.SelectSelectorConfig(
+                        options=wallpaper_options,
+                        mode=selector.SelectSelectorMode.DROPDOWN,
+                    )
                 )
-            )
 
-            color_key = self._color_key_for_background(key, group)
-
-            if color_key is not None:
-                default_color = config["colors"][color_key]
-                saved_color = options.get(color_key, default_color)
+            else:
+                default_color = config["colors"][key]
+                saved_color = options.get(key, default_color)
 
                 if not _valid_theme_color(saved_color):
                     saved_color = default_color
 
                 background_fields[
-                    vol.Required(
-                        color_key,
-                        default=saved_color,
-                    )
+                    vol.Required(key, default=saved_color)
                 ] = selector.TextSelector()
 
         background_fields[
@@ -684,6 +949,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             vol.Optional("reset_colors", default=False)
         ] = selector.BooleanSelector()
 
+        # Abschnittseinstellungen
         section_fields = {
             vol.Required(
                 _section_key("section_column_gap", group),
@@ -694,7 +960,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                         DEFAULT_SECTION_COLUMN_GAP,
                     ),
                 ),
-            ): selector.NumberSelector(
+            ): _RangeNumberSelector(
                 selector.NumberSelectorConfig(
                     min=0,
                     max=50,
@@ -712,7 +978,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                         DEFAULT_SECTION_ROW_GAP,
                     ),
                 ),
-            ): selector.NumberSelector(
+            ): _RangeNumberSelector(
                 selector.NumberSelectorConfig(
                     min=0,
                     max=50,
@@ -735,6 +1001,140 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                 selector.BooleanSelector(),
         }
 
+        # Schriftgrößen
+        font_fields: dict[Any, Any] = {}
+
+        for size, default_value in FONT_SIZES.items():
+            key = _font_key(size, group)
+            saved_value = options.get(key, default_value)
+
+            if (
+                isinstance(saved_value, bool)
+                or not isinstance(saved_value, (int, float))
+                or not math.isfinite(saved_value)
+                or int(saved_value) != saved_value
+                or not 8 <= saved_value <= 46
+            ):
+                saved_value = default_value
+
+            font_fields[
+                vol.Required(key, default=int(saved_value))
+            ] = selector.NumberSelector(
+                selector.NumberSelectorConfig(
+                    step=1,
+                    mode=selector.NumberSelectorMode.BOX,
+                    unit_of_measurement="px",
+                )
+            )
+
+        font_fields[
+            vol.Optional("reset_fonts", default=False)
+        ] = selector.BooleanSelector()
+
+        # Schriftfarben: einfache HEX-Texteingabefelder
+        text_color_fields: dict[Any, Any] = {}
+        color_defaults = TEXT_COLOR_DEFAULTS[group]
+
+        for name, default_value in color_defaults.items():
+            key = _text_color_key(name, group)
+            saved_value = options.get(key, default_value)
+
+            if not _valid_hex_color(saved_value):
+                saved_value = default_value
+
+            # Native HTML color input: displays a color swatch and opens
+            # the browser's color picker without submitting the config flow.
+            # The browser returns the same six-digit HEX string used by ATC.
+            text_color_fields[
+                vol.Required(key, default=saved_value.upper())
+            ] = selector.TextSelector(
+                selector.TextSelectorConfig(
+                    type=selector.TextSelectorType.COLOR
+                )
+            )
+
+        text_color_fields[
+            vol.Optional("reset_text_colors", default=False)
+        ] = selector.BooleanSelector()
+
+        # Icon-Einstellungen
+        icon_fields: dict[Any, Any] = {}
+        icon_ranges = {
+            "icon_size": {"min": 16, "max": 36},
+        }
+        for name, default_value in ICON_DEFAULTS.items():
+            key = _icon_key(name, group)
+            saved = options.get(key, default_value)
+            limits = icon_ranges[name]
+            if (isinstance(saved, bool) or not isinstance(saved, (int, float))
+                    or not math.isfinite(saved) or not limits["min"] <= saved <= limits["max"]
+                    or int(saved) != saved):
+                saved = default_value
+            ns = _RangeNumberSelector(selector.NumberSelectorConfig(
+                min=limits["min"], max=limits["max"], step=1,
+                mode=selector.NumberSelectorMode.SLIDER,
+                unit_of_measurement="px"))
+            lang = (self.hass.config.language or "en").split("-")[0]
+            messages = {
+                "de": {"icon_size": "Die Icon-Größe muss zwischen 16 und 36 Pixel liegen."},
+                "en": {"icon_size": "Icon size must be between 16 and 36 pixels."},
+            }
+            ns.config["validation_message"] = messages.get(lang, messages["en"])[name]
+            icon_fields[vol.Required(key, default=int(saved))] = ns
+
+        for name, default_value in ICON_OFF_COLOR_DEFAULTS.items():
+            key = _icon_key(name, group)
+            saved = options.get(key, default_value)
+            if not _valid_hex_color(saved):
+                saved = default_value
+            icon_fields[vol.Required(key, default=saved.upper())] = selector.TextSelector(
+                selector.TextSelectorConfig(type=selector.TextSelectorType.COLOR))
+
+        icon_fields[
+            vol.Optional("reset_icons", default=False)
+        ] = selector.BooleanSelector()
+
+        # Primär-Farben und Karten-Radius
+        primary_color_fields: dict[Any, Any] = {}
+        for name, default_value in PRIMARY_COLOR_DEFAULTS.items():
+            key = f"{name}_{group}"
+            saved = options.get(key, default_value)
+            if not _valid_hex_color(saved):
+                saved = default_value
+            primary_color_fields[
+                vol.Required(key, default=saved.upper())
+            ] = selector.TextSelector(
+                selector.TextSelectorConfig(
+                    type=selector.TextSelectorType.COLOR
+                )
+            )
+
+        radius_key = f"card_border_radius_{group}"
+        saved_radius = options.get(radius_key, CARD_BORDER_RADIUS_DEFAULT)
+        if (
+            isinstance(saved_radius, bool)
+            or not isinstance(saved_radius, (int, float))
+            or not math.isfinite(saved_radius)
+            or int(saved_radius) != saved_radius
+            or not 0 <= saved_radius <= 28
+        ):
+            saved_radius = CARD_BORDER_RADIUS_DEFAULT
+        primary_color_fields[
+            vol.Required(radius_key, default=int(saved_radius))
+        ] = _RangeNumberSelector(
+            selector.NumberSelectorConfig(
+                min=0,
+                max=28,
+                step=1,
+                mode=selector.NumberSelectorMode.SLIDER,
+                unit_of_measurement="px",
+            )
+        )
+        primary_color_fields[
+            vol.Optional("reset_primary_colors", default=False)
+        ] = selector.BooleanSelector()
+
+        # Gesamtschema erstellen
         return vol.Schema({
             vol.Required("themes"): section(
                 vol.Schema(theme_fields),
@@ -748,6 +1148,22 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                 vol.Schema(section_fields),
                 {"collapsed": True},
             ),
+            vol.Required("fonts"): section(
+                vol.Schema(font_fields),
+                {"collapsed": True},
+            ),
+            vol.Required("text_colors"): section(
+                vol.Schema(text_color_fields),
+                {"collapsed": True},
+            ),
+            vol.Required("icons"): section(
+                vol.Schema(icon_fields),
+                {"collapsed": True},
+            ),
+            vol.Required("primary_colors"): section(
+                vol.Schema(primary_color_fields),
+                {"collapsed": True},
+            ),
         })
 
     @staticmethod
@@ -756,7 +1172,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         group: str,
     ) -> str | None:
         """Return the matching dashboard or popup color option key."""
-
         suffix = "metal" if group == "metal" else "leather"
 
         if background_key == f"background_{suffix}_dark":
@@ -771,4 +1186,4 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         if background_key == f"background_popup_{suffix}_light":
             return f"popup_color_{suffix}_light"
 
-        return None 
+        return None
