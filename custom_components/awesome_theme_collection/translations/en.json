@@ -32,12 +32,12 @@
       },
       "metal": {
         "title": "Awesome-Metal-Themes",
-        "description": "Configure themes, backgrounds, section styling, font sizes, text colors, icons, primary colors and card radius.",
+        "description": "Configure the following areas to suit your preferences.",
         "data": {},
         "sections": {
           "themes": {
             "name": "Selection",
-            "description": "Select the Metal themes to install.",
+            "description": "Select the Metal themes that you want to keep installed.",
             "data": {
               "flat_metal_shadows": "Awesome Flat Metal Shadows",
               "flat_metal": "Awesome Flat Metal",
@@ -63,12 +63,93 @@
           },
           "sections": {
             "name": "Sections",
-            "description": "Here, you can adjust the horizontal and vertical spacing between the sections. Values between 0 and 50px are possible (0px is not recommended). In addition, a border color can be specified (if a section background is active).",
+            "description": "Configure section spacing, border color and section backgrounds. Choose backgrounds and colors that match the design mode.",
             "data": {
               "section_column_gap_metal": "Horizontal spacing (default: 32px)",
               "section_row_gap_metal": "Vertical spacing (default: 24px)",
               "section_border_color_metal": "Border color (when a section background is active)",
-              "reset_sections": "Reset section settings to defaults"
+              "reset_sections": "Reset section settings to defaults",
+              "section_background_always_set_metal": "Background always active",
+              "section_background_dark_metal": "Background - Image - Dark Mode",
+              "section_color_dark_metal": "Background - Color - Dark Mode",
+              "section_background_light_metal": "Background - Image - Light Mode",
+              "section_color_light_metal": "Background - Color - Light Mode"
+            },
+            "data_description": {
+              "section_background_always_set_metal": "Background is set even if no section background has been selected."
+            }
+          },
+          "cards": {
+            "name": "Cards",
+            "description": "Configure the card radius and control buttons backgrounds.",
+            "data": {
+              "card_border_radius_metal": "Card Radius: 0 - 28px (default: 10px)",
+              "control_set_background_metal": "Control buttons with card background",
+              "reset_cards": "Reset to default values"
+            },
+            "data_description": {
+              "control_set_background_metal": "Cover-Controls, Bubble-Sub-Buttons, Mushroom-Sub-Buttons"
+            }
+          },
+          "sidebar": {
+            "name": "Sidebar",
+            "description": "Configure the sidebar title, item typography, text colors and backgrounds.",
+            "data": {
+              "sidebar_title_metal": "Title (default: Home Assistant)",
+              "sidebar_item_fontsize_metal": "Item font size (default: 18px)",
+              "sidebar_item_selected_fontsize_metal": "Selected item font size (default: 20px)",
+              "sidebar_item_text_color_dark_metal": "Item text color - Dark Mode",
+              "sidebar_item_selected_text_color_dark_metal": "Selected item text color - Dark Mode",
+              "sidebar_item_text_color_light_metal": "Item text color - Light Mode",
+              "sidebar_item_selected_text_color_light_metal": "Selected item text color - Light Mode",
+              "sidebar_background_dark_metal": "Background image - Dark Mode",
+              "sidebar_background_color_dark_metal": "Background color - Dark Mode",
+              "sidebar_background_light_metal": "Background image - Light Mode",
+              "sidebar_background_color_light_metal": "Background color - Light Mode",
+              "reset_sidebar": "Reset to default values"
+            },
+            "data_description": {
+              "sidebar_title_metal": "Maximum 20 characters.",
+              "sidebar_item_fontsize_metal": "Allowed range: 14–24px.",
+              "sidebar_item_selected_fontsize_metal": "Allowed range: 14–24px."
+            }
+          },
+          "toolbar": {
+            "name": "Header Toolbar",
+            "description": "Configure header bar item typography, text colors and backgrounds.",
+            "data": {
+              "toolbar_item_fontsize_metal": "Item font size (default: 18px)",
+              "toolbar_item_selected_fontsize_metal": "Selected item font size (default: 18px)",
+              "toolbar_item_text_color_dark_metal": "Item text color - Dark Mode",
+              "toolbar_item_selected_text_color_dark_metal": "Selected item text color - Dark Mode",
+              "toolbar_item_text_color_light_metal": "Item text color - Light Mode",
+              "toolbar_item_selected_text_color_light_metal": "Selected item text color - Light Mode",
+              "toolbar_background_dark_metal": "Background image - Dark Mode",
+              "toolbar_background_color_dark_metal": "Background color - Dark Mode",
+              "toolbar_background_light_metal": "Background image - Light Mode",
+              "toolbar_background_color_light_metal": "Background color - Light Mode",
+              "reset_toolbar": "Reset to default values"
+            },
+            "data_description": {
+              "toolbar_item_fontsize_metal": "Allowed range: 14–24px.",
+              "toolbar_item_selected_fontsize_metal": "Allowed range: 14–24px."
+            }
+          },
+          "icons": {
+            "name": "Icons",
+            "description": "Configure icon size, glow and inactive icon colors. These settings apply to card icons, the sidebar, header and forms.",
+            "data": {
+              "icon_size_metal": "Icon size: 16 - 36px (Default: 24px)",
+              "reset_icons": "Reset to default values",
+              "icon_off_color_dark_metal": "Icon color - dark mode",
+              "icon_off_color_light_metal": "Icon color - light mode",
+              "icons_glow_metal": "Icons with glow (when enabled)"
+            },
+            "data_description": {
+              "icon_size_metal": "These settings apply to card icons, the sidebar, header and forms.",
+              "icon_off_color_dark_metal": "Icon color when off/disabled (default: #929292)",
+              "icon_off_color_light_metal": "Icon color when off/disabled (default: #626262)",
+              "icons_glow_metal": "Icons with status='On', such as lamps, switches, sockets, etc."
             }
           },
           "fonts": {
@@ -123,29 +204,14 @@
               "heading_title_color_light_metal": "e.g. for section headings (default: #221100)"
             }
           },
-          "icons": {
-            "name": "Icons",
-            "description": "Here you can adjust the icon size and icon color (off/disabled). This applies to map icons, the sidebar, the header bar and forms.",
-            "data": {
-              "icon_size_metal": "Icon size: 16 - 36px (Default: 24px)",
-              "reset_icons": "Reset to default values",
-              "icon_off_color_dark_metal": "Icon color - dark mode",
-              "icon_off_color_light_metal": "Icon color - light mode"
-            },
-            "data_description": {
-              "icon_off_color_dark_metal": "Icon color when off/disabled (default: #929292)",
-              "icon_off_color_light_metal": "Icon color when off/disabled (default: #626262)"
-            }
-          },
           "primary_colors": {
-            "name": "Primary Colors and Card Radius",
-            "description": "Configure the primary and accent colors for dark and light mode, and set the card radius (applies to all HA cards, Bubble cards, Mushroom cards and all custom cards whose design can be customised).",
+            "name": "Primary Colors",
+            "description": "Configure primary and accent colors for dark and light mode.",
             "data": {
               "primary_color_dark_metal": "Primary Color - Dark Mode",
               "accent_color_dark_metal": "Accent Color - Dark Mode",
               "primary_color_light_metal": "Primary Color - Light Mode",
               "accent_color_light_metal": "Accent Color - Light Mode",
-              "card_border_radius_metal": "Card Radius: 0 - 28px (default: 10px)",
               "reset_primary_colors": "Reset to default values"
             },
             "data_description": {
@@ -159,12 +225,12 @@
       },
       "leather": {
         "title": "Awesome-Leather-Themes",
-        "description": "Configure themes, backgrounds, section styling, font sizes, text colors, icons, primary colors and card radius.",
+        "description": "Configure the following areas to suit your preferences.",
         "data": {},
         "sections": {
           "themes": {
             "name": "Selection",
-            "description": "Select the Leather themes to install.",
+            "description": "Select the Leather themes that you want to keep installed.",
             "data": {
               "flat_leather_shadows": "Awesome Flat Leather Shadows",
               "flat_leather": "Awesome Flat Leather",
@@ -190,12 +256,93 @@
           },
           "sections": {
             "name": "Sections",
-            "description": "Here, you can adjust the horizontal and vertical spacing between the sections. Values between 0 and 50px are possible (0px is not recommended). In addition, a border color can be specified (if a section background is active).",
+            "description": "Configure section spacing, border color and section backgrounds. Choose backgrounds and colors that match the design mode.",
             "data": {
               "section_column_gap_leather": "Horizontal spacing (default: 32px)",
               "section_row_gap_leather": "Vertical spacing (default: 24px)",
               "section_border_color_leather": "Border color (when a section background is active)",
-              "reset_sections": "Reset section settings to defaults"
+              "reset_sections": "Reset section settings to defaults",
+              "section_background_always_set_leather": "Background always active",
+              "section_background_dark_leather": "Background - Image - Dark Mode",
+              "section_color_dark_leather": "Background - Color - Dark Mode",
+              "section_background_light_leather": "Background - Image - Light Mode",
+              "section_color_light_leather": "Background - Color - Light Mode"
+            },
+            "data_description": {
+              "section_background_always_set_leather": "Background is set even if no section background has been selected."
+            }
+          },
+          "cards": {
+            "name": "Cards",
+            "description": "Configure the card radius and control buttons backgrounds.",
+            "data": {
+              "card_border_radius_leather": "Card Radius: 0 - 28px (default: 10px)",
+              "control_set_background_leather": "Control buttons with card background",
+              "reset_cards": "Reset to default values"
+            },
+            "data_description": {
+              "control_set_background_leather": "Cover-Controls, Bubble-Sub-Buttons, Mushroom-Sub-Buttons"
+            }
+          },
+          "sidebar": {
+            "name": "Sidebar",
+            "description": "Configure the sidebar title, item typography, text colors and backgrounds.",
+            "data": {
+              "sidebar_title_leather": "Title (default: Home Assistant)",
+              "sidebar_item_fontsize_leather": "Item font size (default: 18px)",
+              "sidebar_item_selected_fontsize_leather": "Selected item font size (default: 20px)",
+              "sidebar_item_text_color_dark_leather": "Item text color - Dark Mode",
+              "sidebar_item_selected_text_color_dark_leather": "Selected item text color - Dark Mode",
+              "sidebar_item_text_color_light_leather": "Item text color - Light Mode",
+              "sidebar_item_selected_text_color_light_leather": "Selected item text color - Light Mode",
+              "sidebar_background_dark_leather": "Background image - Dark Mode",
+              "sidebar_background_color_dark_leather": "Background color - Dark Mode",
+              "sidebar_background_light_leather": "Background image - Light Mode",
+              "sidebar_background_color_light_leather": "Background color - Light Mode",
+              "reset_sidebar": "Reset to default values"
+            },
+            "data_description": {
+              "sidebar_title_leather": "Maximum 20 characters.",
+              "sidebar_item_fontsize_leather": "Allowed range: 14–24px.",
+              "sidebar_item_selected_fontsize_leather": "Allowed range: 14–24px."
+            }
+          },
+          "toolbar": {
+            "name": "Header Toolbar",
+            "description": "Configure header bar item typography, text colors and backgrounds.",
+            "data": {
+              "toolbar_item_fontsize_leather": "Item font size (default: 18px)",
+              "toolbar_item_selected_fontsize_leather": "Selected item font size (default: 18px)",
+              "toolbar_item_text_color_dark_leather": "Item text color - Dark Mode",
+              "toolbar_item_selected_text_color_dark_leather": "Selected item text color - Dark Mode",
+              "toolbar_item_text_color_light_leather": "Item text color - Light Mode",
+              "toolbar_item_selected_text_color_light_leather": "Selected item text color - Light Mode",
+              "toolbar_background_dark_leather": "Background image - Dark Mode",
+              "toolbar_background_color_dark_leather": "Background color - Dark Mode",
+              "toolbar_background_light_leather": "Background image - Light Mode",
+              "toolbar_background_color_light_leather": "Background color - Light Mode",
+              "reset_toolbar": "Reset to default values"
+            },
+            "data_description": {
+              "toolbar_item_fontsize_leather": "Allowed range: 14–24px.",
+              "toolbar_item_selected_fontsize_leather": "Allowed range: 14–24px."
+            }
+          },
+          "icons": {
+            "name": "Icons",
+            "description": "Configure icon size, glow and inactive icon colors.",
+            "data": {
+              "icon_size_leather": "Icon size: 16 - 36px (Default: 24px)",
+              "reset_icons": "Reset to default values",
+              "icon_off_color_dark_leather": "Icon color - dark mode",
+              "icon_off_color_light_leather": "Icon color - light mode",
+              "icons_glow_leather": "Icons with glow (when enabled)"
+            },
+            "data_description": {
+              "icon_size_leather": "These settings apply to card icons, the sidebar, header and forms.",
+              "icon_off_color_dark_leather": "Icon color when off/disabled (default: #929292)",
+              "icon_off_color_light_leather": "Icon color when off/disabled (default: #626262)",
+              "icons_glow_leather": "Icons with status='On', such as lamps, switches, sockets, etc."
             }
           },
           "fonts": {
@@ -250,29 +397,14 @@
               "heading_title_color_light_leather": "e.g. for section headings (default: #221100)"
             }
           },
-          "icons": {
-            "name": "Icons",
-            "description": "Here you can adjust the icon size and icon color (off/disabled). This applies to map icons, the sidebar, the header bar and forms.",
-            "data": {
-              "icon_size_leather": "Icon size: 16 - 36px (Default: 24px)",
-              "reset_icons": "Reset to default values",
-              "icon_off_color_dark_leather": "Icon color - dark mode",
-              "icon_off_color_light_leather": "Icon color - light mode"
-            },
-            "data_description": {
-              "icon_off_color_dark_leather": "Icon color when off/disabled (default: #929292)",
-              "icon_off_color_light_leather": "Icon color when off/disabled (default: #626262)"
-            }
-          },
           "primary_colors": {
-            "name": "Primary Colors and Card Radius",
-            "description": "Configure the primary and accent colors for dark and light mode, and set the card radius (applies to all HA cards, Bubble cards, Mushroom cards and all custom cards whose design can be customised).",
+            "name": "Primary Colors",
+            "description": "Configure primary and accent colors for dark and light mode.",
             "data": {
               "primary_color_dark_leather": "Primary Color - Dark Mode",
               "accent_color_dark_leather": "Accent Color - Dark Mode",
               "primary_color_light_leather": "Primary Color - Light Mode",
               "accent_color_light_leather": "Accent Color - Light Mode",
-              "card_border_radius_leather": "Card Radius: 0 - 28px (default: 10px)",
               "reset_primary_colors": "Reset to default values"
             },
             "data_description": {
@@ -294,7 +426,9 @@
       "invalid_font_size": "Font sizes must be whole numbers between 8px and 46px.",
       "invalid_hex_color": "Please enter a valid HEX color value, e.g. #E7EDF5.",
       "invalid_icon_size": "Icon size must be between 16 and 36 pixels.",
-      "invalid_card_radius": "Card radius must be between 0 and 28 pixels."
+      "invalid_card_radius": "Card radius must be between 0 and 28 pixels.",
+      "invalid_sidebar_title": "The title must not exceed 20 characters.",
+      "invalid_sidebar_font_size": "Font sizes must be whole numbers between 14px and 24px."
     }
   }
 }

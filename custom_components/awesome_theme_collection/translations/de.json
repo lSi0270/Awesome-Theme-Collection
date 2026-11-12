@@ -32,12 +32,12 @@
       },
       "metal": {
         "title": "Awesome-Metall-Themes",
-        "description": "Konfiguriere Themes, Hintergründe, Abschnittsdarstellung, Schriftgrößen, Schriftfarben, Icons sowie Primär-Farben und Karten-Radius.",
+        "description": "Konfiguriere die folgenden Bereiche nach deinen Vorstellungen.",
         "data": {},
         "sections": {
           "themes": {
             "name": "Auswahl",
-            "description": "Wähle die Metall-Themes aus, die installiert werden sollen.",
+            "description": "Wähle die Metall-Themes aus, die installiert bleiben sollen.",
             "data": {
               "flat_metal_shadows": "Awesome Flat Metal Shadows",
               "flat_metal": "Awesome Flat Metal",
@@ -63,12 +63,93 @@
           },
           "sections": {
             "name": "Abschnitte",
-            "description": "Hier können die horizontalen und vertikalen Abstände zwischen den Abschnitten eingestellt werden. Es sind Werte zwischen 0 - 50px möglich (0px ist nicht empfehlenswert). Ausserdem kann eine Rahmenfarbe festgelegt werden (wenn ein Abschnitt-Hintergrund aktiv).",
+            "description": "Hier können Abstände, Rahmenfarbe und die Bild- und Farb-Hintergründe der Abschnitte eingestellt werden. Wähle zum Design-Mode passende Hintergründe und Farben aus.",
             "data": {
               "section_column_gap_metal": "Horizontaler Abstand (Standard: 32px)",
               "section_row_gap_metal": "Vertikaler Abstand (Standard: 24px)",
               "section_border_color_metal": "Rahmenfarbe (wenn ein Abschnitt-Hintergrund aktiv)",
-              "reset_sections": "Auf Standard zurücksetzen"
+              "reset_sections": "Auf Standard zurücksetzen",
+              "section_background_always_set_metal": "Hintergrund immer aktiv",
+              "section_background_dark_metal": "Hintergrund - Bild - Dunkel-Modus",
+              "section_color_dark_metal": "Hintergrund - Farbe - Dunkel-Modus",
+              "section_background_light_metal": "Hintergrund - Bild - Hell-Modus",
+              "section_color_light_metal": "Hintergrund - Farbe - Hell-Modus"
+            },
+            "data_description": {
+              "section_background_always_set_metal": "Hintergrund wird auch gesetzt wenn kein Abschnitt-Hintergrund ausgewählt ist."
+            }
+          },
+          "cards": {
+            "name": "Karten",
+            "description": "Konfiguriere den Karten-Radius und den Hintergrund von Bedienelementen.",
+            "data": {
+              "card_border_radius_metal": "Karten-Radius: 0 - 28px (Standard: 10px)",
+              "control_set_background_metal": "Bedienelemente mit Karten-Hintergrund",
+              "reset_cards": "Auf Standard-Werte zurücksetzen"
+            },
+            "data_description": {
+              "control_set_background_metal": "Cover-Controls, Bubble-Sub-Buttons, Mushroom-Sub-Buttons"
+            }
+          },
+          "sidebar": {
+            "name": "Seitenleiste",
+            "description": "Konfiguriere den Titel, die Schriftgrößen, Textfarben und Hintergründe der Seitenleiste.",
+            "data": {
+              "sidebar_title_metal": "Titel (Standard: Home Assistant)",
+              "sidebar_item_fontsize_metal": "Schriftgröße für Einträge (Standard: 18px)",
+              "sidebar_item_selected_fontsize_metal": "Schriftgröße für ausgewählten Eintrag (Standard: 20px)",
+              "sidebar_item_text_color_dark_metal": "Textfarbe für Einträge - Dunkel-Modus (Standard: #EEEEEE)",
+              "sidebar_item_selected_text_color_dark_metal": "Textfarbe für ausgewählten Eintrag - Dunkel-Modus (Standard: #111111)",
+              "sidebar_item_text_color_light_metal": "Textfarbe für Einträge - Hell-Modus (Standard: #202020)",
+              "sidebar_item_selected_text_color_light_metal": "Textfarbe für ausgewählten Eintrag - Hell-Modus (Standard: #EEEEEE)",
+              "sidebar_background_dark_metal": "Hintergrund-Bild Dunkel-Modus",
+              "sidebar_background_color_dark_metal": "Hintergrund-Farbe Dunkel-Modus",
+              "sidebar_background_light_metal": "Hintergrund-Bild Hell-Modus",
+              "sidebar_background_color_light_metal": "Hintergrund-Farbe Hell-Modus",
+              "reset_sidebar": "Auf Standard-Werte zurücksetzen"
+            },
+            "data_description": {
+              "sidebar_title_metal": "Maximal 20 Zeichen.",
+              "sidebar_item_fontsize_metal": "Zulässiger Bereich: 14–24px.",
+              "sidebar_item_selected_fontsize_metal": "Zulässiger Bereich: 14–24px."
+            }
+          },
+          "toolbar": {
+            "name": "Kopfleiste",
+            "description": "Konfiguriere die Schriftgrößen, Textfarben und Hintergründe der Kopfleiste.",
+            "data": {
+              "toolbar_item_fontsize_metal": "Schriftgröße für Einträge (Standard: 18px)",
+              "toolbar_item_selected_fontsize_metal": "Schriftgröße für ausgewählten Eintrag (Standard: 18px)",
+              "toolbar_item_text_color_dark_metal": "Textfarbe für Einträge - Dunkel-Modus (Standard: #CCCCCC)",
+              "toolbar_item_selected_text_color_dark_metal": "Textfarbe für ausgewählten Eintrag - Dunkel-Modus (Standard: #EEEEEE)",
+              "toolbar_item_text_color_light_metal": "Textfarbe für Einträge - Hell-Modus (Standard: #404040)",
+              "toolbar_item_selected_text_color_light_metal": "Textfarbe für ausgewählten Eintrag - Hell-Modus (Standard: #202020)",
+              "toolbar_background_dark_metal": "Hintergrund-Bild Dunkel-Modus",
+              "toolbar_background_color_dark_metal": "Hintergrund-Farbe Dunkel-Modus",
+              "toolbar_background_light_metal": "Hintergrund-Bild Hell-Modus",
+              "toolbar_background_color_light_metal": "Hintergrund-Farbe Hell-Modus",
+              "reset_toolbar": "Auf Standard-Werte zurücksetzen"
+            },
+            "data_description": {
+              "toolbar_item_fontsize_metal": "Zulässiger Bereich: 14–24px.",
+              "toolbar_item_selected_fontsize_metal": "Zulässiger Bereich: 14–24px."
+            }
+          },
+          "icons": {
+            "name": "Icons",
+            "description": "Hier können die Icon-Größe, der Leuchtschein und die Icon-Farbe (wenn aus/deaktiviert) eingestellt werden.",
+            "data": {
+              "icon_size_metal": "Icon-Größe: 16 - 36px (Standard: 24px)",
+              "reset_icons": "Auf Standard-Werte zurücksetzen",
+              "icon_off_color_dark_metal": "Icon-Farbe - Dunkel-Modus",
+              "icon_off_color_light_metal": "Icon-Farbe - Hell-Modus",
+              "icons_glow_metal": "Icons mit Leuchtschein (wenn eingeschaltet)"
+            },
+            "data_description": {
+              "icon_size_metal": "Das gilt für Karten-Icons, Seitenleiste, Kopfleiste und Formulare.",
+              "icon_off_color_dark_metal": "Icon-Farbe wenn aus/deaktiviert (Standard: #929292)",
+              "icon_off_color_light_metal": "Icon-Farbe wenn aus/deaktiviert (Standard: #626262)",
+              "icons_glow_metal": "Icons mit Status='An' wie Lampen, Schalter, Steckdosen usw."
             }
           },
           "fonts": {
@@ -123,29 +204,14 @@
               "heading_title_color_light_metal": "z.B. für Abschnittsüberschriften (Standard: #221100)"
             }
           },
-          "icons": {
-            "name": "Icons",
-            "description": "Hier kann die Icon-Größe und die Icon-Farbe (wenn aus/deaktiviert) eingestellt werden. Das gilt für Karten-Icons, Seitenleiste, Kopfleiste und Formulare.",
-            "data": {
-              "icon_size_metal": "Icon-Größe: 16 - 36px (Standard: 24px)",
-              "reset_icons": "Auf Standard-Werte zurücksetzen",
-              "icon_off_color_dark_metal": "Icon-Farbe - Dunkel-Modus",
-              "icon_off_color_light_metal": "Icon-Farbe - Hell-Modus"
-            },
-            "data_description": {
-              "icon_off_color_dark_metal": "Icon-Farbe wenn aus/deaktiviert (Standard: #929292)",
-              "icon_off_color_light_metal": "Icon-Farbe wenn aus/deaktiviert (Standard: #626262)"
-            }
-          },
           "primary_colors": {
-            "name": "Primär-Farben und Karten-Radius",
-            "description": "Konfiguriere die Primär- und Akzent-Farben für den Dunkel- und Hell-Modus sowie den Karten-Radius (gilt für alle HA-Karten, Bubble-Karten, Mushroom-Karten und alle Custom-Karten die sich im Design anpassen lassen).",
+            "name": "Primär - Farben",
+            "description": "Konfiguriere die Primär- und Akzent-Farben für den Dunkel- und Hell-Modus.",
             "data": {
               "primary_color_dark_metal": "Primär-Farbe Dunkel-Modus",
               "accent_color_dark_metal": "Akzent-Farbe Dunkel-Modus",
               "primary_color_light_metal": "Primär-Farbe Hell-Modus",
               "accent_color_light_metal": "Akzent-Farbe Hell-Modus",
-              "card_border_radius_metal": "Karten-Radius: 0 - 28px (Standard: 10px)",
               "reset_primary_colors": "Auf Standard-Werte zurücksetzen"
             },
             "data_description": {
@@ -159,12 +225,12 @@
       },
       "leather": {
         "title": "Awesome-Leder-Themes",
-        "description": "Konfiguriere Themes, Hintergründe, Abschnittsdarstellung, Schriftgrößen, Schriftfarben, Icons sowie Primär-Farben und Karten-Radius.",
+        "description": "Konfiguriere die folgenden Bereiche nach deinen Vorstellungen.",
         "data": {},
         "sections": {
           "themes": {
             "name": "Auswahl",
-            "description": "Wähle die Leder-Themes aus, die installiert werden sollen.",
+            "description": "Wähle die Leder-Themes aus, die installiert bleiben sollen.",
             "data": {
               "flat_leather_shadows": "Awesome Flat Leather Shadows",
               "flat_leather": "Awesome Flat Leather",
@@ -190,12 +256,93 @@
           },
           "sections": {
             "name": "Abschnitte",
-            "description": "Hier können die horizontalen und vertikalen Abstände zwischen den Abschnitten eingestellt werden. Es sind Werte zwischen 0 - 50px möglich (0px ist nicht empfehlenswert). Ausserdem kann eine Rahmenfarbe festgelegt werden (wenn ein Abschnitt-Hintergrund aktiv).",
+            "description": "Hier können Abstände, Rahmenfarbe und die Bild- und Farb-Hintergründe der Abschnitte eingestellt werden. Wähle zum Design-Mode passende Hintergründe und Farben aus.",
             "data": {
               "section_column_gap_leather": "Horizontaler Abstand (Standard: 32px)",
               "section_row_gap_leather": "Vertikaler Abstand (Standard: 24px)",
               "section_border_color_leather": "Rahmenfarbe (wenn ein Abschnitt-Hintergrund aktiv)",
-              "reset_sections": "Auf Standard zurücksetzen"
+              "reset_sections": "Auf Standard zurücksetzen",
+              "section_background_always_set_leather": "Hintergrund immer aktiv",
+              "section_background_dark_leather": "Hintergrund - Bild - Dunkel-Modus",
+              "section_color_dark_leather": "Hintergrund - Farbe - Dunkel-Modus",
+              "section_background_light_leather": "Hintergrund - Bild - Hell-Modus",
+              "section_color_light_leather": "Hintergrund - Farbe - Hell-Modus"
+            },
+            "data_description": {
+              "section_background_always_set_leather": "Hintergrund wird auch gesetzt wenn kein Abschnitt-Hintergrund ausgewählt ist."
+            }
+          },
+          "cards": {
+            "name": "Karten",
+            "description": "Konfiguriere den Karten-Radius und den Hintergrund von Bedienelementen.",
+            "data": {
+              "card_border_radius_leather": "Karten-Radius: 0 - 28px (Standard: 10px)",
+              "control_set_background_leather": "Bedienelemente mit Karten-Hintergrund",
+              "reset_cards": "Auf Standard-Werte zurücksetzen"
+            },
+            "data_description": {
+              "control_set_background_leather": "Cover-Controls, Bubble-Sub-Buttons, Mushroom-Sub-Buttons"
+            }
+          },
+          "sidebar": {
+            "name": "Seitenleiste",
+            "description": "Konfiguriere den Titel, die Schriftgrößen, Textfarben und Hintergründe der Seitenleiste.",
+            "data": {
+              "sidebar_title_leather": "Titel (Standard: Home Assistant)",
+              "sidebar_item_fontsize_leather": "Schriftgröße für Einträge (Standard: 18px)",
+              "sidebar_item_selected_fontsize_leather": "Schriftgröße für ausgewählten Eintrag (Standard: 20px)",
+              "sidebar_item_text_color_dark_leather": "Textfarbe für Einträge - Dunkel-Modus (Standard: #EEEEEE)",
+              "sidebar_item_selected_text_color_dark_leather": "Textfarbe für ausgewählten Eintrag - Dunkel-Modus (Standard: #111111)",
+              "sidebar_item_text_color_light_leather": "Textfarbe für Einträge - Hell-Modus (Standard: #202020)",
+              "sidebar_item_selected_text_color_light_leather": "Textfarbe für ausgewählten Eintrag - Hell-Modus (Standard: #EEEEEE)",
+              "sidebar_background_dark_leather": "Hintergrund-Bild Dunkel-Modus",
+              "sidebar_background_color_dark_leather": "Hintergrund-Farbe Dunkel-Modus",
+              "sidebar_background_light_leather": "Hintergrund-Bild Hell-Modus",
+              "sidebar_background_color_light_leather": "Hintergrund-Farbe Hell-Modus",
+              "reset_sidebar": "Auf Standard-Werte zurücksetzen"
+            },
+            "data_description": {
+              "sidebar_title_leather": "Maximal 20 Zeichen.",
+              "sidebar_item_fontsize_leather": "Zulässiger Bereich: 14–24px.",
+              "sidebar_item_selected_fontsize_leather": "Zulässiger Bereich: 14–24px."
+            }
+          },
+          "toolbar": {
+            "name": "Kopfleiste",
+            "description": "Konfiguriere die Schriftgrößen, Textfarben und Hintergründe der Kopfleiste.",
+            "data": {
+              "toolbar_item_fontsize_leather": "Schriftgröße für Einträge (Standard: 18px)",
+              "toolbar_item_selected_fontsize_leather": "Schriftgröße für ausgewählten Eintrag (Standard: 18px)",
+              "toolbar_item_text_color_dark_leather": "Textfarbe für Einträge - Dunkel-Modus (Standard: #CCCCCC)",
+              "toolbar_item_selected_text_color_dark_leather": "Textfarbe für ausgewählten Eintrag - Dunkel-Modus (Standard: #EEEEEE)",
+              "toolbar_item_text_color_light_leather": "Textfarbe für Einträge - Hell-Modus (Standard: #404040)",
+              "toolbar_item_selected_text_color_light_leather": "Textfarbe für ausgewählten Eintrag - Hell-Modus (Standard: #202020)",
+              "toolbar_background_dark_leather": "Hintergrund-Bild Dunkel-Modus",
+              "toolbar_background_color_dark_leather": "Hintergrund-Farbe Dunkel-Modus",
+              "toolbar_background_light_leather": "Hintergrund-Bild Hell-Modus",
+              "toolbar_background_color_light_leather": "Hintergrund-Farbe Hell-Modus",
+              "reset_toolbar": "Auf Standard-Werte zurücksetzen"
+            },
+            "data_description": {
+              "toolbar_item_fontsize_leather": "Zulässiger Bereich: 14–24px.",
+              "toolbar_item_selected_fontsize_leather": "Zulässiger Bereich: 14–24px."
+            }
+          },
+          "icons": {
+            "name": "Icons",
+            "description": "Hier können die Icon-Größe, der Leuchtschein und die Icon-Farbe (wenn aus/deaktiviert) eingestellt werden.",
+            "data": {
+              "icon_size_leather": "Icon-Größe: 16 - 36px (Standard: 24px)",
+              "reset_icons": "Auf Standard-Werte zurücksetzen",
+              "icon_off_color_dark_leather": "Icon-Farbe - Dunkel-Modus",
+              "icon_off_color_light_leather": "Icon-Farbe - Hell-Modus",
+              "icons_glow_leather": "Icons mit Leuchtschein (wenn eingeschaltet)"
+            },
+            "data_description": {
+              "icon_size_leather": "Das gilt für Karten-Icons, Seitenleiste, Kopfleiste und Formulare.",
+              "icon_off_color_dark_leather": "Icon-Farbe wenn aus/deaktiviert (Standard: #929292)",
+              "icon_off_color_light_leather": "Icon-Farbe wenn aus/deaktiviert (Standard: #626262)",
+              "icons_glow_leather": "Icons mit Status='An' wie Lampen, Schalter, Steckdosen usw."
             }
           },
           "fonts": {
@@ -250,29 +397,14 @@
               "heading_title_color_light_leather": "z.B. für Abschnittsüberschriften (Standard: #221100)"
             }
           },
-          "icons": {
-            "name": "Icons",
-            "description": "Hier kann die Icon-Größe und die Icon-Farbe (wenn aus/deaktiviert) eingestellt werden. Das gilt für Karten-Icons, Seitenleiste, Kopfleiste und Formulare.",
-            "data": {
-              "icon_size_leather": "Icon-Größe: 16 - 36px (Standard: 24px)",
-              "reset_icons": "Auf Standard-Werte zurücksetzen",
-              "icon_off_color_dark_leather": "Icon-Farbe - Dunkel-Modus",
-              "icon_off_color_light_leather": "Icon-Farbe - Hell-Modus"
-            },
-            "data_description": {
-              "icon_off_color_dark_leather": "Icon-Farbe wenn aus/deaktiviert (Standard: #929292)",
-              "icon_off_color_light_leather": "Icon-Farbe wenn aus/deaktiviert (Standard: #626262)"
-            }
-          },
           "primary_colors": {
-            "name": "Primär-Farben und Karten-Radius",
-            "description": "Konfiguriere die Primär- und Akzent-Farben für den Dunkel- und Hell-Modus sowie den Karten-Radius (gilt für alle HA-Karten, Bubble-Karten, Mushroom-Karten und alle Custom-Karten die sich im Design anpassen lassen).",
+            "name": "Primär - Farben",
+            "description": "Konfiguriere die Primär- und Akzent-Farben für den Dunkel- und Hell-Modus.",
             "data": {
               "primary_color_dark_leather": "Primär-Farbe Dunkel-Modus",
               "accent_color_dark_leather": "Akzent-Farbe Dunkel-Modus",
               "primary_color_light_leather": "Primär-Farbe Hell-Modus",
               "accent_color_light_leather": "Akzent-Farbe Hell-Modus",
-              "card_border_radius_leather": "Karten-Radius: 0 - 28px (Standard: 10px)",
               "reset_primary_colors": "Auf Standard-Werte zurücksetzen"
             },
             "data_description": {
@@ -294,7 +426,9 @@
       "invalid_font_size": "Die Schriftgrößen müssen zwischen 8 und 46 Pixel liegen.",
       "invalid_hex_color": "Bitte gib einen gültigen HEX-Farbwert ein, z. B. #E7EDF5.",
       "invalid_icon_size": "Die Icon-Größe muss zwischen 16 und 36 Pixel liegen.",
-      "invalid_card_radius": "Der Karten-Radius muss zwischen 0 und 28 Pixel liegen."
+      "invalid_card_radius": "Der Karten-Radius muss zwischen 0 und 28 Pixel liegen.",
+      "invalid_sidebar_title": "Der Titel darf höchstens 20 Zeichen enthalten.",
+      "invalid_sidebar_font_size": "Die Schriftgrößen müssen zwischen 14 und 24 Pixel liegen."
     }
   }
 }
