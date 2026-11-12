@@ -94,6 +94,62 @@ PRIMARY_COLOR_DEFAULTS: dict[str, str] = {
 }
 CARD_BORDER_RADIUS_DEFAULT = 10
 
+# Sidebar and toolbar defaults. Keys are option names without the group suffix.
+SIDEBAR_DEFAULTS = {
+    "metal": {
+        "sidebar_title": "Home Assistant",
+        "sidebar_item_fontsize": 18,
+        "sidebar_item_selected_fontsize": 20,
+        "sidebar_item_text_color_dark": "#EEEEEE",
+        "sidebar_item_selected_text_color_dark": "#111111",
+        "sidebar_item_text_color_light": "#202020",
+        "sidebar_item_selected_text_color_light": "#EEEEEE",
+        "sidebar_background_dark": "/local/wallpaper/metal3_dark.jpg",
+        "sidebar_background_color_dark": "linear-gradient(90deg, rgba(22, 25, 28, 0.2), rgba(22, 25, 28, 0.2))",
+        "sidebar_background_light": "/local/wallpaper/metal_light.jpg",
+        "sidebar_background_color_light": "linear-gradient(90deg, rgba(224, 224, 224, 0.4), rgba(224, 224, 224, 0.4))",
+    },
+    "leather": {
+        "sidebar_title": "Home Assistant",
+        "sidebar_item_fontsize": 18,
+        "sidebar_item_selected_fontsize": 20,
+        "sidebar_item_text_color_dark": "#EEEEEE",
+        "sidebar_item_selected_text_color_dark": "#111111",
+        "sidebar_item_text_color_light": "#202020",
+        "sidebar_item_selected_text_color_light": "#EEEEEE",
+        "sidebar_background_dark": "/local/wallpaper/leather2_dark.jpg",
+        "sidebar_background_color_dark": "linear-gradient(90deg, rgba(22, 25, 28, 0.2), rgba(22, 25, 28, 0.2))",
+        "sidebar_background_light": "/local/wallpaper/leather2_light.jpg",
+        "sidebar_background_color_light": "linear-gradient(90deg, rgba(244, 244, 244, 0.6), rgba(244, 244, 244, 0.6))",
+    },
+}
+TOOLBAR_DEFAULTS = {
+    "metal": {
+        "toolbar_item_fontsize": 18,
+        "toolbar_item_selected_fontsize": 18,
+        "toolbar_item_text_color_dark": "#CCCCCC",
+        "toolbar_item_selected_text_color_dark": "#EEEEEE",
+        "toolbar_item_text_color_light": "#404040",
+        "toolbar_item_selected_text_color_light": "#202020",
+        "toolbar_background_dark": "/local/wallpaper/metal3_dark.jpg",
+        "toolbar_background_color_dark": "linear-gradient(180deg, rgba(32, 35, 38, 0.6), rgba(12, 15, 18, 0.6) 10%, rgba(42, 45, 48, 0.6))",
+        "toolbar_background_light": "/local/wallpaper/metal_light.jpg",
+        "toolbar_background_color_light": "linear-gradient(180deg, rgba(164, 164, 164, 0.6), rgba(144, 144, 144, 0.6) 10%, rgba(234, 234, 234, 0.6))",
+    },
+    "leather": {
+        "toolbar_item_fontsize": 18,
+        "toolbar_item_selected_fontsize": 18,
+        "toolbar_item_text_color_dark": "#CCCCCC",
+        "toolbar_item_selected_text_color_dark": "#EEEEEE",
+        "toolbar_item_text_color_light": "#404040",
+        "toolbar_item_selected_text_color_light": "#202020",
+        "toolbar_background_dark": "/local/wallpaper/leather2_dark.jpg",
+        "toolbar_background_color_dark": "linear-gradient(180deg, rgba(32, 35, 38, 0.4), rgba(12, 15, 18, 0.4) 10%, rgba(42, 45, 48, 0.4))",
+        "toolbar_background_light": "/local/wallpaper/leather2_light.jpg",
+        "toolbar_background_color_light": "linear-gradient(180deg, rgba(204, 204, 204, 0.7), rgba(184, 184, 184, 0.7) 10%, rgba(244, 244, 244, 0.7))",
+    },
+}
+
 METAL_COLOR_DEFAULTS = {
     "dashboard_color_metal_dark": (
         "linear-gradient(rgba(16, 21, 28, 0.4), "
@@ -198,8 +254,8 @@ WALLPAPERS = (
 )
 
 DEFAULT_OPTIONS: dict[str, Any] = {
-    "background_metal_dark": "/local/wallpaper/metal2_dark.jpg",
-    "background_metal_light": "/local/wallpaper/metal2_light.jpg",
+    "background_metal_dark": "/local/wallpaper/metal3_dark.jpg",
+    "background_metal_light": "/local/wallpaper/metal_light.jpg",
     "background_popup_metal_dark": "/local/wallpaper/metal2_dark.jpg",
     "background_popup_metal_light": "/local/wallpaper/metal2_light.jpg",
     "background_leather_dark": "/local/wallpaper/leather_dark.jpg",
@@ -214,6 +270,20 @@ DEFAULT_OPTIONS: dict[str, Any] = {
     "section_column_gap_leather": 32,
     "section_row_gap_leather": 24,
     "section_border_color_leather": "rgba(130, 130, 130, 0.2)",
+    "section_background_dark_metal": "/local/wallpaper/metal3_dark.jpg",
+    "section_color_dark_metal": "linear-gradient(rgba(26, 31, 38, 0.4), rgba(26, 31, 38, 0.4))",
+    "section_background_light_metal": "/local/wallpaper/metal2_light.jpg",
+    "section_color_light_metal": "linear-gradient(rgba(224, 224, 224, 0.5), rgba(224, 224, 224, 0.5))",
+    "section_background_always_set_metal": "Off",
+    "icons_glow_metal": "On",
+    "control_set_background_metal": "On",
+    "section_background_dark_leather": "/local/wallpaper/leather2_dark.jpg",
+    "section_color_dark_leather": "linear-gradient(rgba(16, 21, 28, 0.40), rgba(16, 21, 28, 0.40))",
+    "section_background_light_leather": "/local/wallpaper/leather2_light.jpg",
+    "section_color_light_leather": "linear-gradient(rgba(224, 224, 224, 0.60), rgba(224, 224, 224, 0.60))",
+    "section_background_always_set_leather": "Off",
+    "icons_glow_leather": "On",
+    "control_set_background_leather": "On",
     **{
         f"font_size_{size}_{group}": default
         for group in ("metal", "leather")
@@ -241,6 +311,16 @@ DEFAULT_OPTIONS: dict[str, Any] = {
     },
     "card_border_radius_metal": CARD_BORDER_RADIUS_DEFAULT,
     "card_border_radius_leather": CARD_BORDER_RADIUS_DEFAULT,
+    **{
+        f"{key}_{group}": value
+        for group, fields in SIDEBAR_DEFAULTS.items()
+        for key, value in fields.items()
+    },
+    **{
+        f"{key}_{group}": value
+        for group, fields in TOOLBAR_DEFAULTS.items()
+        for key, value in fields.items()
+    },
 }
 
 BACKGROUND_KEYS = tuple(
@@ -259,6 +339,12 @@ TEXT_COLOR_KEYS = tuple(
     f"{key}_{group}"
     for group, colors in TEXT_COLOR_DEFAULTS.items()
     for key in colors
+) + tuple(
+    f"{key}_{group}"
+    for defaults in (SIDEBAR_DEFAULTS, TOOLBAR_DEFAULTS)
+    for group, fields in defaults.items()
+    for key in fields
+    if "text_color" in key
 )
 
 ICON_KEYS = tuple(
@@ -543,6 +629,27 @@ def _validate_options(options: dict[str, Any]) -> dict[str, Any]:
             )
 
     for group in ("metal", "leather"):
+        for mode in ("dark", "light"):
+            path_key = f"section_background_{mode}_{group}"
+            path_value = values[path_key]
+            if (
+                not isinstance(path_value, str)
+                or not path_value.startswith("/local/wallpaper/")
+                or any(char in path_value for char in ('"', "'", "\\", "\n", "\r", "?", "#"))
+                or ".." in Path(path_value).parts
+            ):
+                raise ValueError(f"Ungültiger Abschnitt-Hintergrundpfad: {path_key}")
+            color_key = f"section_color_{mode}_{group}"
+            color_value = values[color_key]
+            if not isinstance(color_value, str) or not _valid_theme_color(color_value):
+                raise ValueError(f"Ungültige Abschnitt-Hintergrundfarbe: {color_key}")
+            values[color_key] = color_value.strip()
+        for switch_name in ("section_background_always_set", "icons_glow", "control_set_background"):
+            switch_key = f"{switch_name}_{group}"
+            if values[switch_key] not in ("On", "Off"):
+                raise ValueError(f"Ungültiger Schalterwert: {switch_key}")
+
+    for group in ("metal", "leather"):
         for size, default in FONT_SIZE_DEFAULTS.items():
             key = f"font_size_{size}_{group}"
             value = values[key]
@@ -595,6 +702,36 @@ def _validate_options(options: dict[str, Any]) -> dict[str, Any]:
         ):
             raise ValueError(f"Ungültiger Karten-Radius: {radius_key}")
         values[radius_key] = int(radius)
+
+    for group in ("metal", "leather"):
+        for defaults in (SIDEBAR_DEFAULTS, TOOLBAR_DEFAULTS):
+            for key, default_value in defaults[group].items():
+                option_key = f"{key}_{group}"
+                value = values[option_key]
+                if key.endswith("_title"):
+                    if (not isinstance(value, str) or len(value) > 20
+                            or any(ord(char) < 32 for char in value)):
+                        raise ValueError(f"Ungültiger Titel: {option_key}")
+                elif key.endswith("_fontsize"):
+                    if (isinstance(value, bool) or not isinstance(value, (int, float))
+                            or int(value) != value or not 14 <= value <= 24):
+                        raise ValueError(f"Ungültige Schriftgröße: {option_key}")
+                    values[option_key] = int(value)
+                elif "text_color" in key:
+                    if not isinstance(value, str) or not re.fullmatch(r"#[0-9A-Fa-f]{6}", value.strip()):
+                        raise ValueError(f"Ungültige Textfarbe: {option_key}")
+                    values[option_key] = value.strip().upper()
+                elif key.endswith("_background_dark") or key.endswith("_background_light"):
+                    if "color_" not in key and (
+                        not isinstance(value, str) or not value.startswith("/local/")
+                        or any(char in value for char in ('"', "'", "\\\\", "\\n", "\\r"))
+                        or ".." in Path(value).parts or "?" in value or "#" in value
+                    ):
+                        raise ValueError(f"Ungültiger Hintergrundpfad: {option_key}")
+                elif "_background_color_" in key:
+                    if not _valid_theme_color(value):
+                        raise ValueError(f"Ungültige Hintergrundfarbe: {option_key}")
+                    values[option_key] = value.strip()
 
     return values
 
@@ -906,6 +1043,48 @@ def _render_theme(
         raise ValueError(
             f"Der Marker {marker} kommt zu oft in {source.name} vor."
         )
+
+    # Abschnitt-Hintergrundbilder und -Farben (Hell-/Dunkelmodus).
+    for mode in ("dark", "light"):
+        path_key = f"section_background_{mode}_{group}"
+        color_key = f"section_color_{mode}_{group}"
+        path_marker = f"ATC_SECTION_BACKGROUND_{suffix}_{mode.upper()}"
+        color_marker = f"ATC_SECTION_COLOR_{suffix}_{mode.upper()}"
+        content, path_count = _replace_atc_background(content, path_marker, values[path_key])
+        content, color_count = _replace_atc_gradient(content, color_marker, values[color_key])
+        if path_count > 4 or color_count > 4:
+            raise ValueError(f"Abschnitt-Hintergrundmarker in {source.name} kommen zu oft vor.")
+
+    for option_name, marker_name in (
+        ("section_background_always_set", "SECTION_BACKGROUND_ALWAYS_SET"),
+        ("icons_glow", "ICONS_GLOW"),
+        ("control_set_background", "CONTROL_SET_BACKGROUND"),
+    ):
+        marker = f"ATC_{marker_name}_{suffix}"
+        content, count = _replace_atc_value(content, marker, values[f"{option_name}_{group}"])
+        if count > 4:
+            raise ValueError(f"Der Marker {marker} kommt zu oft in {source.name} vor.")
+
+    # Sidebar and toolbar titles, typography, colors and backgrounds.
+    for area, defaults in (("SIDEBAR", SIDEBAR_DEFAULTS[group]), ("TOOLBAR", TOOLBAR_DEFAULTS[group])):
+        for key, default_value in defaults.items():
+            option_key = f"{key}_{group}"
+            marker = f"ATC_{key.upper()}_{suffix}"
+            value = values[option_key]
+            if key.endswith("_title"):
+                content, count = _replace_atc_value(content, marker, json.dumps(value, ensure_ascii=False)[1:-1])
+            elif key.endswith("_fontsize"):
+                content, count = _replace_atc_value(content, marker, f"{value}px")
+            elif "text_color" in key:
+                content, count = _replace_atc_value(content, marker, value)
+            elif "_background_color_" in key:
+                content, count = _replace_atc_gradient(content, marker, value)
+            elif key.endswith("_background_dark") or key.endswith("_background_light"):
+                content, count = _replace_atc_background(content, marker, value)
+            else:
+                continue
+            if count > 4:
+                raise ValueError(f"Der Marker {marker} kommt zu oft in {source.name} vor.")
 
     return content
 
