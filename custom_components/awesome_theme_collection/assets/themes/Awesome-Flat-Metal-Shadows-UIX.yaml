@@ -1,117 +1,239 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Flat-Metal-Shadows-UIX (v1.2.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-11-04
+# Theme: Awesome-Flat-Metal-Shadows-UIX (v1.3.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-11-12
 
 Awesome-Flat-Metal-Shadows-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
-  uix-card: |
-    /* HATG:UIX:eigene-3d-hintergrund-mit-abgesetzten-rand:START */
-    :host(:not(hui-heading-card):not(hui-markdown-card):not(advanced-camera-card):not(mushroom-chips-card):not(mushroom-title-card)) ha-card {
-      background: var(--custom-card-gradient) !important;
-      box-shadow: var(--custom-card-shadows) !important;
-      border: var(--custom-card-border) !important;
-    }
-    :host([class*="bubble-"]:not([class*="pop-up"])) {
-      --bubble-main-background-color: transparent !important;
-      --bubble-button-background-color: transparent !important;
-      --bubble-climate-background-color: transparent !important;
-    }
-    :host([class*="bubble-"]:not([class*="pop-up"])) ha-card,
-    :host([class*="bubble-"]) .bubble-container,
-    :host([class*="bubble-"]) .bubble-climate-container,
-    :host([class*="bubble-"]) .bubble-climate-card,
-    :host([class*="bubble-"]) .bubble-button-card-container,
-    :host([class*="bubble-"]) .bubble-close-button,
-    :host([class*="bubble-"]) .bubble-card-background {
-      background: var(--custom-card-gradient) !important;
-      box-shadow: var(--custom-card-shadows) !important;
-      border: var(--custom-card-border) !important;
-      border-radius: var(--default-card-border-radius) !important;
-    }
-    :host([class*="bubble-"]):has(.bubble-separator) ha-card,
-    :host([class*="bubble-"]):has(.bubble-empty-column) ha-card,
-    :host([class*="bubble-"]) .bubble-separator,
-    :host([class*="bubble-"]) .bubble-empty-column,
-    .bubble-separator, .bubble-empty-column,
-    ha-md-list {
-      background: transparent !important;
-      background-color: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    ha-card .bubble-name {
-      font-size: var(--ha-font-size-m) !important;
-      font-weight: normal !important;
-    }
-    .is-off .bubble-main-icon {
-      opacity: 1 !important;
-    }
-    ha-card .bubble-main-icon-container {
-      --mdc-icon-size: var(--default-icon-size) !important;
-      color:  var(--default-icon-off-color) !important;
-    }
-    ha-card ha-tile-container ha-tile-icon {
-      --mdc-icon-size: var(--default-icon-size) !important;
-      --tile-icon-opacity: var(--default-icon-opacity) !important;
-      border-radius: var(--default-icon-border-radius) !important;
-    }
-    ha-card ha-state-icon {
-      min-width: var(--default-icon-size) !important;
-      margin-left: calc((width - var(--default-icon-size)) / 2);
-    }
-    ha-card div.container div.row div.content ha-tile-icon {
-      --mdc-icon-size: var(--default-icon-size) !important;
-    }
-    ha-card mushroom-card mushroom-state-item mushroom-shape-icon ha-state-icon {
-      --mdc-icon-size: var(--default-icon-size) !important;
-      background-color: rgba(0, 0, 0, 0) !important;
-    }
-    ha-card mushroom-shape-icon {
-      --shape-color: rgba(0, 0, 0, 0) !important;
-      --shape-color-disabled: rgba(0, 0, 0, 0) !important;
-      --icon-color-disabled: var(--default-icon-off-color) !important;
-      background-color: rgba(0, 0, 0, 0) !important;
-    }
-    /* HATG:UIX:eigene-3d-hintergrund-mit-abgesetzten-rand:END */
-    /* HATG:UIX:eigene-popup-hintergrund-fuer-bubble-card-popups:START */
-    .bubble-pop-up-background {
-      background: var(--popup-custom-wallpaper, var(--lovelace-background, none)) !important;
-      background-attachment: scroll !important;
-      box-shadow: var(--custom-card-shadows) !important;
-      border: var(--custom-card-border) !important;
-    }
-    .bubble-pop-up-header, .bubble-header, .bubble-header-card {
-      background: transparent !important;
-      border: none !important;
-      box-shadow: none !important;
-    }
-    .bubble-header {
-      .bubble-name {
-        font-size: var(--ha-font-size-xl) !important;
-        line-height: 22px !important;
-        color: var(--ha-heading-card-title-color) !important;
+  uix-card-yaml: |
+    .: |
+      /* HATG:UIX:eigene-3d-hintergrund-mit-abgesetzten-rand:START */
+      :host(:not(hui-heading-card):not(hui-markdown-card):not(advanced-camera-card):not(mushroom-chips-card):not(mushroom-title-card)) ha-card {
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--custom-card-shadows) !important;
+        border: var(--custom-card-border) !important;
       }
-      .bubble-main-icon {
-        color: var(--ha-heading-card-title-color) !important;
+      :host([class*="bubble-"]:not([class*="pop-up"])) {
+        --bubble-main-background-color: transparent !important;
+        --bubble-button-background-color: transparent !important;
+        --bubble-climate-background-color: transparent !important;
       }
-    }
-    /* HATG:UIX:eigene-popup-hintergrund-fuer-bubble-card-popups:END */
-    /* HATG:UIX:eigene-calendar-card:START */
-    div.calendar-container div.calendar-item div.calendar-content {
-      div.event-title {
+      :host([class*="bubble-"]:not([class*="pop-up"])) ha-card,
+      :host([class*="bubble-"]) .bubble-container,
+      :host([class*="bubble-"]) .bubble-climate-card,
+      :host([class*="bubble-"]) .bubble-button-card-container,
+      :host([class*="bubble-"]) .bubble-close-button,
+      :host([class*="bubble-"]) .bubble-card-background {
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--custom-card-shadows) !important;
+        border: var(--custom-card-border) !important;
+        border-radius: var(--default-card-border-radius) !important;
+      }
+      :host([class*="bubble-"]):has(.bubble-separator) ha-card,
+      :host([class*="bubble-"]):has(.bubble-empty-column) ha-card,
+      :host([class*="bubble-"]) .bubble-separator,
+      :host([class*="bubble-"]) .bubble-empty-column,
+      .bubble-separator, .bubble-empty-column,
+      ha-md-list {
+        background: transparent !important;
+        background-color: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      ha-card .bubble-name {
         font-size: var(--ha-font-size-m) !important;
+        font-weight: normal !important;
       }
-      div.event-time {
-        font-size: var(--ha-font-size-s) !important;
+      /* HATG:UIX:eigene-3d-hintergrund-mit-abgesetzten-rand:END */
+      /* HATG:UIX:eigene-popup-hintergrund-fuer-bubble-card-popups:START */
+      .bubble-pop-up-background {
+        background: var(--popup-custom-wallpaper, var(--lovelace-background, none)) !important;
+        background-attachment: scroll !important;
+        box-shadow: var(--custom-card-shadows) !important;
+        border: var(--custom-card-border) !important;
       }
-    }
-    /* HATG:UIX:eigene-calendar-card:END */
+      .bubble-pop-up-header, .bubble-header, .bubble-header-card {
+        background: transparent !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
+      .bubble-header {
+        .bubble-name {
+          font-size: var(--ha-font-size-xl) !important;
+          line-height: 22px !important;
+          color: var(--ha-heading-card-title-color) !important;
+        }
+        .bubble-main-icon {
+          color: var(--ha-heading-card-title-color) !important;
+        }
+      }
+      /* HATG:UIX:eigene-popup-hintergrund-fuer-bubble-card-popups:END */
+      /* HATG:UIX:eigene-calendar-card:START */
+      div.calendar-container div.calendar-item div.calendar-content {
+        div.event-title {
+          font-size: var(--ha-font-size-m) !important;
+        }
+        div.event-time {
+          font-size: var(--ha-font-size-s) !important;
+        }
+      }
+      /* HATG:UIX:eigene-calendar-card:END */
+      /* HATG:UIX:eigene-icon-controls:START */
+      .is-on[class="button"] .bubble-main-icon,
+      .is-on[class="is-light is-on"] .bubble-main-icon {
+      @container style(--icons-glow: On) {
+        filter: drop-shadow(0px 0px 6px var(--bubble-icon-color)) !important;
+      }
+      }
+      ha-card .bubble-main-icon-container[data-state="on"] {
+      @container style(--icons-glow: On) {
+        filter: drop-shadow(0px 0px 10px var(--state-color)) !important;
+      }
+      }
+      ha-card ha-tile-icon[data-state="on"] {
+      @container style(--icons-glow: On) {
+        filter: drop-shadow(0px 0px 10px var(--tile-icon-color)) !important;
+      }
+      }
+      ha-card ha-state-icon[data-state="on"] {
+      @container style(--icons-glow: On) {
+        filter: drop-shadow(0px 0px 10px var(--state-color)) !important;
+      }
+      }
+      .is-off .bubble-main-icon {
+        opacity: 1 !important;
+      }
+      ha-card .bubble-main-icon-container {
+        --mdc-icon-size: var(--default-icon-size) !important;
+        color:  var(--default-icon-off-color) !important;
+      }
+      ha-card ha-tile-container ha-tile-icon {
+        --mdc-icon-size: var(--default-icon-size) !important;
+        --tile-icon-opacity: var(--default-icon-opacity) !important;
+        border-radius: var(--default-icon-border-radius) !important;
+      }
+      ha-card ha-state-icon {
+        min-width: var(--default-icon-size) !important;
+        margin-left: calc((width - var(--default-icon-size)) / 2);
+      }
+      ha-card div.container div.row div.content ha-tile-icon {
+        --mdc-icon-size: var(--default-icon-size) !important;
+      }
+      ha-card mushroom-card mushroom-state-item mushroom-shape-icon ha-state-icon {
+        --mdc-icon-size: var(--default-icon-size) !important;
+        background-color: rgba(0, 0, 0, 0) !important;
+      }
+      ha-card mushroom-shape-icon {
+        --shape-color: rgba(0, 0, 0, 0) !important;
+        --shape-color-disabled: rgba(0, 0, 0, 0) !important;
+        --icon-color-disabled: var(--default-icon-off-color) !important;
+        background-color: rgba(0, 0, 0, 0) !important;
+      }
+      /* HATG:UIX:eigene-icon-controls:END */
+      /* HATG:UIX:eigene-bubble-controls:END */
+      :host([class*="bubble-"]) .bubble-climate-container,
+      :host([class*="bubble-"]) .bubble-temperature-container,
+      :host([class*="bubble-"]) .bubble-media-button,
+      :host([class*="bubble-"]) .bubble-cover-button,
+      :host([class*="bubble-"]) .bubble-sub-button {
+      @container style(--control-set-background: On) {
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+        border-radius: var(--default-card-border-radius) !important;
+      }
+      }
+      :host([class*="bubble-"]) .bubble-media-button.bright-background,
+      :host([class*="bubble-"]) .bubble-cover-button.bright-background,
+      :host([class*="bubble-"]) .bubble-sub-button.bright-background {
+      @container style(--control-set-background: On) {
+        background: var(--state-active-color) !important;
+      }
+      }
+      /* HATG:UIX:eigene-bubble-controls:END */
+      /* HATG:UIX:eigene-mushroom-controls:START */
+    "mushroom-cover-buttons-control $ mushroom-button $": |
+      @container style(--control-set-background: On) {
+      button.button {
+        border-radius: var(--default-card-sub-border-radius) !important;
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+      }
+    "mushroom-button $": |
+      @container style(--control-set-background: On) {
+      button.button {
+        border-radius: var(--default-card-sub-border-radius) !important;
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+      }
+    "mushroom-climate-temperature-control $ mushroom-input-number $": |
+      @container style(--control-set-background: On) {
+      div#container {
+        border-radius: var(--default-card-sub-border-radius) !important;
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+      }
+    "mushroom-number-value-control $ mushroom-slider $": |
+      @container style(--control-set-background: On) {
+      div.container div#slider {
+        border-radius: var(--default-card-sub-border-radius) !important;
+      }
+      }
+    "mushroom-media-player-volume-control $ mushroom-button $": |
+      button.button {
+      @container style(--control-set-background: On) {
+        border-radius: var(--default-card-sub-border-radius) !important;
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+      }
+    "mushroom-media-player-volume-control $ mushroom-slider $": |
+      @container style(--control-set-background: On) {
+      div.container div#slider {
+        border-radius: var(--default-card-sub-border-radius) !important;
+      }
+      }
+    "mushroom-select-option-control $": |
+      @container style(--control-set-background: On) {
+      ha-control-select-menu {
+        border-radius: var(--default-card-sub-border-radius) !important;
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+      }
+      /* HATG:UIX:eigene-mushroom-controls:END */
+      /* HATG:UIX:eigene-ha-cover-controls:START */
+    "hui-card-features $ hui-card-feature $ hui-cover-open-close-card-feature $ ha-control-button $": |
+      @container style(--control-set-background: On) {
+      button.button {
+        background: var(--custom-card-gradient) !important;
+        box-shadow: var(--control-button-shadows) !important;
+        border: var(--custom-card-border) !important;
+      }
+      }
+      /* HATG:UIX:eigene-ha-cover-controls:END */
   uix-root: |
     /* HATG:UIX:eigene-toolbar-mit-schatten:START */
     div div.header slot div.toolbar {
       box-shadow:
         var(--custom-toolbar-shadow, no) !important;
         z-index: 10 !important;
+      background: var(--toolbar-wallpaper, no) !important;
+    }
+    ha-tab-group-tab {
+      font-size: var(--toolbar-item-fontsize) !important;
+      color: var(--toolbar-item-text-color) !important;
+    }
+    ha-tab-group-tab[active] {
+      font-size: var(--toolbar-item-selected-fontsize) !important;
+      color: var(--toolbar-item-selected-text-color) !important;
     }
     /* HATG:UIX:eigene-toolbar-mit-schatten:END */
   uix-badge: |
@@ -133,23 +255,23 @@ Awesome-Flat-Metal-Shadows-UIX:
       background-color: var(--accent-color, var(--primary-color)) !important;
       background-image: none !important;
     }
-    ha-list-item-button.selected {
-      --sidebar-selected-text-color: var(--disabled-color);
-      --sidebar-selected-icon-color: var(--disabled-color);
-      color: var(--text-primary-color) !important;
-    }
     ha-list-item-button::before {
       transition: opacity 160ms ease, box-shadow 160ms ease;
     }
+    ha-list-item-button.selected {
+      --sidebar-selected-icon-color: var(--sidebar-item-selected-text-color) !important;
+    }
+    ha-list-item-button.selected .item-text {
+      color: var(--sidebar-item-selected-text-color) !important;
+      font-size: var(--sidebar-item-selected-fontsize) !important;
+    }
     ha-list-item-button .item-text {
-      font-size: var(--ha-font-size-l) !important;
+      color: var(--sidebar-item-text-color) !important;
+      font-size: var(--sidebar-item-fontsize) !important;
       margin-left: calc((var(--mdc-icon-size) - 24px) / 2);
     }
     ha-list-item-button ha-icon {
       margin-left: calc((24px - var(--mdc-icon-size)) / 2);
-    }
-    div.panels-list ha-list-nav slot ha-list-item-button .item-text {
-      margin-left: calc((var(--mdc-icon-size) - 24px) / 2);
     }
     div.panels-list ha-list-nav slot ha-list-item-button ha-svg-icon {
       width: var(--mdc-icon-size);
@@ -160,13 +282,23 @@ Awesome-Flat-Metal-Shadows-UIX:
         var(--custom-sidebar-shadow, no) !important;
         z-index: 10 !important;
       backdrop-filter: blur(1px) !important;
+      background: var(--sidebar-wallpaper, var(--lovelace-background, none)) !important;
     }
     .badge {
       background-color: var(--accent-color) !important;
       color: var(--disabled-color) !important;
       font-size: var(--ha-font-size-m) !important;
+      border-radius: var(--ha-border-radius-lg) !important;
       font-weight: bold !important;
       border: 1px solid black !important;
+    }
+    .menu .title {
+      font-size: 0 !important;
+    }
+    .menu .title::after {
+      content: "Home Assistant"/* ATC_SIDEBAR_TITLE_METAL */ !important;
+      font-size: var(--ha-font-size-xl, 20px); !important;
+      color: var(--sidebar-item-text-color) !important;
     }
     /* HATG:UIX:eigene-sidebar-eintrag-hervorheben:END */
   uix-drawer: |
@@ -188,13 +320,25 @@ Awesome-Flat-Metal-Shadows-UIX:
     }
     /* HATG:UIX:eigene-dashboard-hintergrund-fuer-alle-seiten:END */
   uix-view-yaml: |
-    # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:START
+    # HATG:UIX:eigene-sections-border-und-background:START
     "hui-sections-view $": |
-      div.section-container:has([style*="background"]) {
-        border-radius: var(--default-card-border-radius) !important;
-        border: 1px solid rgba(130, 130, 130, 0.2) /* ATC_SECTION_BORDER_COLOR_METAL */;
+      @container style(--section-background-always: On) {
+        div.section-container {
+          padding: var(--ha-space-2) !important;
+          border-radius: var(--default-card-border-radius) !important;
+          box-shadow: var(--section-shadows) !important;
+          background: var(--section-background, var(--lovelace-background, none)) !important;
+        }
       }
-    # HATG:UIX:eigene-dezenter-rand-um-sections-wenn-background-gesetzt:END
+      @container style(--section-background-always: Off) {
+        div.section-container:has([style*="background"]) {
+          border-radius: var(--default-card-border-radius) !important;
+          border: 1px solid rgba(130, 130, 130, 0.2) /* ATC_SECTION_BORDER_COLOR_METAL */;
+          box-shadow: var(--section-shadows) !important;
+          background: var(--section-background, var(--lovelace-background, none)) !important;
+        }
+      }
+    # HATG:UIX:eigene-sections-border-und-background:END
   uix-more-info-yaml: |
     # HATG:UIX:eigene-popup-hintergrund-fuer-more-info:START
     "$ ha-dialog $": |
@@ -240,6 +384,10 @@ Awesome-Flat-Metal-Shadows-UIX:
         background: transparent !important;
         background-color: transparent !important;
       }
+    "ha-header-bar $": |
+      header.header-bar {
+        background: var(--sidebar-wallpaper, no) !important;
+      }
     $: |
       :host {
         wa-dialog::part(dialog) {
@@ -262,6 +410,10 @@ Awesome-Flat-Metal-Shadows-UIX:
         div.event-time {
           font-size: var(--ha-font-size-s) !important;
         }
+      }
+      div.notifications {
+        box-shadow: var(--custom-sidebar-shadow, no) !important;
+        background: var(--sidebar-wallpaper, var(--lovelace-background, none)) !important;
       }
     # HATG:UIX:eigene-popup-hintergrund-fuer-alle-dialoge:END
   uix-config-yaml: |
@@ -470,7 +622,8 @@ Awesome-Flat-Metal-Shadows-UIX:
       state-climate-auto-color: "#007AFF"
       state-climate-dry-color: "#007AFF"
       state-climate-fan_only-color: "#5AC8FA"
-      state-climate-heat_cool-color: "#FFC107"
+      state-climate-heat_cool-color: "#E78800"
+      state-climate-heat-cool-color: "#E78800"
       state-cover-color: "var(--default-accent-color)"
       state-cover-active-color: "var(--default-accent-color)"
       state-cover-open-color: "#929000"
@@ -832,8 +985,8 @@ Awesome-Flat-Metal-Shadows-UIX:
       ha-space-18: "72px"
       ha-space-19: "76px"
       ha-space-20: "80px"
-      ha-border-radius-sm: "calc(var(--default-card-border-radius) - 12px)" # "4px"
-      ha-border-radius-md: "calc(var(--default-card-border-radius) - 8px)" # "8px"
+      ha-border-radius-sm: "calc(var(--default-card-border-radius) - 8px)" # "4px"
+      ha-border-radius-md: "calc(var(--default-card-border-radius) - 6px)" # "8px"
       ha-border-radius-lg: "calc(var(--default-card-border-radius) - 4px)" # "12px"
       ha-border-radius-xl: "var(--default-card-border-radius)" # "16px"
       ha-border-radius-2xl: "calc(var(--default-card-border-radius) + 4px)" # "20px"
@@ -1073,24 +1226,44 @@ Awesome-Flat-Metal-Shadows-UIX:
       custom-card-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.3), inset 2px 2px 0px rgba(255, 255, 255, 0.4), inset -1px -1px 0px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.10)"
       custom-card-border: "1px solid #8a8a8a"
       custom-glow-border: "2px solid #00828f"
-      custom-sidebar-shadow: "8px 0 16px -7px rgba(0, 0, 0, 0.20), 3px 0 10px -4px rgba(0, 0, 0, 0.10)"
-      custom-toolbar-shadow: "0 8px 16px -6px rgba(0, 0, 0, 0.20), 0 4px 9px -3px rgba(0, 0, 0, 0.10)"
       ha-view-sections-row-gap: 24px # ATC_SECTION_ROW_GAP_METAL
       ha-view-sections-column-gap: 32px # ATC_SECTION_COLUMN_GAP_METAL
       ha-heading-card-title-color: "#221100" # ATC_HEADING_TITLE_COLOR_LIGHT_METAL
       ha-heading-card-subtitle-color: "#221100" # ATC_HEADING_TITLE_COLOR_LIGHT_METAL
-      mdc-icon-size: "24px" # ATC_ICON_SIZE_METAL
-      default-icon-size: "24px" # ATC_ICON_SIZE_METAL
+      mdc-icon-size: "36px" # ATC_ICON_SIZE_METAL
+      default-icon-size: "36px" # ATC_ICON_SIZE_METAL
       default-icon-off-color: "#626262" #ATC_ICON_OFF_COLOR_LIGHT_METAL
       default-icon-opacity: "0.0"
-      default-icon-border-radius: "6px"
+      default-icon-border-radius: "6px" # ATC_ICON_BORDER_RADIUS_METAL
       ha-tile-icon-border-radius: "6px"
       tile-icon-opacity: "0.0"
       ha-transition-property: "transform, opacity"
       default-card-border-radius: "10px" # ATC_CARD_BORDER_RADIUS_METAL
       default-card-sub-border-radius: "calc(var(--default-card-border-radius) - 4px)"
+      control-select-menu-border-radius: "var(--default-card-sub-border-radius)"
+      mush-control-border-radius: "var(--default-card-sub-border-radius)"
+      mush-slider-border-radius: "var(--default-card-sub-border-radius)"
       default-primary-color: "#0A5CFF" # ATC_PRIMARY_COLOR_LIGHT_METAL
       default-accent-color: "#BA4B00" # ATC_ACCENT_COLOR_LIGHT_METAL
+      section-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.3), inset 2px 2px 0px rgba(255, 255, 255, 0.4), inset -1px -1px 0px rgba(0, 0, 0, 0.3)"
+      section-background: "linear-gradient(rgba(224, 224, 224, 0.5), rgba(224, 224, 224, 0.5))/* ATC_SECTION_COLOR_METAL_LIGHT */, url('/local/wallpaper/metal2_light.jpg') /* ATC_SECTION_BACKGROUND_METAL_LIGHT */ center / cover no-repeat"
+      section-background-always: "On" # ATC_SECTION_BACKGROUND_ALWAYS_SET_METAL
+      icons-glow: "On" # ATC_ICONS_GLOW_METAL
+      control-button-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.3), inset 2px 2px 0px rgba(255, 255, 255, 0.4), inset -1px -1px 0px rgba(0, 0, 0, 0.3)"
+      control-set-background: "On" # ATC_CONTROL_SET_BACKGROUND_METAL
+      sidebar-item-fontsize: "18px" # ATC_SIDEBAR_ITEM_FONTSIZE_METAL
+      sidebar-item-selected-fontsize: "20px" # ATC_SIDEBAR_ITEM_SELECTED_FONTSIZE_METAL
+      toolbar-item-fontsize: "18px" # ATC_TOOLBAR_ITEM_FONTSIZE_METAL
+      toolbar-item-selected-fontsize: "18px" # ATC_TOOLBAR_ITEM_SELECTED_FONTSIZE_METAL
+      sidebar-item-text-color: "#202020" # ATC_SIDEBAR_ITEM_TEXT_COLOR_LIGHT_METAL
+      sidebar-item-selected-text-color: "#EEEEEE" # ATC_SIDEBAR_ITEM_SELECTED_TEXT_COLOR_LIGHT_METAL
+      sidebar-wallpaper: "linear-gradient(90deg, rgba(224, 224, 224, 0.4), rgba(224, 224, 224, 0.4))/* ATC_SIDEBAR_BACKGROUND_COLOR_LIGHT_METAL */, url('/local/wallpaper/metal_light.jpg') /* ATC_SIDEBAR_BACKGROUND_LIGHT_METAL */ center / cover no-repeat"
+      custom-sidebar-shadow: "8px 0 16px -7px rgba(0, 0, 0, 0.20), 3px 0 10px -4px rgba(0, 0, 0, 0.10)"
+      toolbar-item-text-color: "#404040" # ATC_TOOLBAR_ITEM_TEXT_COLOR_LIGHT_METAL
+      toolbar-item-selected-text-color: "#202020" # ATC_TOOLBAR_ITEM_SELECTED_TEXT_COLOR_LIGHT_METAL
+      toolbar-wallpaper: "linear-gradient(180deg, rgba(164, 164, 164, 0.6), rgba(144, 144, 144, 0.6) 10%, rgba(234, 234, 234, 0.6))/* ATC_TOOLBAR_BACKGROUND_COLOR_LIGHT_METAL */, url('/local/wallpaper/metal_light.jpg') /* ATC_TOOLBAR_BACKGROUND_LIGHT_METAL */ center / cover no-repeat"
+      custom-toolbar-shadow: "0 8px 16px -6px rgba(0, 0, 0, 0.20), 0 4px 9px -3px rgba(0, 0, 0, 0.10)"
+      app-header-selection-bar-color: "var(--toolbar-item-selected-text-color)"
 
     dark:
       # Grundfarben & Text / Grundfarben
@@ -1210,7 +1383,7 @@ Awesome-Flat-Metal-Shadows-UIX:
       state-climate-auto-color: "#ffd478"
       state-climate-dry-color: "#0A84FF"
       state-climate-fan_only-color: "#32ADE6"
-      state-climate-heat_cool-color: "#FFC107"
+      state-climate-heat_cool-color: "#E78800"
       state-cover-color: "#0A84BB"
       state-cover-active-color: "#B2B200"
       state-cover-open-color: "#8424F9"
@@ -1572,8 +1745,8 @@ Awesome-Flat-Metal-Shadows-UIX:
       ha-space-18: "72px"
       ha-space-19: "76px"
       ha-space-20: "80px"
-      ha-border-radius-sm: "calc(var(--default-card-border-radius) - 12px)" # "4px"
-      ha-border-radius-md: "calc(var(--default-card-border-radius) - 8px)" # "8px"
+      ha-border-radius-sm: "calc(var(--default-card-border-radius) - 8px)" # "4px"
+      ha-border-radius-md: "calc(var(--default-card-border-radius) - 6px)" # "8px"
       ha-border-radius-lg: "calc(var(--default-card-border-radius) - 4px)" # "12px"
       ha-border-radius-xl: "var(--default-card-border-radius)" # "16px"
       ha-border-radius-2xl: "calc(var(--default-card-border-radius) + 4px)" # "20px"
@@ -1815,21 +1988,41 @@ Awesome-Flat-Metal-Shadows-UIX:
       custom-card-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.6), inset 2px 2px 0px rgba(255, 255, 255, 0.10), inset -1px -1px 0px rgba(0, 0, 0, 0.7), 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3)"
       custom-card-border: "1px solid #2b303d"
       custom-glow-border: "2px solid #00828f"
-      custom-sidebar-shadow: "8px 0 16px -7px rgba(0, 0, 0, 0.30), 3px 0 10px -4px rgba(0, 0, 0, 0.14)"
-      custom-toolbar-shadow: "0 8px 16px -6px rgba(0, 0, 0, 0.30), 0 4px 9px -3px rgba(0, 0, 0, 0.14)"
       ha-view-sections-row-gap: 24px # ATC_SECTION_ROW_GAP_METAL
       ha-view-sections-column-gap: 32px # ATC_SECTION_COLUMN_GAP_METAL
       ha-heading-card-title-color: "#ffbb88" # ATC_HEADING_TITLE_COLOR_DARK_METAL
       ha-heading-card-subtitle-color: "#ffbb88" # ATC_HEADING_TITLE_COLOR_DARK_METAL
-      mdc-icon-size: "24px" # ATC_ICON_SIZE_METAL
-      default-icon-size: "24px" # ATC_ICON_SIZE_METAL
+      mdc-icon-size: "36px" # ATC_ICON_SIZE_METAL
+      default-icon-size: "36px" # ATC_ICON_SIZE_METAL
       default-icon-off-color: "#929292" #ATC_ICON_OFF_COLOR_DARK_METAL
       default-icon-opacity: "0.0"
-      default-icon-border-radius: "6px"
+      default-icon-border-radius: "6px" # ATC_ICON_BORDER_RADIUS_METAL
       ha-tile-icon-border-radius: "6px"
       tile-icon-opacity: "0.0"
       ha-transition-property: "transform, opacity"
       default-card-border-radius: "10px" # ATC_CARD_BORDER_RADIUS_METAL
       default-card-sub-border-radius: "calc(var(--default-card-border-radius) - 4px)"
+      control-select-menu-border-radius: "var(--default-card-sub-border-radius)"
+      mush-control-border-radius: "var(--default-card-sub-border-radius)"
+      mush-slider-border-radius: "var(--default-card-sub-border-radius)"
       default-primary-color: "#0A5CFF" # ATC_PRIMARY_COLOR_DARK_METAL
       default-accent-color: "#FFB200" # ATC_ACCENT_COLOR_DARK_METAL
+      section-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.6), inset 2px 2px 0px rgba(255, 255, 255, 0.10), inset -1px -1px 0px rgba(0, 0, 0, 0.7)"
+      section-background: "linear-gradient(rgba(26, 31, 38, 0.4), rgba(26, 31, 38, 0.4))/* ATC_SECTION_COLOR_METAL_DARK */, url('/local/wallpaper/metal3_dark.jpg') /* ATC_SECTION_BACKGROUND_METAL_DARK */ center / cover no-repeat"
+      section-background-always: "On" # ATC_SECTION_BACKGROUND_ALWAYS_SET_METAL
+      icons-glow: "On" # ATC_ICONS_GLOW_METAL
+      control-button-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.6), inset 2px 2px 0px rgba(255, 255, 255, 0.10), inset -1px -1px 0px rgba(0, 0, 0, 0.7)"
+      control-set-background: "On" # ATC_CONTROL_SET_BACKGROUND_METAL
+      sidebar-item-fontsize: "18px" # ATC_SIDEBAR_ITEM_FONTSIZE_METAL
+      sidebar-item-selected-fontsize: "20px" # ATC_SIDEBAR_ITEM_SELECTED_FONTSIZE_METAL
+      toolbar-item-fontsize: "18px" # ATC_TOOLBAR_ITEM_FONTSIZE_METAL
+      toolbar-item-selected-fontsize: "18px" # ATC_TOOLBAR_ITEM_SELECTED_FONTSIZE_METAL
+      sidebar-item-text-color: "#EEEEEE" # ATC_SIDEBAR_ITEM_TEXT_COLOR_DARK_METAL
+      sidebar-item-selected-text-color: "#111111" # ATC_SIDEBAR_ITEM_SELECTED_TEXT_COLOR_DARK_METAL
+      sidebar-wallpaper: "linear-gradient(90deg, rgba(22, 25, 28, 0.2), rgba(22, 25, 28, 0.2))/* ATC_SIDEBAR_BACKGROUND_COLOR_DARK_METAL */, url('/local/wallpaper/metal3_dark.jpg') /* ATC_SIDEBAR_BACKGROUND_DARK_METAL */ center / cover no-repeat"
+      custom-sidebar-shadow: "8px 0 16px -7px rgba(0, 0, 0, 0.30), 3px 0 10px -4px rgba(0, 0, 0, 0.14)"
+      toolbar-item-text-color: "#CCCCCC" # ATC_TOOLBAR_ITEM_TEXT_COLOR_DARK_METAL
+      toolbar-item-selected-text-color: "#EEEEEE" # ATC_TOOLBAR_ITEM_SELECTED_TEXT_COLOR_DARK_METAL
+      toolbar-wallpaper: "linear-gradient(180deg, rgba(32, 35, 38, 0.6), rgba(12, 15, 18, 0.6) 10%, rgba(42, 45, 48, 0.6))/* ATC_TOOLBAR_BACKGROUND_COLOR_DARK_METAL */, url('/local/wallpaper/metal3_dark.jpg') /* ATC_TOOLBAR_BACKGROUND_DARK_METAL */ center / cover no-repeat"
+      custom-toolbar-shadow: "0 8px 16px -6px rgba(0, 0, 0, 0.30), 0 4px 9px -3px rgba(0, 0, 0, 0.14)"
+      app-header-selection-bar-color: "var(--toolbar-item-selected-text-color)"
