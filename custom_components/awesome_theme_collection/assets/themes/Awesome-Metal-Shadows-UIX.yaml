@@ -1,6 +1,6 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Metal-Shadows-UIX (v1.3.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-11-12
+# Theme: Awesome-Metal-Shadows-UIX (v1.4.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-11-20
 
 Awesome-Metal-Shadows-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
@@ -11,6 +11,21 @@ Awesome-Metal-Shadows-UIX:
         background: var(--custom-card-gradient) !important;
         box-shadow: var(--custom-card-shadows) !important;
         border: var(--custom-card-border) !important;
+      }
+      /* ATC Soft 3D: inner contour, independent of the configured card shadow.
+         Hidden for every other design via the theme variable. */
+      :host(:not(hui-heading-card):not(hui-markdown-card):not(advanced-camera-card):not(mushroom-chips-card):not(mushroom-title-card)) ha-card {
+        position: relative;
+      }
+      :host(:not(hui-heading-card):not(hui-markdown-card):not(advanced-camera-card):not(mushroom-chips-card):not(mushroom-title-card)) ha-card::before {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border-radius: max(0px, calc(var(--default-card-border-radius, 10px) - 3px));
+        border: var(--atc-soft3d-rim-border, 1px solid rgba(255, 255, 255, 0.16));
+        box-shadow: var(--atc-soft3d-rim-shadow, inset 0 -1px 0 rgba(0, 0, 0, 0.12));
+        pointer-events: none;
+        opacity: var(--atc-soft3d-outline, 0);
       }
       :host([class*="bubble-"]:not([class*="pop-up"])) {
         --bubble-main-background-color: transparent !important;
@@ -84,10 +99,18 @@ Awesome-Metal-Shadows-UIX:
         filter: drop-shadow(0px 0px 6px var(--bubble-icon-color)) !important;
       }
       }
-      ha-card .bubble-main-icon-container[data-state="on"] {
-      @container style(--icons-glow: On) {
-        filter: drop-shadow(0px 0px 10px var(--state-color)) !important;
+      /* Glow auf dem Icon statt auf seinem Container */
+      ha-card .bubble-main-icon-container[data-state="on"] .bubble-main-icon {
+        @container style(--icons-glow: On) {
+          filter: drop-shadow(0 0 10px var(--state-color, currentColor)) !important;
+        }
       }
+      /* Nur die Icon-Huelle oeffnen; keine Slider-/Karten-Container */
+      @container style(--icons-glow: On) {
+        .bubble-main-icon-container,
+        .bubble-icon-container {
+          overflow: visible !important;
+        }
       }
       ha-card ha-tile-icon[data-state="on"] {
       @container style(--icons-glow: On) {
@@ -113,20 +136,42 @@ Awesome-Metal-Shadows-UIX:
       }
       ha-card ha-state-icon {
         min-width: var(--default-icon-size) !important;
-        margin-left: calc((width - var(--default-icon-size)) / 2);
       }
       ha-card div.container div.row div.content ha-tile-icon {
         --mdc-icon-size: var(--default-icon-size) !important;
       }
-      ha-card mushroom-card mushroom-state-item mushroom-shape-icon ha-state-icon {
+      /* Mushroom: zentral fuer Shape-Icons aller Kartentypen */
+      ha-card mushroom-shape-icon ha-state-icon {
         --mdc-icon-size: var(--default-icon-size) !important;
-        background-color: rgba(0, 0, 0, 0) !important;
+        background-color: transparent !important;
       }
       ha-card mushroom-shape-icon {
         --shape-color: rgba(0, 0, 0, 0) !important;
         --shape-color-disabled: rgba(0, 0, 0, 0) !important;
         --icon-color-disabled: var(--default-icon-off-color) !important;
         background-color: rgba(0, 0, 0, 0) !important;
+      }
+      /* Mushroom: kartenspezifische Glow-Freigabe. */
+      mushroom-light-card,
+      :host(mushroom-light-card) {
+        --atc-mushroom-light-glow: drop-shadow(0 0 10px var(--state-light-active-color, var(--state-active-color, rgb(var(--rgb-state-light-color)))));
+      }
+      /* Climate: nur wenn Mushroom die Shape als aktiv einstuft. */
+      mushroom-climate-card,
+      :host(mushroom-climate-card) {
+        --atc-mushroom-light-glow: drop-shadow(0 0 10px var(--state-climate-active-color, var(--state-active-color, currentColor)));
+      }
+      /* Fan: aktive Ventilatoren. */
+      mushroom-fan-card,
+      :host(mushroom-fan-card) {
+        --atc-mushroom-light-glow: drop-shadow(0 0 10px var(--state-fan-active-color, var(--state-active-color, currentColor)));
+      }
+      /* Entity: wird u.a. fuer Switch-Entitaeten verwendet.
+         Hinweis: Mushroom bewertet bei Entity Cards auch andere
+         Zustaende als aktiv; dies ist bewusst ein weiterer Test. */
+      mushroom-entity-card,
+      :host(mushroom-entity-card) {
+        --atc-mushroom-light-glow: drop-shadow(0 0 10px var(--state-active-color, currentColor)));
       }
       /* HATG:UIX:eigene-icon-controls:END */
       /* HATG:UIX:eigene-bubble-controls:END */
@@ -151,6 +196,14 @@ Awesome-Metal-Shadows-UIX:
       }
       /* HATG:UIX:eigene-bubble-controls:END */
       /* HATG:UIX:eigene-mushroom-controls:START */
+    # Zentraler Mushroom-Test: CSS-Variable aus der Light Card erben.
+    # Kein Glow fuer andere Kartentypen (Fallback: none).
+    "mushroom-shape-icon $": |
+      @container style(--icons-glow: On) {
+        .shape:not(.disabled) {
+          filter: var(--atc-mushroom-light-glow, none) !important;
+        }
+      }
     "mushroom-cover-buttons-control $ mushroom-button $": |
       @container style(--control-set-background: On) {
       button.button {
@@ -475,6 +528,14 @@ Awesome-Metal-Shadows-UIX:
         border: var(--custom-card-border) !important;
       }
     # HATG:UIX:eigene-karten-der-profileseiten-mit-fuellung:END
+  uix-card-context-yaml: |
+    - anchor: "&.type-entities"
+      entity_name:
+        rules:
+          - when:
+              - request: default
+              - request: [device, entity]
+            use: [entity]
   uix-theme: "Awesome-Metal-Shadows-UIX"
   uix-hacs-frontend-yaml: |
     # HATG:UIX:eigene-hacs-frontend-mit-hintergrund:START
@@ -1222,7 +1283,10 @@ Awesome-Metal-Shadows-UIX:
       card-backdrop-blur: "none"
 
       # Eigene Theme-Einträge (Freitext, siehe "Alle Felder" / Typ "Sonstige")
-      custom-card-gradient: "linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(200, 200, 200, 0.9) 40%, rgba(170, 170, 170, 0.9) 100%)"
+      custom-card-gradient: "linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(200, 200, 200, 0.9) 40%, rgba(170, 170, 170, 0.9) 100%)" # ATC_CARD_DESIGN_METAL_LIGHT
+      atc-soft3d-outline: "0" # ATC_SOFT3D_OUTLINE_METAL_LIGHT
+      atc-soft3d-rim-border: "1px solid rgba(86, 88, 95, 0.50)"
+      atc-soft3d-rim-shadow: "inset 0 1px 0 rgba(255, 255, 255, 0.42), inset 0 -1px 0 rgba(72, 75, 82, 0.18)"
       custom-card-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.3), inset 2px 2px 0px rgba(255, 255, 255, 0.4), inset -1px -1px 0px rgba(0, 0, 0, 0.3), 0 8px 22px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.10)"
       custom-card-border: "1px solid #8a8a8a"
       custom-glow-border: "2px solid #00828f"
@@ -1984,7 +2048,8 @@ Awesome-Metal-Shadows-UIX:
       card-backdrop-blur: "none"
 
       # Eigene Theme-Einträge (Freitext, siehe "Alle Felder" / Typ "Sonstige")
-      custom-card-gradient: "linear-gradient(180deg, rgba(60, 64, 73, 0.9) 0%, rgba(42, 45, 52, 0.9) 50%, rgba(22, 25, 28, 0.9) 100%)"
+      custom-card-gradient: "linear-gradient(180deg, rgba(60, 64, 73, 0.9) 0%, rgba(42, 45, 52, 0.9) 50%, rgba(22, 25, 28, 0.9) 100%)" # ATC_CARD_DESIGN_METAL_DARK
+      atc-soft3d-outline: "0" # ATC_SOFT3D_OUTLINE_METAL_DARK
       custom-card-shadows: "inset 1px 1px 0px rgba(0, 0, 0, 0.6), inset 2px 2px 0px rgba(255, 255, 255, 0.10), inset -1px -1px 0px rgba(0, 0, 0, 0.7), 0 12px 24px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3)"
       custom-card-border: "1px solid #2b303d"
       custom-glow-border: "2px solid #00828f"
