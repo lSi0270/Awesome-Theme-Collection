@@ -17,17 +17,20 @@
         "title": "Awesome Theme Collection",
         "description": "Wähle den Konfigurationsbereich.",
         "menu_options": {
-          "areas": "Bereiche aktivieren/deaktivieren",
+          "areas": "Auswahl",
           "metal": "Awesome-Metall-Themes",
-          "leather": "Awesome-Leder-Themes"
+          "leather": "Awesome-Leder-Themes",
+          "extras": "Zusatzfunktionen"
         }
       },
       "areas": {
         "title": "Awesome Theme Collection",
-        "description": "Aktiviere oder deaktiviere die gewünschten Theme-Bereiche. Beim Deaktivieren werden die zugehörigen, von der Integration verwalteten Themes und Hintergründe entfernt.",
+        "description": "Wähle die Themes aus die installiert bleiben sollen.",
         "data": {
-          "metal_enabled": "Awesome-Metall-Themes",
-          "leather_enabled": "Awesome-Leder-Themes"
+          "metal_shadows": "Awesome Metal Shadows",
+          "metal": "Awesome Metal",
+          "leather_shadows": "Awesome Leather Shadows",
+          "leather": "Awesome Leather"
         }
       },
       "metal": {
@@ -35,16 +38,6 @@
         "description": "Konfiguriere die folgenden Bereiche nach deinen Vorstellungen.",
         "data": {},
         "sections": {
-          "themes": {
-            "name": "Auswahl",
-            "description": "Wähle die Metall-Themes aus, die installiert bleiben sollen.",
-            "data": {
-              "flat_metal_shadows": "Awesome Flat Metal Shadows",
-              "flat_metal": "Awesome Flat Metal",
-              "metal_shadows": "Awesome Metal Shadows",
-              "metal": "Awesome Metal"
-            }
-          },
           "backgrounds": {
             "name": "Hintergründe",
             "description": "Konfiguriere die Dashboard- und Popup-Hintergrundbilder sowie deren Farben. Wähle zum Design-Mode passende Hintergründe und Farben aus.",
@@ -81,8 +74,9 @@
           },
           "cards": {
             "name": "Karten",
-            "description": "Konfiguriere den Karten-Radius und den Hintergrund von Bedienelementen.",
+            "description": "Wähle das Karten-Design und konfiguriere den Karten-Radius sowie die Hintergründe von Bedienelementen.",
             "data": {
+              "card_design_metal": "Karten - Design",
               "card_border_radius_metal": "Karten-Radius: 0 - 28px (Standard: 10px)",
               "control_set_background_metal": "Bedienelemente mit Karten-Hintergrund",
               "reset_cards": "Auf Standard-Werte zurücksetzen"
@@ -228,16 +222,6 @@
         "description": "Konfiguriere die folgenden Bereiche nach deinen Vorstellungen.",
         "data": {},
         "sections": {
-          "themes": {
-            "name": "Auswahl",
-            "description": "Wähle die Leder-Themes aus, die installiert bleiben sollen.",
-            "data": {
-              "flat_leather_shadows": "Awesome Flat Leather Shadows",
-              "flat_leather": "Awesome Flat Leather",
-              "leather_shadows": "Awesome Leather Shadows",
-              "leather": "Awesome Leather"
-            }
-          },
           "backgrounds": {
             "name": "Hintergründe",
             "description": "Konfiguriere die Dashboard- und Popup-Hintergrundbilder sowie deren Farben. Wähle zum Design-Mode passende Hintergründe und Farben aus.",
@@ -274,8 +258,9 @@
           },
           "cards": {
             "name": "Karten",
-            "description": "Konfiguriere den Karten-Radius und den Hintergrund von Bedienelementen.",
+            "description": "Wähle das Karten-Design und konfiguriere den Karten-Radius sowie die Hintergründe von Bedienelementen.",
             "data": {
+              "card_design_leather": "Karten - Design",
               "card_border_radius_leather": "Karten-Radius: 0 - 28px (Standard: 10px)",
               "control_set_background_leather": "Bedienelemente mit Karten-Hintergrund",
               "reset_cards": "Auf Standard-Werte zurücksetzen"
@@ -415,6 +400,31 @@
             }
           }
         }
+      },
+      "error": {
+        "invalid_card_design": "Ungültiges Karten-Design."
+      },
+      "extras": {
+        "title": "Zusatzfunktionen",
+        "menu_options": {
+          "design_mode_feature": "Design-Modus-Steuerung",
+          "ha_naming": "HA-Entitäten-Namen"
+        }
+      },
+      "design_mode_feature": {
+        "title": "Design-Modus-Steuerung",
+        "description": "Aktiviert oder deaktiviert die Aktion awesome_theme_collection.set_design_mode. Bestehende Automationen werden nicht verändert.",
+        "data": {
+          "feature_design_mode": "Design-Modus-Steuerung aktivieren"
+        }
+      },
+      "ha_naming": {
+        "title": "HA-Entitäten-Namen",
+        "description": "Mit dieser Funktion kannst du festlegen, ob Home Assistant die Gerätenamen vor den einzelnen Bezeichnungen anzeigt.\n\nOpt-Out (Standard): Gerätenamen werden automatisch weggelassen. Für einzelne Geräte kannst du Ausnahmen festlegen.\n\nOpt-In: Gerätenamen bleiben erhalten. Du kannst gezielt auswählen, bei welchen Geräten sie weggelassen werden sollen.\n\nÄnderungen werden nach dem Neuladen der Oberfläche sichtbar.",
+        "data": {
+          "feature_ha_naming": "HA-Entitäten-Namen aktivieren",
+          "ha_naming_mode": "Betriebsart"
+        }
       }
     },
     "error": {
@@ -429,6 +439,49 @@
       "invalid_card_radius": "Der Karten-Radius muss zwischen 0 und 28 Pixel liegen.",
       "invalid_sidebar_title": "Der Titel darf höchstens 20 Zeichen enthalten.",
       "invalid_sidebar_font_size": "Die Schriftgrößen müssen zwischen 14 und 24 Pixel liegen."
+    }
+  },
+  "services": {
+    "set_design_mode": {
+      "name": "Design-Modus und Theme einstellen",
+      "description": "Ändert den Design-Modus und/oder das Theme aller aktiven Home-Assistant-Benutzer. Nicht angegebene Einstellungen bleiben erhalten.",
+      "fields": {
+        "mode": {
+          "name": "Design-Modus",
+          "description": "Optional: Automatisch, Hell oder Dunkel. Ohne Angabe bleibt der bisherige Modus erhalten."
+        },
+        "theme": {
+          "name": "Theme",
+          "description": "Optional: Installiertes Theme auswählen. Ohne Angabe bleibt das bisherige Theme jedes Benutzers erhalten."
+        }
+      }
+    }
+  },
+  "selector": {
+    "design_mode": {
+      "options": {
+        "auto": "Automatisch",
+        "light": "Hell",
+        "dark": "Dunkel"
+      }
+    },
+    "ha_naming_mode": {
+      "options": {
+        "opt_in": "Opt-In (Namen standardmäßig beibehalten)",
+        "opt_out": "Opt-Out (Präfixe standardmäßig entfernen)"
+      }
+    },
+    "card_design": {
+      "options": {
+        "STANDARD": "Standard",
+        "FLAT": "Flat",
+        "SOFT 3D": "Soft 3D",
+        "STANDARD - INVERS": "Standard-Invers",
+        "DIAGONAL": "Diagonal",
+        "DIAGONAL - INVERS": "Diagonal-Invers",
+        "RADIAL": "Radial",
+        "RADIAL - INVERS": "Radial-Invers"
+      }
     }
   }
 }
