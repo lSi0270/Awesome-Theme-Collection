@@ -4,13 +4,13 @@
 
 # Awesome Theme Collection
 
-This is a collection of UIX themes with matching backgrounds for Home Assistant. The themes style (almost) all standard HA cards, custom cards, bubble cards and mushroom cards with a consistent look.
+This is a collection of 4 UIX themes featuring 8 different card designs and matching backgrounds for Home Assistant. The themes style (almost) all standard HA cards, custom cards, bubble cards and mushroom cards with a consistent look.
 
 In addition, all pages (settings, profiles, etc.), dialogue boxes, bubble card pop-ups, sections, the sidebar and the header toolbar will be given an image background.
 
-The themes all use the same color scheme but differ in terms of card styling – with or without shadows – and the choice of background.
+The themes use the same color scheme but differ in terms of card styling—with or without shadows—and the choice of background.
 
-In addition, further adjustments can be made in the integration settings to tailor the themes even more closely to your personal taste.
+In addition, you can make many further adjustments in the integration settings to customize the themes even more to your personal taste.
 
 [Installation](#installation-instructions) · [Settings](#settings) · [Changes](#changes)
 ## Included Themes
@@ -43,32 +43,42 @@ In addition, further adjustments can be made in the integration settings to tail
   <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Leather-UIX_light.jpg" alt="Awesome-Leather-UIX_light" width="45%" />
 </p>
 
-- Awesome-Flat-Metal-Shadows-UIX
+## Included Card Designs
+
+- Standard, Standard-Invers
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Metal-Shadows-UIX_dark.jpg" alt="Awesome-Flat-Metal-Shadows-UIX_dark" width="45%" />
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Metal-Shadows-UIX_light.jpg" alt="Awesome-Flat-Metal-Shadows-UIX_light" width="45%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Standard_dark.jpg" alt="Design_Standard_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Standard_light.jpg" alt="Design_Standard_light" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Standard_Invers_dark.jpg" alt="Design_Standard_Invers_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Standard_Invers_light.jpg" alt="Design_Standard_Invers_light" width="24%" />
 </p>
 
-- Awesome-Flat-Metal-UIX
+- Flat, Soft3D
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Metal-UIX_dark.jpg" alt="Awesome-Flat-Metal-UIX_dark" width="45%" />
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Metal-UIX_light.jpg" alt="Awesome-Flat-Metal-UIX_light" width="45%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Flat_dark.jpg" alt="Design_Flat_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Flat_light.jpg" alt="Design_Flat_light" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Soft3D_dark.jpg" alt="Design_Soft3D_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Soft3D_light.jpg" alt="Design_Soft3D_light" width="24%" />
 </p>
 
-- Awesome-Flat-Leather-Shadows-UIX
+- Diagonal, Diagonal-Invers
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Leather-Shadows-UIX_dark.jpg" alt="Awesome-Flat-Leather-Shadows-UIX_dark" width="45%" />
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Leather-Shadows-UIX_light.jpg" alt="Awesome-Flat-Leather-Shadows-UIX_light" width="45%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Diagonal_dark.jpg" alt="Design_Diagonal_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Diagonal_light.jpg" alt="Design_Diagonal_light" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Diagonal_Invers_dark.jpg" alt="Design_Diagonal_Invers_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Diagonal_Invers_light.jpg" alt="Design_Diagonal_Invers_light" width="24%" />
 </p>
 
-- Awesome-Flat-Leather-UIX
+- Radial, Radial-Invers
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Leather-UIX_dark.jpg" alt="Awesome-Flat-Leather-UIX_dark" width="45%" />
-  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Awesome-Flat-Leather-UIX_light.jpg" alt="Awesome-Flat-Leather-UIX_light" width="45%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Radial_dark.jpg" alt="Design_Radial_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Radial_light.jpg" alt="Design_Radial_light" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Radial_Invers_dark.jpg" alt="Design_Radial_Invers_dark" width="24%" />
+  <img src="https://raw.githubusercontent.com/lSi0270/Awesome-Theme-Collection/main/screenshots/Design_Radial_Invers_light.jpg" alt="Design_Radial_Invers_light" width="24%" />
 </p>
 
 
@@ -132,25 +142,24 @@ I certainly hope that some of you will enjoy it as much as I do.
 
 Various changes can be made in the integration settings. There are 3 sub-menus.
 
-- Enable/disable sections
+- Selection
 - Awesome Metal Themes
 - Awesome Leather Themes
+- Additional Features
 
 Selecting an option opens the corresponding dialog box.
 
-## Enable/disable sections
+## Selection
 
-- Here, an entire theme section can be enabled or disabled. This means that if **‘Awesome Metal Themes’ or ‘Awesome Leather Themes’** is disabled, all corresponding themes and background images will be disabled (removed from the public area).
+- Here you can select the themes you want to make available. This means that if you deactivate individual themes, they will no longer be selectable on the profile settings page (they will be removed from the public area).
 
-- The themes and backgrounds are made available again once enabled; this means they are not completely deleted when disabled and remain available at any time in the integration settings (provided the integration is not uninstalled).
+- Themes are re-enabled after activation; this means they are not completely deleted when deactivated and remain available at any time in the integration settings (as long as the integration is not uninstalled).
+
+- If both themes from a theme category are deactivated, the corresponding menu item is also deactivated (Awesome Metal Themes or Awesome Leather Themes).
 
 ## Awesome Metal Themes
 
 All settings relating to the metal themes are configured here and are independent of the other sections.
-
-### Selection
-
-- Here, individual **themes from this section can be enabled or disabled.** Only the themes are removed from the public area. The corresponding background images remain available for the other themes.
 
 ### Backgrounds
 
@@ -202,12 +211,15 @@ If **“Reset to default”** is enabled, **clicking “OK” will restore the d
 
 ### Cards
 
-- Here you can set the **card radius for all cards**. This applies to all HA cards, bubble cards, mushroom cards and other custom cards. This ensures a consistent card design. Bubble cards normally have a significantly larger radius (28px).
-If you wish, you can also adjust all other cards accordingly.
+- First, you can select the card design here (default: Standard—corresponds to the previous design for non-flat themes). There are a total of **8 different designs available** (Standard, Flat, Soft 3D, Standard Inverse, Diagonal, Diagonal Inverse, Radial, Radial Inverse).
+Since the card design can now be set here, all 4 Flat Design themes are no longer needed (the Flat Design corresponds to the previous Flat themes).
 
-- **Control buttons with card background** means that the controls (cover control buttons, bubble sub-control buttons, mushroom control buttons) will also adopt the card style.
+- Additionally, you can set the **card radius for all cards**. This applies to all HA cards, Bubble cards, Mushroom cards, and other custom cards. This ensures a consistent card design. Bubble cards typically have a significantly larger radius (28px).
+If desired, you can adjust all other cards to match this setting.
 
-If **"Reset to default"** is enabled, **clicking "OK" will restore the default settings in this section.**
+- **Controls with Map Background** ensures that the controls (Cover Control buttons, Bubble Sub-Control buttons, Mushroom Control buttons) also adopt the map style.
+
+If **"Reset to Default"** is enabled, **clicking "OK" will restore the default settings in this section.**
 
 ### Sidebar
 
@@ -295,6 +307,29 @@ All settings are the same as in the Awesome Metal Themes section. See [**Awesome
 
 *All settings here apply only to all leather themes.*
 
+
+## Additional Features
+
+The following additional features are included in the package starting with v1.4.0.
+
+### Design Mode Control
+
+- This feature allows you to use automations to switch the theme’s design mode and/or to change the theme itself. This option can be disabled using a toggle.
+
+- An action called "Awesome Theme Collection: Set Design Mode and Theme" is provided for this purpose, which can be used in your own automations (e.g., to control light and dark modes based on sunrise and sunset).
+
+- This feature is enabled by default
+
+### HA entity names
+
+- With this add-on, Home Assistant’s naming convention can optionally be reverted to the behavior prior to HA 2026.11.0. “Opt-out” means that only the entity name is displayed, rather than the compound name that HA introduced starting with version 2026.11.0.
+
+- However, this add-on can also be disabled via a toggle if “Enable HA Entity Names” is turned off.
+
+- The add-on was implemented using the same principle as the HA No-Device prefix (https://github.com/tcrgit/ha-no-device-prefix).
+
+- This feature is enabled by default
+
 [🏠 Home](#awesome-theme-collection)
 
 
@@ -303,7 +338,26 @@ All settings are the same as in the Awesome Metal Themes section. See [**Awesome
 - If you like my work, please give my repository a ⭐ on GitHub.
 - If you find a problem or have a suggestion for improvement, please open an issue in the GitHub repository.
 
+
 ## Changes
+
+v1.4.0
+
+Some content changes and additional features:
+
+- The 4 flat themes have been removed, as the card design can now be set via the integration settings (including the FLAT design).
+
+- The selection options in the theme sections have also been removed, as the selection for all remaining themes is now made in the main menu
+
+- **New** In the "Cards" section under Awesome Metal Themes and Awesome Leather Themes, you can now choose the card design. In addition to the two designs that were already available (Standard and Flat),
+there are now **6 new card designs**: Soft 3D, Standard Inverse, Diagonal, Diagonal Inverse, Radial, Radial Inverse... feel free to try out the new designs.
+
+- **New** as an **additional feature: Design Mode Control**, it is now possible to use automation to switch between light and dark mode for a theme (which isn’t possible with the theme’s built-in features) or, optionally, to set a different theme via automation (e.g., switching to light mode at sunrise and back to dark mode at sunset).
+An action is provided for this: Select the action “Awesome Theme Collection: Set Design Mode and Theme” and configure it accordingly. The feature can also be disabled in the integration settings. This feature is enabled by default
+
+- **New** as an **additional feature: HA Entity Names**, it is now possible to optionally revert Home Assistant’s naming conventions to the behavior prior to HA 2026.11.0. This feature can also be disabled in the integration settings. This feature is enabled by default
+
+- "Icons with a glow" now works as intended with Bubble Cards and Mushroom Cards
 
 v1.3.0
 
@@ -330,7 +384,6 @@ The ‘Background always active’ toggle ensures that a background is always ap
 - In the ‘Icons’ section, there is a new toggle ‘Icons with glow’, which causes icons with the ‘On’ status to display a glow in their status color, e.g. switched-on lamps, sockets, switches, etc.
 
 v1.2.0
-
 The range of personalisation options has been significantly expanded once again:
 
 - the default font sizes can be changed (font-size-xs, font-size-s, font-size-m, font-size-l, font-size-xl, font-size-2xl, font-size-3xl, font-size-4xl, font-size-5xl),
@@ -369,32 +422,26 @@ v1.1.0
 
 - Even more system dialog boxes now feature theme styling
 
-
 v1.0.5
 - adds a subtle border to sections when a background is set
 
 - state-active-color (light) corrected
-
 
 v1.0.4
 - no more error messages in the log after a restart
 
 - "reload designs" is now carried out automatically after installation/uninstallation
 
-
 v1.0.3
 - new metal background
 
 - screenshots updated
 
-
 v1.0.2
 - more colors fixes, transparency values partially adjusted, more dialog boxes with a dashboard background
 
-
 v1.0.1
 - some color fixes for HA-Cards, Bubble-Cards, Mushroom-Cards
-
 
 v1.0.0
 - first release (8 UIX-Themes with Light & Dark Section)
