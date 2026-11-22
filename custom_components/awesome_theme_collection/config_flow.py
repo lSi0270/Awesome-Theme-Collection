@@ -169,8 +169,6 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
         "enabled_key": "metal_enabled",
         "options_key": "themes_metal",
         "themes": (
-            "flat_metal_shadows",
-            "flat_metal",
             "metal_shadows",
             "metal",
         ),
@@ -211,8 +209,6 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
         "enabled_key": "leather_enabled",
         "options_key": "themes_leather",
         "themes": (
-            "flat_leather_shadows",
-            "flat_leather",
             "leather_shadows",
             "leather",
         ),
@@ -253,10 +249,6 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
 
 
 THEMES = {
-    "flat_leather_shadows": "Awesome Flat Leather Shadows",
-    "flat_leather": "Awesome Flat Leather",
-    "flat_metal_shadows": "Awesome Flat Metal Shadows",
-    "flat_metal": "Awesome Flat Metal",
     "leather_shadows": "Awesome Leather Shadows",
     "leather": "Awesome Leather",
     "metal_shadows": "Awesome Metal Shadows",
@@ -544,39 +536,112 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         options = self.config_entry.options
         menu_options = ["areas"]
 
-        if options.get("metal_enabled", True):
-            menu_options.append("metal")
+        # Hide a theme family's configuration when both its themes are off.
+        # Per-family lists are authoritative; older configurations may only
+        # have the combined "themes" list.
+        legacy_themes = options.get("themes")
+        for group, config in THEME_GROUPS.items():
+            selected_themes = options.get(config["options_key"])
+            if not isinstance(selected_themes, list):
+                selected_themes = (
+                    legacy_themes if isinstance(legacy_themes, list)
+                    else list(config["themes"])
+                )
+            if any(key in selected_themes for key in config["themes"]):
+                menu_options.append(group)
 
-        if options.get("leather_enabled", True):
-            menu_options.append("leather")
-
+        menu_options.append("extras")
         return self.async_show_menu(
             step_id="init",
             menu_options=menu_options,
+        )
+
+    async def async_step_extras(
+        self, user_input: dict[str, Any] | None = None,
+    ) -> config_entries.ConfigFlowResult:
+        """Submenu for independent optional functions."""
+        return self.async_show_menu(
+            step_id="extras",
+            menu_options=["design_mode_feature", "ha_naming"],
+        )
+
+    async def async_step_design_mode_feature(
+        self, user_input: dict[str, Any] | None = None,
+    ) -> config_entries.ConfigFlowResult:
+        """Enable or disable the existing design-mode action."""
+        options = dict(self.config_entry.options)
+        if user_input is not None:
+            options["feature_design_mode"] = bool(user_input["feature_design_mode"])
+            return self.async_create_entry(title="", data=options)
+        return self.async_show_form(
+            step_id="design_mode_feature",
+            data_schema=vol.Schema({
+                vol.Required("feature_design_mode", default=options.get("feature_design_mode", True)):
+                    selector.BooleanSelector(),
+            }),
+        )
+
+    async def async_step_ha_naming(
+        self, user_input: dict[str, Any] | None = None,
+    ) -> config_entries.ConfigFlowResult:
+        """Configure the isolated browser-side entity naming feature."""
+        options = dict(self.config_entry.options)
+        if user_input is not None:
+            options["feature_ha_naming"] = bool(user_input["feature_ha_naming"])
+            options["ha_naming_mode"] = user_input["ha_naming_mode"]
+            return self.async_create_entry(title="", data=options)
+        return self.async_show_form(
+            step_id="ha_naming",
+            data_schema=vol.Schema({
+                vol.Required("feature_ha_naming", default=options.get("feature_ha_naming", True)):
+                    selector.BooleanSelector(),
+                vol.Required("ha_naming_mode", default=options.get("ha_naming_mode", "opt_out")):
+                    selector.SelectSelector(selector.SelectSelectorConfig(
+                        options=["opt_in", "opt_out"],
+                        mode=selector.SelectSelectorMode.DROPDOWN,
+                        translation_key="ha_naming_mode",
+                    )),
+            }),
         )
 
     async def async_step_areas(
         self,
         user_input: dict[str, Any] | None = None,
     ) -> config_entries.ConfigFlowResult:
-        """Enable or disable the theme areas."""
+        """Select the four available themes in one central menu."""
         options = dict(self.config_entry.options)
+        all_keys = tuple(THEMES)
+        legacy = options.get("themes", list(all_keys))
+        if not isinstance(legacy, list):
+            legacy = list(all_keys)
+
+        selected: set[str] = set()
+        for group, config in THEME_GROUPS.items():
+            saved = options.get(config["options_key"])
+            if not isinstance(saved, list):
+                saved = [key for key in config["themes"] if key in legacy]
+            if options.get(config["enabled_key"], True):
+                selected.update(key for key in saved if key in config["themes"])
 
         if user_input is not None:
-            options.update(user_input)
+            for group, config in THEME_GROUPS.items():
+                options[config["options_key"]] = [
+                    key for key in config["themes"] if user_input.get(key, False)
+                ]
+                # The family configuration remains accessible even when no
+                # themes from that family are currently selected.
+                options[config["enabled_key"]] = True
+            options["themes"] = [
+                key for key in all_keys if user_input.get(key, False)
+            ]
             return self.async_create_entry(title="", data=options)
 
         return self.async_show_form(
             step_id="areas",
             data_schema=vol.Schema({
-                vol.Required(
-                    "metal_enabled",
-                    default=options.get("metal_enabled", True),
-                ): selector.BooleanSelector(),
-                vol.Required(
-                    "leather_enabled",
-                    default=options.get("leather_enabled", True),
-                ): selector.BooleanSelector(),
+                vol.Optional(key, default=key in selected):
+                    selector.BooleanSelector()
+                for key in all_keys
             }),
         )
 
@@ -608,7 +673,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
 
         if user_input is not None:
             try:
-                theme_data = user_input["themes"]
                 background_data = user_input["backgrounds"]
                 section_data = user_input["sections"]
                 font_data = user_input["fonts"]
@@ -629,13 +693,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                 ) from err
 
             new_options = dict(options)
-
-            # Theme-Auswahl
-            new_options[config["options_key"]] = [
-                key
-                for key in config["themes"]
-                if theme_data.get(key, False)
-            ]
 
             # Hintergrundbilder
             for key in config["backgrounds"]:
@@ -905,6 +962,20 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     new_options[key] = value.strip().upper()
 
 
+            # Card design is stored now; its CSS implementation follows later.
+            design_key = f"card_design_{group}"
+            if card_data.get("reset_cards", False):
+                new_options[design_key] = "STANDARD"
+            else:
+                design = card_data.get(design_key, "STANDARD")
+                if design not in ('STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'):
+                    return self.async_show_form(
+                        step_id=group,
+                        data_schema=await self._group_schema(group),
+                        errors={"cards": "invalid_card_design"},
+                    )
+                new_options[design_key] = design
+
             # Karten: Karten-Radius und Steuerungs-Schalter
             radius_key = f"card_border_radius_{group}"
             if card_data.get("reset_cards", False):
@@ -960,41 +1031,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             self.hass,
             options,
         )
-
-        legacy_themes = options.get("themes", list(THEMES))
-
-        if (
-            not isinstance(legacy_themes, list)
-            or any(not isinstance(key, str) for key in legacy_themes)
-        ):
-            legacy_themes = list(THEMES)
-
-        selected_themes = options.get(
-            config["options_key"],
-            [
-                key for key in config["themes"]
-                if key in legacy_themes
-            ],
-        )
-
-        if (
-            not isinstance(selected_themes, list)
-            or any(
-                not isinstance(key, str)
-                or key not in config["themes"]
-                for key in selected_themes
-            )
-        ):
-            selected_themes = [
-                key for key in config["themes"]
-                if key in legacy_themes
-            ]
-
-        theme_fields = {
-            vol.Optional(key, default=key in selected_themes):
-                selector.BooleanSelector()
-            for key in config["themes"]
-        }
 
         suffix = group
 
@@ -1286,6 +1322,19 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
 
         # Karten: Radius und Hintergrund für Steuerungs-Schalter
         card_fields: dict[Any, Any] = {}
+        design_key = f"card_design_{group}"
+        saved_design = options.get(design_key, "STANDARD")
+        if saved_design not in ('STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'):
+            saved_design = "STANDARD"
+        card_fields[vol.Required(design_key, default=saved_design)] = (
+            selector.SelectSelector(
+                selector.SelectSelectorConfig(
+                    options=['STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'],
+                    mode=selector.SelectSelectorMode.DROPDOWN,
+                    translation_key="card_design",
+                )
+            )
+        )
         radius_key = f"card_border_radius_{group}"
         saved_radius = options.get(radius_key, CARD_BORDER_RADIUS_DEFAULT)
         if (
@@ -1305,10 +1354,6 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
 
         # Gesamtschema erstellen
         return vol.Schema({
-            vol.Required("themes"): section(
-                vol.Schema(theme_fields),
-                {"collapsed": True},
-            ),
             vol.Required("backgrounds"): section(
                 vol.Schema(background_fields),
                 {"collapsed": True},

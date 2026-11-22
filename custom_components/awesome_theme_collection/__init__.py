@@ -15,6 +15,7 @@ from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
 
 DOMAIN = "awesome_theme_collection"
+
 TRANSPARENT_WALLPAPER = "transparent.png"
 
 _LOGGER = logging.getLogger(__name__)
@@ -193,8 +194,6 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
         "enabled_key": "metal_enabled",
         "options_key": "themes_metal",
         "themes": {
-            "flat_metal_shadows": "Awesome-Flat-Metal-Shadows-UIX.yaml",
-            "flat_metal": "Awesome-Flat-Metal-UIX.yaml",
             "metal_shadows": "Awesome-Metal-Shadows-UIX.yaml",
             "metal": "Awesome-Metal-UIX.yaml",
         },
@@ -220,8 +219,6 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
         "enabled_key": "leather_enabled",
         "options_key": "themes_leather",
         "themes": {
-            "flat_leather_shadows": "Awesome-Flat-Leather-Shadows-UIX.yaml",
-            "flat_leather": "Awesome-Flat-Leather-UIX.yaml",
             "leather_shadows": "Awesome-Leather-Shadows-UIX.yaml",
             "leather": "Awesome-Leather-UIX.yaml",
         },
@@ -242,6 +239,19 @@ THEME_GROUPS: dict[str, dict[str, Any]] = {
         "colors": LEATHER_COLOR_DEFAULTS,
     },
 }
+
+# Legacy FLAT themes are no longer shipped. Keep their filenames only for
+# safe cleanup of files previously installed by this integration.
+LEGACY_FLAT_THEME_FILES = (
+    "Awesome-Flat-Metal-Shadows-UIX.yaml",
+    "Awesome-Flat-Metal-UIX.yaml",
+    "Awesome-Flat-Leather-Shadows-UIX.yaml",
+    "Awesome-Flat-Leather-UIX.yaml",
+)
+LEGACY_FLAT_THEME_KEYS = frozenset((
+    "flat_metal_shadows", "flat_metal",
+    "flat_leather_shadows", "flat_leather",
+))
 
 THEMES = {
     **THEME_GROUPS["metal"]["themes"],
@@ -309,6 +319,8 @@ DEFAULT_OPTIONS: dict[str, Any] = {
         for group in ("metal", "leather")
         for key, value in PRIMARY_COLOR_DEFAULTS.items()
     },
+    "card_design_metal": "STANDARD",
+    "card_design_leather": "STANDARD",
     "card_border_radius_metal": CARD_BORDER_RADIUS_DEFAULT,
     "card_border_radius_leather": CARD_BORDER_RADIUS_DEFAULT,
     **{
@@ -1034,6 +1046,61 @@ def _render_theme(
                 f"Der Marker {marker} kommt zu oft in {source.name} vor."
             )
 
+    # Card design: identical gradients for Metal and Leather.
+    card_design = values.get(f"card_design_{group}", "STANDARD")
+    if card_design not in ('STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'):
+        card_design = "STANDARD"
+    card_gradients = {
+        "STANDARD": {
+            "LIGHT": "linear-gradient(180deg, rgba(255, 255, 255, 0.9) 0%, rgba(200, 200, 200, 0.9) 40%, rgba(170, 170, 170, 0.9) 100%)",
+            "DARK": "linear-gradient(180deg, rgba(60, 64, 73, 0.9) 0%, rgba(42, 45, 52, 0.9) 50%, rgba(22, 25, 28, 0.9) 100%)",
+        },
+        "FLAT": {
+            "LIGHT": "linear-gradient(180deg, rgba(220, 220, 220, 0.9) 0%, rgba(220, 220, 220, 0.9) 40%, rgba(220, 220, 220, 0.9) 100%)",
+            "DARK": "linear-gradient(180deg, rgba(40, 44, 55, 0.9) 0%, rgba(40, 44, 55, 0.9) 50%, rgba(40, 44, 55, 0.9) 100%)",
+        },
+        "SOFT 3D": {
+            # Quiet, theme-matched fill; the separate inset contour supplies depth.
+            # Existing --custom-card-shadows and --custom-card-border remain intact.
+            "LIGHT": "linear-gradient(180deg, rgba(245, 245, 245, 0.96) 0%, rgba(218, 218, 218, 0.96) 52%, rgba(201, 201, 201, 0.96) 100%)",
+            "DARK": "linear-gradient(180deg, rgba(57, 61, 70, 0.96) 0%, rgba(43, 46, 54, 0.96) 52%, rgba(34, 37, 43, 0.96) 100%)",
+        },
+        "STANDARD - INVERS": {
+            "LIGHT": "linear-gradient(0deg, rgba(255, 255, 255, 0.9) 0%, rgba(200, 200, 200, 0.9) 40%, rgba(170, 170, 170, 0.9) 100%)",
+            "DARK": "linear-gradient(0deg, rgba(60, 64, 73, 0.9) 0%, rgba(42, 45, 52, 0.9) 50%, rgba(22, 25, 28, 0.9) 100%)",
+        },
+        "DIAGONAL": {
+            "LIGHT": "linear-gradient(155deg, rgba(255, 255, 255, 0.9) 0%, rgba(200, 200, 200, 0.9) 40%, rgba(170, 170, 170, 0.9) 100%)",
+            "DARK": "linear-gradient(155deg, rgba(60, 64, 73, 0.9) 0%, rgba(42, 45, 52, 0.9) 50%, rgba(22, 25, 28, 0.9) 100%)",
+        },
+        "DIAGONAL - INVERS": {
+            "LIGHT": "linear-gradient(325deg, rgba(255, 255, 255, 0.9) 0%, rgba(200, 200, 200, 0.9) 40%, rgba(170, 170, 170, 0.9) 100%)",
+            "DARK": "linear-gradient(325deg, rgba(60, 64, 73, 0.9) 0%, rgba(42, 45, 52, 0.9) 50%, rgba(22, 25, 28, 0.9) 100%)",
+        },
+        "RADIAL": {
+            "LIGHT": "radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(220, 220, 220, 0.9) 70%, rgba(185, 185, 185, 0.9) 100%)",
+            "DARK": "radial-gradient(circle, rgba(50, 54, 63, 0.9) 0%, rgba(42, 45, 52, 0.9) 70%, rgba(27, 30, 33, 0.9) 100%)",
+        },
+        "RADIAL - INVERS": {
+            "LIGHT": "radial-gradient(circle, rgba(185, 185, 185, 0.9) 0%, rgba(220, 220, 220, 0.9) 70%, rgba(255, 255, 255, 0.9) 100%)",
+            "DARK": "radial-gradient(circle, rgba(27, 30, 33, 0.9) 0%, rgba(42, 45, 52, 0.9) 70%, rgba(50, 54, 63, 0.9) 100%)",
+        },
+    }
+    for mode in ("LIGHT", "DARK"):
+        marker = f"ATC_CARD_DESIGN_{suffix}_{mode}"
+        content, count = _replace_atc_value(content, marker, card_gradients[card_design][mode])
+        if count != 1:
+            raise ValueError(f"Der Marker {marker} muss genau einmal in {source.name} vorkommen (gefunden: {count}).")
+
+    # Soft 3D inner rim is opt-in; all other designs keep their original appearance.
+    for mode in ("LIGHT", "DARK"):
+        marker = f"ATC_SOFT3D_OUTLINE_{suffix}_{mode}"
+        content, count = _replace_atc_value(
+            content, marker, "1" if card_design == "SOFT 3D" else "0"
+        )
+        if count != 1:
+            raise ValueError(f"Der Marker {marker} muss genau einmal in {source.name} vorkommen (gefunden: {count}).")
+
     # Karten-Radius (ein Marker je Theme-Abschnitt / Design-Modus).
     marker = f"ATC_CARD_BORDER_RADIUS_{suffix}"
     content, count = _replace_atc_value(
@@ -1218,7 +1285,7 @@ def _selected_themes(options: dict[str, Any]) -> set[str]:
             "Die bisherige Theme-Auswahl enthält Duplikate."
         )
 
-    unknown_legacy = set(legacy_themes) - set(THEMES)
+    unknown_legacy = set(legacy_themes) - set(THEMES) - LEGACY_FLAT_THEME_KEYS
 
     if unknown_legacy:
         raise ValueError(
@@ -1257,7 +1324,7 @@ def _selected_themes(options: dict[str, Any]) -> set[str]:
                 f"Die Theme-Auswahl für {group} enthält Duplikate."
             )
 
-        unknown = set(group_themes) - set(config["themes"])
+        unknown = set(group_themes) - set(config["themes"]) - LEGACY_FLAT_THEME_KEYS
 
         if unknown:
             raise ValueError(
@@ -1265,7 +1332,7 @@ def _selected_themes(options: dict[str, Any]) -> set[str]:
             )
 
         if enabled:
-            selected.update(group_themes)
+            selected.update(key for key in group_themes if key in config["themes"])
 
     return selected
 
@@ -1311,6 +1378,16 @@ def _sync_assets(
                 content=rendered_content,
             )
 
+    # Remove only old FLAT files still matching the hash we installed.
+    # User-edited files remain untouched, as with all managed assets.
+    for filename in LEGACY_FLAT_THEME_FILES:
+        changed |= _sync_file(
+            themes_source / filename,
+            themes_target / filename,
+            managed_themes,
+            selected=False,
+        )
+
     selected_wallpapers: set[str] = {TRANSPARENT_WALLPAPER}
 
     for config in THEME_GROUPS.values():
@@ -1338,6 +1415,8 @@ def _sync_assets(
     )
 
     return changed
+
+
 
 
 async def async_setup_entry(
@@ -1393,6 +1472,31 @@ async def async_setup_entry(
         _LOGGER.exception(
             "Die Dateien wurden synchronisiert, aber die Themes "
             "konnten nicht neu geladen werden."
+        )
+
+    # Optional feature: failures must never prevent theme installation.
+    try:
+        from .design_mode import async_register_design_mode_action
+
+        if options.get("feature_design_mode", True):
+            async_register_design_mode_action(hass)
+        else:
+            from .design_mode import async_unregister_design_mode_action
+            async_unregister_design_mode_action(hass)
+    except Exception:
+        _LOGGER.exception(
+            "Optionale Design-Modus-Aktion konnte nicht registriert werden; "
+            "die Theme-Integration bleibt verfügbar."
+        )
+
+    # Browser-side naming is isolated: registration failures cannot break themes.
+    try:
+        from .ha_naming import async_setup_ha_naming
+        await async_setup_ha_naming(hass, options)
+    except Exception:
+        _LOGGER.exception(
+            "Optionale HA-Namensgebung konnte nicht eingerichtet werden; "
+            "die Themes bleiben verfügbar."
         )
 
     selected = _selected_themes(options)
@@ -1522,4 +1626,17 @@ async def async_unload_entry(
     entry: ConfigEntry,
 ) -> bool:
     """Unload the integration."""
+    try:
+        from .design_mode import async_unregister_design_mode_action
+
+        async_unregister_design_mode_action(hass)
+    except Exception:
+        _LOGGER.exception(
+            "Optionale Design-Modus-Aktion konnte nicht entfernt werden."
+        )
+    try:
+        from .ha_naming import async_disable_ha_naming
+        async_disable_ha_naming(hass)
+    except Exception:
+        _LOGGER.exception("Optionale HA-Namensgebung konnte nicht deaktiviert werden.")
     return True

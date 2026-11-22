@@ -1,0 +1,22 @@
+set_design_mode:
+  name: Set design mode and theme
+  description: Set appearance mode and/or theme for all active Home Assistant users. Omitted settings are preserved.
+  fields:
+    mode:
+      name: Design mode
+      description: Optional. Choose automatic, light or dark. Leave empty to keep the current mode.
+      required: false
+      example: dark
+      selector:
+        select:
+          translation_key: design_mode
+          options:
+            - auto
+            - light
+            - dark
+    theme:
+      name: Theme
+      description: Optional. Choose an installed theme. Leave empty to keep each user's current theme.
+      required: false
+      selector:
+        theme: {}
