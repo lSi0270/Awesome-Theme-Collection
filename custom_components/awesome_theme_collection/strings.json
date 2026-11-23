@@ -401,9 +401,6 @@
           }
         }
       },
-      "error": {
-        "invalid_card_design": "Ungültiges Karten-Design."
-      },
       "extras": {
         "title": "Zusatzfunktionen",
         "menu_options": {
@@ -438,7 +435,8 @@
       "invalid_icon_size": "Die Icon-Größe muss zwischen 16 und 36 Pixel liegen.",
       "invalid_card_radius": "Der Karten-Radius muss zwischen 0 und 28 Pixel liegen.",
       "invalid_sidebar_title": "Der Titel darf höchstens 20 Zeichen enthalten.",
-      "invalid_sidebar_font_size": "Die Schriftgrößen müssen zwischen 14 und 24 Pixel liegen."
+      "invalid_sidebar_font_size": "Die Schriftgrößen müssen zwischen 14 und 24 Pixel liegen.",
+      "invalid_card_design": "Ungültiges Karten-Design."
     }
   },
   "selector": {
