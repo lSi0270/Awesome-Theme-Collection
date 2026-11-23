@@ -977,7 +977,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
                     return self.async_show_form(
                         step_id=group,
                         data_schema=await self._group_schema(group),
-                        errors={"cards": "invalid_card_design"},
+                        errors={"base": "base"},
                     )
                 new_options[design_key] = design
 
