@@ -1,6 +1,9 @@
 {
   "domain": "awesome_theme_collection",
   "name": "Awesome Theme Collection",
+  "after_dependencies": [
+    "http"
+  ],
   "codeowners": [
     "@lSi0270"
   ],

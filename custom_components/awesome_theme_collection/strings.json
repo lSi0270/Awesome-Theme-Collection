@@ -457,14 +457,14 @@
     },
     "card_design": {
       "options": {
-        "STANDARD": "Standard",
-        "FLAT": "Flat",
-        "SOFT 3D": "Soft 3D",
-        "STANDARD - INVERS": "Standard-Invers",
-        "DIAGONAL": "Diagonal",
-        "DIAGONAL - INVERS": "Diagonal-Invers",
-        "RADIAL": "Radial",
-        "RADIAL - INVERS": "Radial-Invers"
+        "standard": "Standard",
+        "flat": "Flat",
+        "soft_3d": "Soft 3D",
+        "standard_invers": "Standard-Invers",
+        "diagonal": "Diagonal",
+        "diagonal_invers": "Diagonal-Invers",
+        "radial": "Radial",
+        "radial_invers": "Radial-Invers"
       }
     }
   }

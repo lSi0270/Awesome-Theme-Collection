@@ -94,6 +94,11 @@ PRIMARY_COLOR_DEFAULTS: dict[str, str] = {
     "accent_color_light": "#BA4B00",
 }
 CARD_BORDER_RADIUS_DEFAULT = 10
+# Selector keys must be valid Home Assistant translation identifiers.
+# Preserve the existing stored design identifiers and theme rendering logic.
+CARD_DESIGN_SELECTOR_TO_STORED = {'standard': 'STANDARD', 'flat': 'FLAT', 'soft_3d': 'SOFT 3D', 'standard_invers': 'STANDARD - INVERS', 'diagonal': 'DIAGONAL', 'diagonal_invers': 'DIAGONAL - INVERS', 'radial': 'RADIAL', 'radial_invers': 'RADIAL - INVERS'}
+CARD_DESIGN_STORED_TO_SELECTOR = {value: key for key, value in CARD_DESIGN_SELECTOR_TO_STORED.items()}
+
 
 def _text_color_key(name: str, group: str) -> str:
     """Return a group-specific text color option key."""
@@ -967,7 +972,7 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
             if card_data.get("reset_cards", False):
                 new_options[design_key] = "STANDARD"
             else:
-                design = card_data.get(design_key, "STANDARD")
+                design = CARD_DESIGN_SELECTOR_TO_STORED.get(card_data.get(design_key), card_data.get(design_key, "STANDARD"))
                 if design not in ('STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'):
                     return self.async_show_form(
                         step_id=group,
@@ -1326,10 +1331,10 @@ class AwesomeThemeOptionsFlow(config_entries.OptionsFlowWithReload):
         saved_design = options.get(design_key, "STANDARD")
         if saved_design not in ('STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'):
             saved_design = "STANDARD"
-        card_fields[vol.Required(design_key, default=saved_design)] = (
+        card_fields[vol.Required(design_key, default=CARD_DESIGN_STORED_TO_SELECTOR[saved_design])] = (
             selector.SelectSelector(
                 selector.SelectSelectorConfig(
-                    options=['STANDARD', 'FLAT', 'SOFT 3D', 'STANDARD - INVERS', 'DIAGONAL', 'DIAGONAL - INVERS', 'RADIAL', 'RADIAL - INVERS'],
+                    options=list(CARD_DESIGN_SELECTOR_TO_STORED),
                     mode=selector.SelectSelectorMode.DROPDOWN,
                     translation_key="card_design",
                 )
