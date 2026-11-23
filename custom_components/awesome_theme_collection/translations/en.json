@@ -401,9 +401,6 @@
           }
         }
       },
-      "error": {
-        "invalid_card_design": "Invalid card design."
-      },
       "extras": {
         "title": "Additional features",
         "menu_options": {
@@ -438,7 +435,8 @@
       "invalid_icon_size": "Icon size must be between 16 and 36 pixels.",
       "invalid_card_radius": "Card radius must be between 0 and 28 pixels.",
       "invalid_sidebar_title": "The title must not exceed 20 characters.",
-      "invalid_sidebar_font_size": "Font sizes must be whole numbers between 14px and 24px."
+      "invalid_sidebar_font_size": "Font sizes must be whole numbers between 14px and 24px.",
+      "invalid_card_design": "Invalid card design."
     }
   },
   "services": {
