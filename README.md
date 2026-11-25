@@ -346,6 +346,16 @@ Folgende Zusatzfunktionen sind ab v1.4.0 mit im Paket enthalten.
 
 ## Änderungen
 
+v1.4.1
+
+Reines Bugfix-Release:
+
+- die aktivierte Zusatzfunktion "HA-Entitäten-Namen" konnte erhebliche Performanceprobleme verursachen, insbesondere auf größeren Installationen durch unnötige Aktualisierungen.
+  Ein besonderer Dank geht an "poolebd" für die Analyse und Melden dieses Problems auf Github und auch einer passenden Lösung dazu !
+  
+- Fehler bei der Darstellung des bubble-card-seperators auf Firefox Browsern behoben
+ 
+
 v1.4.0
 
 Einige inhaltliche Veränderungen und zusätzliche Möglichkeiten:
@@ -796,6 +806,15 @@ The following additional features are included in the package starting with v1.4
 
 
 ## Changes
+
+v1.4.1
+
+Pure bug fix release:
+
+- The enabled "HA Entity Names" feature could cause significant performance issues, particularly on larger installations, due to unnecessary refreshes.
+Special thanks to “poolebd” for analyzing and reporting this issue on GitHub, as well as for providing a suitable solution!
+
+- Fixed an issue with the display of the bubble-card separator in Firefox browsers
 
 v1.4.0
 
