@@ -23,8 +23,26 @@
     return text;
   }
 
+  // Performance memoization based on poolebd's GitHub issue #1.
+  function stripAll(text, prefixes) {
+    let previous;
+    do { previous = text; text = strip(text, prefixes); } while (text !== previous);
+    return text;
+  }
+  const stateMemo = new WeakMap();
+  const metaMemo = new WeakMap();
+  let lastEntities = null;
+  const memo = (map, input, key, make) => {
+    const hit = map.get(input);
+    if (hit && hit.key === key) return hit.out;
+    const out = make();
+    map.set(input, {key, out});
+    return out;
+  };
+
   function cleaned(hass) {
     if (!settings.enabled || !hass?.states || !hass?.entities || !hass?.devices) return hass;
+    const settingsKey = `${settings.enabled}|${settings.opt_in_mode}`;
     const entities = {...hass.entities};
     const states = {...hass.states};
     let changed = false;
@@ -42,18 +60,26 @@
       const friendly = state.attributes?.friendly_name || '';
       const metaName = meta.name || meta.original_name;
       if (!forceOmit && !metaName && names.includes(friendly)) continue;
-      const newFriendly = strip(friendly, names);
+      const newFriendly = stripAll(friendly, names);
       if (newFriendly !== friendly && state.attributes) {
-        states[id] = {...state, attributes: {...state.attributes, friendly_name: newFriendly}};
+        states[id] = memo(stateMemo, state, `${settingsKey}|${newFriendly}`,
+          () => ({...state, attributes: {...state.attributes, friendly_name: newFriendly}}));
         changed = true;
       }
-      const newMetaName = metaName ? strip(metaName, names) : metaName;
+      const newMetaName = metaName ? stripAll(metaName, names) : metaName;
       if (newMetaName !== metaName || meta.next_name_part === 'device') {
-        entities[id] = {...meta, name: newMetaName, original_name: newMetaName, next_name_part: undefined};
+        entities[id] = memo(metaMemo, meta, `${settingsKey}|${newMetaName}`,
+          () => ({...meta, name: newMetaName, original_name: newMetaName, next_name_part: undefined}));
         changed = true;
       }
     }
-    return changed ? {...hass, entities, states} : hass;
+    if (!changed) return hass;
+    if (lastEntities && Object.keys(entities).length === Object.keys(lastEntities).length &&
+        Object.keys(entities).every(id => entities[id] === lastEntities[id])) {
+      return {...hass, entities: lastEntities, states};
+    }
+    lastEntities = entities;
+    return {...hass, entities, states};
   }
 
   async function refresh() {
