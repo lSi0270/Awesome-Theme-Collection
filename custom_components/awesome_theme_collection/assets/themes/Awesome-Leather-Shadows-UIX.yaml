@@ -1,6 +1,6 @@
 # Erstellt mit HATG v1.3.2
-# Theme: Awesome-Leather-Shadows-UIX (v1.4.0 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
-# Generiert am 2026-11-20
+# Theme: Awesome-Leather-Shadows-UIX (v1.4.1 by lSi) – Grundfarbe #0A5CFF, Akzent #BA4B00, Karten-Radius 10px
+# Generiert am 2026-11-25
 
 Awesome-Leather-Shadows-UIX:
   # UIX (theme-global; muss auf Theme-Ebene stehen, nicht unter modes.light/dark)
@@ -54,6 +54,44 @@ Awesome-Leather-Shadows-UIX:
         border: none !important;
         box-shadow: none !important;
       }
+      /* Soft 3D: Bubble separator/empty column must not inherit the rim pseudo-element. */
+      :host([class*="bubble-"]):has(.bubble-separator) ha-card::before,
+      :host([class*="bubble-"]):has(.bubble-empty-column) ha-card::before,
+      :host([class*="bubble-"]):has(.bubble-separator) ha-card::after,
+      :host([class*="bubble-"]):has(.bubble-empty-column) ha-card::after {
+        content: none !important;
+        display: none !important;
+        box-shadow: none !important;
+        border: none !important;
+      }
+      /* ATC: target the actual separator within Bubble Card's shadow root.
+         Do not depend on a class on :host. Preserve .bubble-line. */
+      ha-card:has(.bubble-container.bubble-separator),
+      ha-card:has(.bubble-empty-column) {
+        background: transparent !important;
+        background-image: none !important;
+        border: 0 none transparent !important;
+        box-shadow: none !important;
+        --custom-card-gradient: transparent;
+        --custom-card-border: none;
+        --custom-card-shadows: none;
+      }
+      ha-card:has(.bubble-container.bubble-separator)::before,
+      ha-card:has(.bubble-container.bubble-separator)::after,
+      ha-card:has(.bubble-empty-column)::before,
+      ha-card:has(.bubble-empty-column)::after {
+        content: none !important;
+        display: none !important;
+        opacity: 0 !important;
+        box-shadow: none !important;
+      }
+      ha-card .bubble-container.bubble-separator,
+      ha-card .bubble-empty-column {
+        background: transparent !important;
+        background-image: none !important;
+        border: none !important;
+        box-shadow: none !important;
+      }
       ha-card .bubble-name {
         font-size: var(--ha-font-size-m) !important;
         font-weight: normal !important;
@@ -90,6 +128,9 @@ Awesome-Leather-Shadows-UIX:
         div.event-time {
           font-size: var(--ha-font-size-s) !important;
         }
+      }
+      div.calendar-container div.calendar-item {
+        padding: 5px !important;
       }
       /* HATG:UIX:eigene-calendar-card:END */
       /* HATG:UIX:eigene-icon-controls:START */
