@@ -350,11 +350,11 @@ v1.4.1
 
 Reines Bugfix-Release:
 
-- die aktivierte Zusatzfunktion "HA-Entitäten-Namen" konnte erhebliche Performanceprobleme verursachen, insbesondere auf größeren Installationen durch unnötige Aktualisierungen.
-  Ein besonderer Dank geht an "poolebd" für die Analyse und Melden dieses Problems auf Github und auch einer passenden Lösung dazu !
-  
-- Fehler bei der Darstellung des bubble-card-seperators auf Firefox Browsern behoben
- 
+- Die aktivierte Zusatzfunktion „HA-Entitäten-Namen“ konnte durch unnötige Aktualisierungen von Entitätsobjekten erhebliche Performanceprobleme verursachen, insbesondere bei größeren Installationen. Dieses Verhalten wurde optimiert.
+
+  Ein besonderer Dank geht an [poolebd](https://github.com/poolebd) für die Analyse und Meldung dieses Problems auf GitHub ([Issue #1](https://github.com/lSi0270/Awesome-Theme-Collection/issues/1)) sowie für die Bereitstellung einer passenden Lösung!
+
+- Darstellungsfehler beim Bubble-Card-Separator in Firefox behoben.
 
 v1.4.0
 
@@ -809,12 +809,13 @@ The following additional features are included in the package starting with v1.4
 
 v1.4.1
 
-Pure bug fix release:
+Bugfix release:
 
-- The enabled "HA Entity Names" feature could cause significant performance issues, particularly on larger installations, due to unnecessary refreshes.
-Special thanks to “poolebd” for analyzing and reporting this issue on GitHub, as well as for providing a suitable solution!
+- When enabled, the optional "HA Entity Names" feature could cause significant performance issues due to unnecessary entity object updates, particularly in larger Home Assistant installations. This behavior has been optimized.
 
-- Fixed an issue with the display of the bubble-card separator in Firefox browsers
+  Special thanks to [poolebd](https://github.com/poolebd) for analyzing and reporting this issue on GitHub ([Issue #1](https://github.com/lSi0270/Awesome-Theme-Collection/issues/1)), as well as for providing a suitable solution!
+
+- Fixed a rendering issue with the Bubble Card separator in Firefox.
 
 v1.4.0
 
